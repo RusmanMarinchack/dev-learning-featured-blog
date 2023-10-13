@@ -1,3 +1,124 @@
-{{ 'colections-list.css' | asset_url | stylesheet_tag }}
+{{ 'collections-list.css' | asset_url | stylesheet_tag }}
 
-<script src="{{ "colections-list" | asset_url }}" defer="defer"></script>
+<script src="{{ "collections-list" | asset_url }}" defer="defer"></script>
+
+<section class="collections-list">
+    <div class="collections-list__container">
+      <div class="collections-list__wrapper">
+        {% for block in section.blocks %}
+          {% assign collection = block.settings.collection %}
+
+          <div class="collections-list__item collections-item-{{ section.settings.text_position }} collections-item-{{ section.settings.image_aspect_ratio }}">
+            <div class="collections-list__box-img">
+              <a class="collections-list__link" href="{{ collection.url }}">
+                {% if block.settings.image_with_text_image %}
+                  <img style="background: {{ section.settings.overlay_color }}" src="{{ block.settings.image_with_text_image | image_url: width: 400 }}" alt="{{ collection.title }}">
+
+                {% elsif collection.image %}
+                  <img style="background: {{ section.settings.overlay_color }}" src="{{ collection.image | image_url: width: 400 }}" alt="{{ collection.title }}">
+                {% else %}
+                  <img style="background: {{ section.settings.overlay_color }}" src="{{ 'def.png' | asset_img_url: '400x' }}" alt="{{ collection.title }}">
+                {% endif %}
+              </a>
+            </div>
+            <div class="collections-list__description collections-list-description">
+              {% if section.settings.text_position == "inside" %}
+                <h4 class="collections-list-description__title" style="color: {{ section.settings.image_text_color }}">{{ collection.title }}</h4>
+              {% else %}
+                <h4 class="collections-list-description__title">{{ collection.title }}</h4>
+              {% endif %}
+
+              {% if section.settings.show_products_count %}
+                <div class="collections-list-description__length">{{ collection.products_count }} products</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+</section>
+
+{% schema %}
+    {
+      "name": "Collections list",
+      "settings": [
+        {
+          "type": "select",
+          "id": "text_position",
+          "label": "Text position",
+          "options": [
+            {
+              "value": "under",
+              "label": "Under the impage"
+            },
+            {
+              "value": "inside",
+              "label": "Inside the image"
+            }
+          ],
+          "default": "under"
+        },
+        {
+          "type": "select",
+          "id": "image_aspect_ratio",
+          "label": "Image aspect ratio",
+          "options": [
+            {
+              "value": "square",
+              "label": "Square"
+            },
+            {
+              "value": "portrait",
+              "label": "Portrait"
+            },
+            {
+              "value": "landscape",
+              "label": "Landscape"
+            }
+          ],
+          "default": "square"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_products_count",
+          "label": "Show products count",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "image_text_color",
+          "label": "Image text color",
+          "default": "#000000"
+        },
+        {
+          "type": "color_background",
+          "id": "overlay_color",
+          "label": "Overlay color",
+          "default": "linear-gradient(#ffffff, #000000)"
+        }
+      ],
+      "blocks": [
+        {
+          "name": "Collection",
+          "type": "collection",
+          "settings": [
+            {
+              "type": "collection",
+              "id": "collection",
+              "label": "Collection"
+            },
+            {
+              "type": "image_picker",
+              "id": "image_with_text_image",
+              "label": "Image"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "Collections list"
+        }
+      ]
+    }
+{% endschema %}
