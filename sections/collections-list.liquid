@@ -6,7 +6,7 @@
         {% for block in section.blocks %}
           {% assign collection = block.settings.collection %}
 
-          <div class="collections-list__item collections-item-{{ section.settings.text_position }} collections-item-{{ section.settings.image_aspect_ratio }}">
+          <div class="collections-list__item{% if section.settings.text_position == "inside" %} collections-item-{{-section.settings.text_position-}} {% endif %} collections-item-{{ section.settings.image_aspect_ratio }}">
             <div class="collections-list__box-img">
               <a class="collections-list__link" href="{{ collection.url }}">
                 <picture>
