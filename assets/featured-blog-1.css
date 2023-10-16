@@ -93,13 +93,14 @@
     margin-top: auto;
 }
 .featured-blog .featured-blog-footer__links .featured-blog-footer__link {
+    display: inline-block;
     text-decoration: none;
     padding: 4px 0;
     border-bottom: 1px solid #000;
     color: #000;
     transition: border 0.2s;
 }
-.featured-blog-author .featured-blog-footer__links .featured-blog-footer__link:hover {
+.featured-blog .featured-blog-footer__links .featured-blog-footer__link:hover {
     border-color: transparent;
 }
 .featured-blog-footer__author {
