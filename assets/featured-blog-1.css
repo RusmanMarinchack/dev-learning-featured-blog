@@ -132,6 +132,7 @@
     width: 24px;
     background-color: #000;
     border-radius: 16px;
+    margin: 0 12px;
     transform: scale(1.3);
 }
 
