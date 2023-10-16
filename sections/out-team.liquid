@@ -1,0 +1,79 @@
+{{ 'out-team.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'out-team.js' | asset_url }}" defer="defer"></script>
+
+{% assign card = section.blocks.settings %}
+
+<section class="out-team">
+    <div class="out-team__container">
+        <div class="out-team__wrapper">
+            {% for block in section.blocks %}
+                <div class="out-team__card">
+                    <div class="out-team__box-photo">
+                        <img src="{{ block.settings.card_image | image_url: width: 400 }}" alt="{{ block.settings.name }}" class="out-team__photo">
+                    </div>
+                    <div class="out-team__info">
+                        <div class="out-team__name">{{ block.settings.name }}</div>
+                        <div class="out-team__description">{{ block.settings.description }}</div>
+                        <button class="out-team__btn-popup">{{ section.settings.btn_popup }}</button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+    {
+      "name": "Out team",
+      "settings": [
+        {
+          "type": "text",
+          "id": "btn_popup",
+          "label": "Btn popup",
+          "default": "Read more label"
+        }
+      ],
+      "blocks": [
+        {
+          "name": "Team card",
+          "type": "team-card",
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "card_image",
+              "label": "Card image"
+            },
+            {
+              "type": "image_picker",
+              "id": "popup_image",
+              "label": "Popup image"
+            },
+            {
+              "type": "text",
+              "id": "name",
+              "label": "Name",
+              "default": "Quick links"
+            },
+            {
+              "type": "text",
+              "id": "role",
+              "label": "Role",
+              "default": "Quick links"
+            },
+            {
+              "type": "richtext",
+              "id": "description",
+              "label": "Description"
+            }
+          ]
+        }
+      ],
+      "presets": [
+          {
+            "name": "Out team"
+          }
+      ]
+    }
+
+{% endschema %}

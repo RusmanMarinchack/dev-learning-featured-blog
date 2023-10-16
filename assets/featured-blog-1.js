@@ -1,11 +1,14 @@
 'use strict'
 
 document.addEventListener("DOMContentLoaded", function () {
-    const mql = window.matchMedia("(max-width: 1023.98px)");
     const swiperContainer = document.querySelector('.featured-blog__container')
-    let featureBlogSwiper;
 
     if(swiperContainer) {
+        let featureBlogSwiper;
+
+        const swiperWrapper = swiperContainer.querySelector('.featured-blog__wrapper')
+
+
         function initSwiper() {
             featureBlogSwiper = new Swiper('.featured-blog__container', {
                 slidesPerView: 1,
@@ -26,21 +29,23 @@ document.addEventListener("DOMContentLoaded", function () {
             })
         }
 
-        function activeSliderMob(e) {
-            if(e.matches) {
+        function handlerActiveSliderMob() {
+            if (window.innerWidth <= 1023.98) {
                 if (!featureBlogSwiper) {
                     initSwiper();
+                    // swiperWrapper.classList.add("swiper-wrapper")
                 }
             } else {
                 if (featureBlogSwiper) {
                     featureBlogSwiper.destroy(true, true);
                     featureBlogSwiper = undefined;
+                    // swiperWrapper.classList.remove("swiper-wrapper")
                 }
             }
         }
 
-        mql.addEventListener('change', activeSliderMob)
-        activeSliderMob(mql)
+        handlerActiveSliderMob();
+        window.addEventListener('resize', handlerActiveSliderMob);
     }
 
 })

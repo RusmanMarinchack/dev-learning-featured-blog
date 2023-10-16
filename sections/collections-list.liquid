@@ -1,0 +1,111 @@
+{{ 'collections-list.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ "collections-list" | asset_url }}" defer="defer"></script>
+
+
+
+<section class="collections-list">
+    <div class="collections-list__container">
+      <div class="collections-list__wrapper">
+        {% for block in section.blocks %}
+          {% assign collection = block.settings.collection %}
+          <div class="collections-list__item">
+            <div class="collections-list__box-img">
+              <a href="{{ collection.url }}">
+                <img src="{{ collection.image | image_url: width: 400 }}" alt="{{ collectin.title }}">
+              </a>
+            </div>
+            <div class="collections-list__description collections-list-description">
+              <h4 class="collections-list-description__title">{{ collection.title }}</h4>
+              <div class="collections-list-description__length">{{ collection.products_count }} products</div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+</section>
+
+{% schema %}
+    {
+      "name": "Collections list",
+      "settings": [
+        {
+          "type": "select",
+          "id": "text_position",
+          "label": "Text position",
+          "options": [
+            {
+              "value": "under",
+              "label": "Under the impage"
+            },
+            {
+              "value": "inside",
+              "label": "Inside the image"
+            }
+          ],
+          "default": "under"
+        },
+        {
+          "type": "select",
+          "id": "image_aspect_ratio",
+          "label": "Image aspect ratio",
+          "options": [
+            {
+              "value": "square",
+              "label": "Square"
+            },
+            {
+              "value": "portrait",
+              "label": "Portrait"
+            },
+            {
+              "value": "landscape",
+              "label": "Landscape"
+            }
+          ],
+          "default": "square"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_products_count",
+          "label": "Show products count",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "image_text_color",
+          "label": "Image text color",
+          "default": "#000000"
+        },
+        {
+          "type": "color_background",
+          "id": "overlay_color",
+          "label": "Overlay color",
+          "default": "linear-gradient(#ffffff, #000000)"
+        }
+      ],
+      "blocks": [
+        {
+          "name": "Collection",
+          "type": "collection",
+          "settings": [
+            {
+              "type": "collection",
+              "id": "collection",
+              "label": "Collection"
+            },
+            {
+              "type": "image_picker",
+              "id": "image_with_text_image",
+              "label": "Image"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "Collections list"
+        }
+      ]
+    }
+{% endschema %}
