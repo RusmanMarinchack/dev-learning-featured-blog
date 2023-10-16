@@ -53,7 +53,7 @@
 .collections-list .collections-list__box-img .collections-list__link {
     display: inline-block;
 }
-.collections-list .collections-list__box-img img {
+.collections-list .collections-list__box-img .collections-list__img {
     position: absolute;
     top: 0;
     left: 0;
@@ -65,21 +65,18 @@
 .collections-list .collections-list__description {
     text-align: center;
 }
-.collections-list .collections-list__description {
-
-}
 .collections-list .collections-list-description__title {
     margin: 0;
     font-size: 22px;
     font-style: normal;
     font-weight: 500;
-    line-height: 118.182%;
+    line-height: 118%;
 }
 .collections-list .collections-list-description__length {
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 137.5%;
+    line-height: 138%;
     margin-top: 12px;
     color: #535353;
 }
@@ -108,7 +105,7 @@
 }
 
 @media (hover: hover) {
-    .collections-list .collections-list__box-img:hover img {
-        transform: scale(1.3);
+    .collections-list .collections-list__box-img:hover .collections-list__img {
+        transform: scale(1.05);
     }
 }

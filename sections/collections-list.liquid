@@ -1,7 +1,5 @@
 {{ 'collections-list.css' | asset_url | stylesheet_tag }}
 
-<script src="{{ "collections-list" | asset_url }}" defer="defer"></script>
-
 <section class="collections-list">
     <div class="collections-list__container">
       <div class="collections-list__wrapper">
@@ -11,14 +9,18 @@
           <div class="collections-list__item collections-item-{{ section.settings.text_position }} collections-item-{{ section.settings.image_aspect_ratio }}">
             <div class="collections-list__box-img">
               <a class="collections-list__link" href="{{ collection.url }}">
-                {% if block.settings.image_with_text_image %}
-                  <img style="background: {{ section.settings.overlay_color }}" src="{{ block.settings.image_with_text_image | image_url: width: 400 }}" alt="{{ collection.title }}">
-
-                {% elsif collection.image %}
-                  <img style="background: {{ section.settings.overlay_color }}" src="{{ collection.image | image_url: width: 400 }}" alt="{{ collection.title }}">
-                {% else %}
-                  <img style="background: {{ section.settings.overlay_color }}" src="{{ 'def.png' | asset_img_url: '400x' }}" alt="{{ collection.title }}">
-                {% endif %}
+                <picture>
+                  {% if block.settings.image_with_text_image %}
+                    <source media="(max-width: 1023.98px)" srcset="{{ block.settings.image_with_text_image | image_url: width: 800 }}">
+                    <img class="collections-list__img" style="background: {{ section.settings.overlay_color }}" src="{{ block.settings.image_with_text_image | image_url: width: 400 }}" alt="{{ collection.title }}">
+                  {% elsif collection.image %}
+                    <source media="(max-width: 1023.98px)" srcset="{{ collection.image | image_url: width: 800 }}">
+                    <img class="collections-list__img" style="background: {{ section.settings.overlay_color }}" src="{{ collection.image | image_url: width: 400 }}" alt="{{ collection.title }}">
+                  {% else %}
+                    <source media="(max-width: 1023.98px)" srcset="{{ 'def.png' | asset_img_url: '800x' }}">
+                    <img class="collections-list__img" style="background: {{ section.settings.overlay_color }}" src="{{ 'def.png' | asset_img_url: '400x' }}" alt="{{ collection.title }}">
+                  {% endif %}
+                </picture>
               </a>
             </div>
             <div class="collections-list__description collections-list-description">
