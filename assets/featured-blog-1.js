@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const swiperWrapper = swiperContainer.querySelector('.featured-blog__wrapper')
 
-
         function initSwiper() {
             featureBlogSwiper = new Swiper('.featured-blog__container', {
                 slidesPerView: 1,

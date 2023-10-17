@@ -1,27 +1,67 @@
 {{ 'out-team.css' | asset_url | stylesheet_tag }}
+{{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
 
 <script src="{{ 'out-team.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
 
 {% assign card = section.blocks.settings %}
+{% assign index = 0 %}
 
-<section class="out-team">
-    <div class="out-team__container">
-        <div class="out-team__wrapper">
+<section class="out-team aut-team-{{ section.id }}">
+    <div class="out-team__container swiper">
+        <div class="out-team__wrapper swiper-wrapper">
             {% for block in section.blocks %}
-                <div class="out-team__card">
+                <div class="out-team__card swiper-slide">
                     <div class="out-team__box-photo">
-                        <img src="{{ block.settings.card_image | image_url: width: 400 }}" alt="{{ block.settings.name }}" class="out-team__photo">
+                        {% if block.settings.card_image %}
+                            <img src="{{ block.settings.card_image | image_url: width: 400 }}" alt="{{ block.settings.name }}" class="out-team__photo">
+                        {% else %}
+                            <img src="{{ 'blog-post-def.png' | asset_img_url: '400x' }}" alt="{{ block.settings.name }}" class="out-team__photo">
+                        {% endif %}
+                    </div>
+                    <div class="out-team__social out-team-social">
+                        <div class="out-team-social__item">
+                            <a href="https://uk-ua.facebook.com/" class="out-team-social__link">
+                                <img class="out-team-social__image" src="{{ 'facebook.svg' | asset_url }}" alt="Icon">
+                            </a>
+                        </div>
+                        <div class="out-team-social__item">
+                            <a href="https://www.instagram.com/" class="out-team-social__link">
+                                <img class="out-team-social__image" src="{{ 'instagram.svg' | asset_url }}" alt="Icon">
+                            </a>
+                        </div>
                     </div>
                     <div class="out-team__info">
                         <div class="out-team__name">{{ block.settings.name }}</div>
-                        <div class="out-team__description">{{ block.settings.description }}</div>
-                        <button class="out-team__btn-popup">{{ section.settings.btn_popup }}</button>
+                        <div class="out-team__role">{{ block.settings.role }}</div>
+                        {% if block.settings.description != empty %}
+                            <div class="out-team__description">{{ block.settings.description }}</div>
+                        {% endif %}
+                        <button class="out-team__btn-popup _popup-btn" data-id="card-team-{{ index }}">{{ section.settings.btn_popup }}</button>
                     </div>
                 </div>
+
+                {% assign index = index | plus: 1 %}
             {% endfor %}
         </div>
     </div>
 </section>
+
+{% for block in section.blocks %}
+    <div class="popup-shadow" >
+        <div class="popup" id="card-team-{{ index }}">
+            <button class="popup__close">&#10005;</button>
+            <div class="popup__content">
+                <div class="popup__box-image">
+                    <img src="{{ block.settings.popup_image | image_url: width: 505 }}" alt="{{ block.name }}" class="popup__image">
+                </div>
+                <div class="popup__box-text"></div>
+            </div>
+        </div>
+    </div>
+
+    {% assign index = index | plus: 1 %}
+{% endfor %}
 
 {% schema %}
     {
@@ -59,7 +99,7 @@
               "type": "text",
               "id": "role",
               "label": "Role",
-              "default": "Quick links"
+              "default": "Co-founder & CEO"
             },
             {
               "type": "richtext",
