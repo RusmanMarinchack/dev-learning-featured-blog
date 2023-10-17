@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 slidesPerView: 1,
                 spaceBetween: 20,
                 pagination: {
-                    el: '.featured-blog__swiper-pagination',
+                    el: '.out-team__swiper-pagination',
                     clickable: true
                 },
                 breakpoints: {
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         slidesPerView: 1,
 
                     },
-                    767.98: {
+                    575.98: {
                         slidesPerView: 2,
                     }
                 }
@@ -31,13 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (window.innerWidth <= 1023.98) {
                 if (!teamSlide) {
                     initSlider();
-                    // swiperWrapper.classList.add("swiper-wrapper")
                 }
             } else {
                 if (teamSlide) {
                     teamSlide.destroy(true, true);
                     teamSlide = undefined;
-                    // swiperWrapper.classList.remove("swiper-wrapper")
                 }
             }
         }
@@ -54,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(popupBtn.length > 0) {
             popupBtn.forEach(btn => {
                 btn.addEventListener('click', function() {
+                    let widthScroll = window.innerWidth - document.documentElement.offsetWidth
                     let idPopup = this.dataset.id
 
                     if(idPopup) {
@@ -61,8 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         if(popup) {
                             popup.classList.add('active')
+                            document.body.classList.add('look')
+                            document.body.style.marginRight = `${widthScroll}px`
 
-                            let btnClose = popup.querySelector('.popup__close')
+                            let btnClose = popup.querySelector('.popup-team__close')
 
                             popup.addEventListener('click', function(e) {
                                 e.stopPropagation()
@@ -79,6 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                 function popupHidden() {
                                     popupShadow.classList.remove('active')
                                     popup.classList.remove('active')
+                                    document.body.classList.remove('look')
+                                    document.body.style.marginRight = `0px`
                                 }
                             }
                         }
