@@ -1,36 +1,23 @@
 {{ 'collections-list.css' | asset_url | stylesheet_tag }}
 
+<script src="{{ "collections-list" | asset_url }}" defer="defer"></script>
+
+
+
 <section class="collections-list">
     <div class="collections-list__container">
       <div class="collections-list__wrapper">
         {% for block in section.blocks %}
           {% assign collection = block.settings.collection %}
-          {% assign collection_image = block.settings.image_with_text_image | default: block.settings.collection %}
-
-          <div class="collections-list__item{% if section.settings.text_position == "inside" %} collections-item-{{-section.settings.text_position-}} {% endif %}">
-            <div class="collections-list__box-img collections-list__box-img--{{ section.settings.image_aspect_ratio }}">
-              <a class="collections-list__link" href="{{ collection.url }}">
-                <picture>
-                  {% if collection_image %}
-                    <source media="(max-width: 1023.98px)" srcset="{{ collection_image | image_url: width: 293 }} 1x, {{ collection_image | image_url: width: 586 }} 2x">
-                    <img class="collections-list__img" src="{{ collection_image | image_url: width: 400 }}" alt="{{ collection.title }}">
-                  {% else %}
-                    <source media="(max-width: 1023.98px)" srcset="{{ 'def.png' | asset_img_url: '293x' }} 1x, {{ 'def.png' | asset_img_url: '586x' }} 2x">
-                    <img class="collections-list__img" src="{{ 'def.png' | asset_img_url: '400x' }}" alt="{{ collection.title }}">
-                  {% endif %}
-                </picture>
+          <div class="collections-list__item">
+            <div class="collections-list__box-img">
+              <a href="{{ collection.url }}">
+                <img src="{{ collection.image | image_url: width: 400 }}" alt="{{ collectin.title }}">
               </a>
             </div>
-            <div class="collections-list__description collections-list-description" style="background: {{ section.settings.overlay_color }}">
-              {% if section.settings.text_position == "under" %}
-                <a href="{{ collection.url }}" class="collections-list-description__link">{{ collection.title }}</a>
-              {% else %}
-                <h4 class="collections-list-description__title" {% if section.settings.text_position == "inside" %}style="color: {{ section.settings.image_text_color }}"{% endif %}>{{ collection.title }}</h4>
-              {% endif %}
-
-              {% if section.settings.show_products_count %}
-                <div class="collections-list-description__length"><span {% if section.settings.text_position == "inside" %}style="color: {{ section.settings.image_text_color }}"{% endif %}>{{ collection.products_count }}</span> products</div>
-              {% endif %}
+            <div class="collections-list__description collections-list-description">
+              <h4 class="collections-list-description__title">{{ collection.title }}</h4>
+              <div class="collections-list-description__length">{{ collection.products_count }} products</div>
             </div>
           </div>
         {% endfor %}
@@ -64,12 +51,12 @@
           "label": "Image aspect ratio",
           "options": [
             {
-              "value": "portrait",
-              "label": "Portrait"
-            },
-            {
               "value": "square",
               "label": "Square"
+            },
+            {
+              "value": "portrait",
+              "label": "Portrait"
             },
             {
               "value": "landscape",
@@ -94,7 +81,7 @@
           "type": "color_background",
           "id": "overlay_color",
           "label": "Overlay color",
-          "default": "linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.80) 100%)"
+          "default": "linear-gradient(#ffffff, #000000)"
         }
       ],
       "blocks": [

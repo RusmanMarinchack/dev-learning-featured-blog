@@ -145,9 +145,6 @@
 }
 
 @media screen and (min-width: 1023.98px) {
-    .featured-blog__container .featured-blog__swiper-pagination.swiper-pagination {
-        display: none;
-    }
     .featured-blog__container .featured-blog__wrapper {
         flex-wrap: wrap;
         gap: 15.67px;

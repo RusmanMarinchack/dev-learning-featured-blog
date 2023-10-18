@@ -13,19 +13,14 @@
             {% for article in blog.articles limit: 3 %}
                 <div class="featured-blog__item swiper-slide">
                     <div class="featured-blog__box-img">
-                        <a class="featured-blog__link" href="{{ article.url }}">
-                            <picture>
-                                {% if article.image %}
-                                    <source media="(max-width: 1023.98px)" srcset="{{ article.image | image_url: width: 1078 }}">
-                                    <img src="{{ article.image | image_url: width: 539 }}" alt="{{ article.title }}">
-                                {% elsif postImage %}
-                                    <source media="(max-width: 1023.98px)" srcset="{{ postImage | image_url: width: 1078 }}">
-                                    <img src="{{ postImage | image_url: width: 539 }}" alt="{{ article.title }}">
-                                {% else %}
-                                    <source media="(max-width: 1023.98px)" srcset="{{ "blog-post-def.png" | asset_img_url: "1078x" }}">
-                                    <img src="{{ "blog-post-def.png" | asset_img_url: "539x" }}" alt="{{ article.title }}">
-                                {% endif %}
-                            </picture>
+                        <a href="{{ article.url }}">
+                            {% if article.image %}
+                                <img src="{{ article.image | image_url: width: 539 }}" alt="{{ article.title }}">
+                            {% elsif postImage %}
+                                <img src="{{ postImage | image_url: width: 539 }}" alt="{{ article.title }}">
+                            {% else %}
+                                <img src="{{ "blog-post-def.png" | asset_img_url: "539x" }}" alt="{{ article.title }}">
+                            {% endif %}
                         </a>
                     </div>
                     <div class="featured-blog__content">

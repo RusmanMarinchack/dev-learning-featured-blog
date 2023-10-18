@@ -39,46 +39,65 @@
         "show_text_below": false
       }
     },
-    "b0058ad9-7e97-4c30-bf18-a02f0c13487e": {
-      "type": "collections-list",
+    "cb14a288-b07d-4f18-94a8-1b93f56ec4ad": {
+      "type": "out-team",
       "blocks": {
-        "5b56d642-1275-4590-90ac-5d442c371fa9": {
-          "type": "collection",
+        "ba1eac1f-5337-4876-9dc7-90b78b86620e": {
+          "type": "team-card",
           "settings": {
-            "collection": "talismans-1"
+            "card_image": "shopify:\/\/shop_images\/Hristo-Borisov.png",
+            "popup_image": "shopify:\/\/shop_images\/Hristo-Borisov-4_e1776c57-782a-4afb-8de9-423d9d70dfae.png",
+            "name": "Quick",
+            "role": "Co-founder & CEO",
+            "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <\/p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <\/p>"
           }
         },
-        "df296b61-8f61-4948-b619-4fa2db6ef8f6": {
-          "type": "collection",
+        "1b6767f9-9f69-4fa1-9a89-df7f3fd4ed7f": {
+          "type": "team-card",
           "settings": {
-            "collection": "talismans-2"
+            "card_image": "shopify:\/\/shop_images\/Hristo-Borisov-2.png",
+            "name": "Hristo Borisov",
+            "role": "Co-founder & CEO",
+            "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <\/p>"
           }
         },
-        "7a2ff017-c1c9-4518-b4c9-e15c994d9beb": {
-          "type": "collection",
+        "e15bea45-8b31-4222-b1e7-11684ad2370e": {
+          "type": "team-card",
           "settings": {
-            "collection": "talismans-3"
+            "card_image": "shopify:\/\/shop_images\/Hristo-Borisov3.png",
+            "name": "Jana links",
+            "role": "CEO",
+            "description": "<p>38 067 252 52 03<\/p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <\/p>"
           }
         },
-        "2606a394-2eb8-445b-9b5f-8cae4b119dde": {
-          "type": "collection",
+        "3451784d-7b60-4eaa-a4fd-4f98b128e603": {
+          "type": "team-card",
           "settings": {
-            "collection": "talismans-4"
+            "card_image": "shopify:\/\/shop_images\/Hristo-Borisov-4_e1776c57-782a-4afb-8de9-423d9d70dfae.png",
+            "popup_image": "shopify:\/\/shop_images\/popup-image.png",
+            "name": "Jon",
+            "role": "Co-founder",
+            "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <\/p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <\/p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <\/p>"
+          }
+        },
+        "fcd053d1-333f-41c5-b130-a05d8e0dd6c3": {
+          "type": "team-card",
+          "settings": {
+            "name": "Quick links",
+            "role": "Co-founder & CEO",
+            "description": ""
           }
         }
       },
       "block_order": [
-        "5b56d642-1275-4590-90ac-5d442c371fa9",
-        "df296b61-8f61-4948-b619-4fa2db6ef8f6",
-        "7a2ff017-c1c9-4518-b4c9-e15c994d9beb",
-        "2606a394-2eb8-445b-9b5f-8cae4b119dde"
+        "ba1eac1f-5337-4876-9dc7-90b78b86620e",
+        "1b6767f9-9f69-4fa1-9a89-df7f3fd4ed7f",
+        "e15bea45-8b31-4222-b1e7-11684ad2370e",
+        "3451784d-7b60-4eaa-a4fd-4f98b128e603",
+        "fcd053d1-333f-41c5-b130-a05d8e0dd6c3"
       ],
       "settings": {
-        "text_position": "under",
-        "image_aspect_ratio": "square",
-        "show_products_count": true,
-        "image_text_color": "#000000",
-        "overlay_color": "linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(0, 0, 0, 1) 100%)"
+        "btn_popup": "Read more label"
       }
     },
     "featured_collection": {
@@ -112,7 +131,7 @@
   },
   "order": [
     "image_banner",
-    "b0058ad9-7e97-4c30-bf18-a02f0c13487e",
+    "cb14a288-b07d-4f18-94a8-1b93f56ec4ad",
     "featured_collection"
   ]
 }
