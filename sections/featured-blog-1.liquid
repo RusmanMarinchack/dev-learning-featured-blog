@@ -2,7 +2,6 @@
 {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
 
 {% assign blog = section.settings.blog %}
-{% assign postImage = section.settings.image_with_text_image %}
 
 <script src="{{ 'featured-blog-1.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
@@ -11,18 +10,23 @@
     <div class="featured-blog__container swiper">
         <div class="featured-blog__wrapper swiper-wrapper">
             {% for article in blog.articles limit: 3 %}
+                {% assign image_banner = article.image | default: section.settings.image_with_text_image %}
+
                 <div class="featured-blog__item swiper-slide">
                     <div class="featured-blog__box-img">
                         <a class="featured-blog__link" href="{{ article.url }}">
                             <picture>
-                                {% if article.image %}
-                                    <source media="(max-width: 1023.98px)" srcset="{{ article.image | image_url: width: 1078 }} 2x">
-                                    <img class="featured-blog__img" src="{{ article.image | image_url: width: 539 }}" alt="{{ article.title }}">
-                                {% elsif postImage %}
-                                    <source media="(max-width: 1023.98px)" srcset="{{ postImage | image_url: width: 1078 }} 2x">
-                                    <img class="featured-blog__img" src="{{ postImage | image_url: width: 539 }}" alt="{{ article.title }}">
+                                {% if image_banner %}
+                                    <source media="(max-width: 1023.98px)"
+                                            srcset="{{ image_banner | image_url: width: 486 }} 1x,
+                                                    {{ article.image | image_url: width: 972 }} 2x"
+                                    >
+                                    <img class="featured-blog__img" src="{{ image_banner | image_url: width: 539 }}" alt="{{ article.title }}">
                                 {% else %}
-                                    <source media="(max-width: 1023.98px)" srcset="{{ "blog-post-def.png" | asset_img_url: "1078x" }} 2x">
+                                    <source media="(max-width: 1023.98px)"
+                                            srcset="{{ "blog-post-def.png" | asset_img_url: "486x" }} 1x,
+                                                    {{ "blog-post-def.png" | asset_img_url: "972x" }} 2x"
+                                    >
                                     <img class="featured-blog__img" src="{{ "blog-post-def.png" | asset_img_url: "539x" }}" alt="{{ article.title }}">
                                 {% endif %}
                             </picture>
