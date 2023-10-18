@@ -5,33 +5,31 @@
       <div class="collections-list__wrapper">
         {% for block in section.blocks %}
           {% assign collection = block.settings.collection %}
+          {% assign collection_image = block.settings.image_with_text_image | default: block.settings.collection %}
 
-          <div class="collections-list__item{% if section.settings.text_position == "inside" %} collections-item-{{-section.settings.text_position-}} {% endif %} collections-item-{{ section.settings.image_aspect_ratio }}">
-            <div class="collections-list__box-img">
+          <div class="collections-list__item{% if section.settings.text_position == "inside" %} collections-item-{{-section.settings.text_position-}} {% endif %}">
+            <div class="collections-list__box-img collections-list__box-img--{{ section.settings.image_aspect_ratio }}">
               <a class="collections-list__link" href="{{ collection.url }}">
                 <picture>
-                  {% if block.settings.image_with_text_image %}
-                    <source media="(max-width: 1023.98px)" srcset="{{ block.settings.image_with_text_image | image_url: width: 800 }}">
-                    <img class="collections-list__img" style="background: {{ section.settings.overlay_color }}" src="{{ block.settings.image_with_text_image | image_url: width: 400 }}" alt="{{ collection.title }}">
-                  {% elsif collection.image %}
-                    <source media="(max-width: 1023.98px)" srcset="{{ collection.image | image_url: width: 800 }}">
-                    <img class="collections-list__img" style="background: {{ section.settings.overlay_color }}" src="{{ collection.image | image_url: width: 400 }}" alt="{{ collection.title }}">
+                  {% if collection_image %}
+                    <source media="(max-width: 1023.98px)" srcset="{{ collection_image | image_url: width: 293 }} 1x, {{ collection_image | image_url: width: 586 }} 2x">
+                    <img class="collections-list__img" src="{{ collection_image | image_url: width: 400 }}" alt="{{ collection.title }}">
                   {% else %}
-                    <source media="(max-width: 1023.98px)" srcset="{{ 'def.png' | asset_img_url: '800x' }}">
-                    <img class="collections-list__img" style="background: {{ section.settings.overlay_color }}" src="{{ 'def.png' | asset_img_url: '400x' }}" alt="{{ collection.title }}">
+                    <source media="(max-width: 1023.98px)" srcset="{{ 'def.png' | asset_img_url: '293x' }} 1x, {{ 'def.png' | asset_img_url: '586x' }} 2x">
+                    <img class="collections-list__img" src="{{ 'def.png' | asset_img_url: '400x' }}" alt="{{ collection.title }}">
                   {% endif %}
                 </picture>
               </a>
             </div>
-            <div class="collections-list__description collections-list-description">
-              {% if section.settings.text_position == "inside" %}
-                <h4 class="collections-list-description__title" style="color: {{ section.settings.image_text_color }}">{{ collection.title }}</h4>
+            <div class="collections-list__description collections-list-description" style="background: {{ section.settings.overlay_color }}">
+              {% if section.settings.text_position == "under" %}
+                <a href="{{ collection.url }}" class="collections-list-description__link">{{ collection.title }}</a>
               {% else %}
-                <h4 class="collections-list-description__title">{{ collection.title }}</h4>
+                <h4 class="collections-list-description__title" {% if section.settings.text_position == "inside" %}style="color: {{ section.settings.image_text_color }}"{% endif %}>{{ collection.title }}</h4>
               {% endif %}
 
               {% if section.settings.show_products_count %}
-                <div class="collections-list-description__length">{{ collection.products_count }} products</div>
+                <div class="collections-list-description__length" {% if section.settings.text_position == "inside" %}style="color: {{ section.settings.image_text_color }}"{% endif %}>{{ collection.products_count }} products</div>
               {% endif %}
             </div>
           </div>
@@ -66,12 +64,12 @@
           "label": "Image aspect ratio",
           "options": [
             {
-              "value": "square",
-              "label": "Square"
-            },
-            {
               "value": "portrait",
               "label": "Portrait"
+            },
+            {
+              "value": "square",
+              "label": "Square"
             },
             {
               "value": "landscape",
@@ -96,7 +94,7 @@
           "type": "color_background",
           "id": "overlay_color",
           "label": "Overlay color",
-          "default": "linear-gradient(#ffffff, #000000)"
+          "default": "linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.80) 100%)"
         }
       ],
       "blocks": [
