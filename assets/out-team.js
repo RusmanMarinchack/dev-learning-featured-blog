@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sliderContent = document.querySelector('.out-team__container')
 
     if (sliderContent) {
+        const mdl = window.matchMedia("(max-width: 1023.98px)")
         let teamSlide
 
         function initSlider() {
@@ -20,15 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         slidesPerView: 1,
 
                     },
-                    575.98: {
+                    499.98: {
                         slidesPerView: 2,
                     }
                 }
             })
         }
 
-        function handlerActiveSlider() {
-            if (window.innerWidth <= 1023.98) {
+        function handlerSliderMob(media) {
+            if(media.matches) {
                 if (!teamSlide) {
                     initSlider();
                 }
@@ -40,8 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        handlerActiveSlider()
-        window.addEventListener('resize', handlerActiveSlider)
+        handlerSliderMob(mdl)
+        mdl.addEventListener('change', handlerSliderMob)
     }
 
 

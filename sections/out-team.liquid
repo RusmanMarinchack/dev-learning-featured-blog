@@ -5,7 +5,7 @@
 <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
 
 {% assign card = section.blocks.settings %}
-{% assign index = 1 %}
+{% assign indexItem = 1 %}
 {% assign indexPopup = 1 %}
 
 <section class="out-team aut-team-{{ section.id }}">
@@ -14,20 +14,26 @@
             {% for block in section.blocks %}
                 <div class="out-team__card swiper-slide">
                     <div class="out-team__box-photo">
-                        {% if block.settings.card_image %}
-                            <img src="{{ block.settings.card_image | image_url: width: 400 }}" alt="{{ block.settings.name }}" class="out-team__photo">
-                        {% else %}
-                            <img src="{{ 'blog-post-def.png' | asset_img_url: '400x' }}" alt="{{ block.settings.name }}" class="out-team__photo">
-                        {% endif %}
+                        <picture>
+                            {% if block.settings.card_image %}
+                                <source media="(max-width: 575.98px)" srcset="{{ block.settings.card_image | image_url: width: 543 }} 1x, {{ block.settings.card_image | image_url: width: 1086 }} 2x">
+                                <source media="(max-width: 1023.98px)" srcset="{{ block.settings.card_image | image_url: width: 668 }} 1x, {{ block.settings.card_image | image_url: width: 1336 }} 2x">
+                                <img src="{{ block.settings.card_image | image_url: width: 400 }}" alt="{{ block.settings.name }}" class="out-team__photo">
+                            {% else %}
+                                <source media="(max-width: 575.98px)" srcset="{{ 'blog-post-def.png' | asset_img_url: '543x' }} 1x, {{ 'blog-post-def.png' | asset_img_url: '1086x' }} 2x">
+                                <source media="(max-width: 1023.98px)" srcset="{{ 'blog-post-def.png' | asset_img_url: '668x' }} 1x, {{ 'blog-post-def.png' | asset_img_url: '1336x' }} 2x">
+                                <img src="{{ 'blog-post-def.png' | asset_img_url: '400x' }}" alt="{{ block.settings.name }}" class="out-team__photo">
+                            {% endif %}
+                        </picture>
                     </div>
-                    <div class="out-team__social out-team-social">
+                    <div class="out-team-social">
                         <div class="out-team-social__item social">
-                            <a href="https://uk-ua.facebook.com/" class="out-team-social__link social__link">
+                            <a href="https://uk-ua.facebook.com/" target="_blank" class="out-team-social__link social-link">
                                 <img class="out-team-social__image" src="{{ 'facebook.svg' | asset_url }}" alt="Icon">
                             </a>
                         </div>
                         <div class="out-team-social__item social">
-                            <a href="https://www.instagram.com/" class="out-team-social__link social__link">
+                            <a href="https://www.instagram.com/" target="_blank" class="out-team-social__link social-link">
                                 <img class="out-team-social__image" src="{{ 'instagram.svg' | asset_url }}" alt="Icon">
                             </a>
                         </div>
@@ -35,11 +41,11 @@
                     <div class="out-team__info">
                         <div class="out-team__name">{{ block.settings.name }}</div>
                         <div class="out-team__role">{{ block.settings.role }}</div>
-                        <button class="out-team__btn-popup _popup-btn" data-id="card-team-{{ index }}">{{ section.settings.btn_popup }}</button>
+                        <button class="out-team__btn-popup _popup-btn" data-id="card-team-{{ indexItem }}">{{ section.settings.btn_popup }}</button>
                     </div>
                 </div>
 
-                {% assign index = index | plus: 1 %}
+                {% assign indexItem = indexItem | plus: 1 %}
             {% endfor %}
         </div>
         <div class="out-team__swiper-pagination swiper-pagination"></div>
@@ -50,7 +56,7 @@
     {% assign image_popup_defoult = block.settings.popup_image | default: block.settings.card_image %}
 
     <div class="popup-shadow" >
-        <div class="popup popup-team" id="card-team-{{ indexPopup }}">
+        <div class="popup-team" id="card-team-{{ indexPopup }}">
             <button class="popup-team__close _popup-btn">&#10005;</button>
             <div class="popup-team__content">
                 <div class="popup-team__box-image">
@@ -73,17 +79,17 @@
                     <div class="popup-text__description">{{ block.settings.description }}</div>
                     <ul class="popup-text__socials">
                         <li class="popup-text__item social">
-                            <a href="" class="popup-text__link social__link">
+                            <a href="https://uk-ua.facebook.com/" target="_blank" class="popup-text__link social-link">
                                 <img src="{{ 'facebook.svg' | asset_url }}" alt="Icon" class="popup-text__image">
                             </a>
                         </li>
                         <li class="popup-text__item social">
-                            <a href="" class="popup-text__link social__link">
+                            <a href="https://www.instagram.com/" target="_blank" class="popup-text__link social-link">
                                 <img src="{{ 'instagram.svg' | asset_url }}" alt="Icon" class="popup-text__image">
                             </a>
                         </li>
                         <li class="popup-text__item social">
-                            <a href="" class="popup-text__link social__link">
+                            <a href="https://www.youtube.com/" target="_blank" class="popup-text__link social-link">
                                 <img src="{{ 'youtube.svg' | asset_url }}" alt="Icon" class="popup-text__image">
                             </a>
                         </li>

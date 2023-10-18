@@ -51,10 +51,17 @@ body.look {
     line-height: 118%;
     margin: 0 0 12px 0;
 }
+.out-team .out-team__role {
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 128.571%;
+}
 .out-team .out-team__description p {
     margin: 0 0 12px 0;
 }
-.out-team .out-team__social {
+.out-team .out-team-social {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -177,7 +184,7 @@ body.look {
     height: 100%;
     object-fit: cover;
 }
-.popup-team .popup-team__box-text {
+.popup-team .popup-text {
     width: 50%;
     padding: 24px 32px;
 }
@@ -242,12 +249,16 @@ body.look {
     }
 }
 @media screen and (max-width: 1023.98px) {
+    .popup-team {
+        max-width: 700px;
+        width: 100%;
+    }
     .popup-team .popup-team__content {
+        width: auto;
         flex-direction: column;
-        width: calc(100vw - 32px);
         padding-top: 56px;
     }
-    .popup-team .popup-team__box-text {
+    .popup-team .popup-text {
         width: 100%;
         padding: 32px 0 0 0;
     }
@@ -259,7 +270,7 @@ body.look {
         padding-bottom: 57px;
     }
 }
-@media screen and (max-width: 767.98px) {
+@media screen and (max-width: 575.98px) {
     .popup-team .popup-team__box-image {
         padding-bottom: 100%;
     }
@@ -281,7 +292,7 @@ body.look {
 }
 
 @media (hover: hover) {
-    .social:hover .social__link {
+    .social:hover .social-link {
         transform: scale(1.1);
     }
     .out-team .out-team__info {
