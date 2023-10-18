@@ -12,17 +12,20 @@
     <div class="out-team__container swiper">
         <div class="out-team__wrapper swiper-wrapper">
             {% for block in section.blocks %}
+                {% assign image = block.settings.card_image %}
+                {% assign image_defaoult = 'blog-post-def.png' %}
+
                 <div class="out-team__card swiper-slide">
                     <div class="out-team__box-photo">
                         <picture>
                             {% if block.settings.card_image %}
-                                <source media="(max-width: 575.98px)" srcset="{{ block.settings.card_image | image_url: width: 543 }} 1x, {{ block.settings.card_image | image_url: width: 1086 }} 2x">
-                                <source media="(max-width: 1023.98px)" srcset="{{ block.settings.card_image | image_url: width: 668 }} 1x, {{ block.settings.card_image | image_url: width: 1336 }} 2x">
-                                <img src="{{ block.settings.card_image | image_url: width: 400 }}" alt="{{ block.settings.name }}" class="out-team__photo">
+                                <source media="(max-width: 575.98px)" srcset="{{ image | image_url: width: 543 }} 1x, {{ image | image_url: width: 1086 }} 2x">
+                                <source media="(max-width: 1023.98px)" srcset="{{ image | image_url: width: 668 }} 1x, {{ image | image_url: width: 1336 }} 2x">
+                                <img src="{{ image | image_url: width: 400 }}" alt="{{ block.settings.name }}" class="out-team__photo">
                             {% else %}
-                                <source media="(max-width: 575.98px)" srcset="{{ 'blog-post-def.png' | asset_img_url: '543x' }} 1x, {{ 'blog-post-def.png' | asset_img_url: '1086x' }} 2x">
-                                <source media="(max-width: 1023.98px)" srcset="{{ 'blog-post-def.png' | asset_img_url: '668x' }} 1x, {{ 'blog-post-def.png' | asset_img_url: '1336x' }} 2x">
-                                <img src="{{ 'blog-post-def.png' | asset_img_url: '400x' }}" alt="{{ block.settings.name }}" class="out-team__photo">
+                                <source media="(max-width: 575.98px)" srcset="{{ image_defaoult | asset_img_url: '543x' }} 1x, {{ image_defaoult | asset_img_url: '1086x' }} 2x">
+                                <source media="(max-width: 1023.98px)" srcset="{{ image_defaoult | asset_img_url: '668x' }} 1x, {{ image_defaoult | asset_img_url: '1336x' }} 2x">
+                                <img src="{{ image_defaoult | asset_img_url: '400x' }}" alt="{{ block.settings.name }}" class="out-team__photo">
                             {% endif %}
                         </picture>
                     </div>
@@ -54,6 +57,7 @@
 
 {% for block in section.blocks %}
     {% assign image_popup_defoult = block.settings.popup_image | default: block.settings.card_image %}
+    {% assign image_popup_default = 'blog-post-def.png' %}
 
     <div class="popup-shadow" >
         <div class="popup-team" id="card-team-{{ indexPopup }}">
@@ -66,9 +70,9 @@
                             <source media="(max-width: 767.98px)" srcset="{{ image_popup_defoult | image_url: width: 700, height: 703 }} 1x, {{ block.settings.popup_image | image_url: width: 1400, height: 1406 }} 2x">
                             <img src="{{ image_popup_defoult | image_url: width: 505, height: 505 }}" alt="{{ block.settings.name }}" class="popup-team__image">
                         {% else %}
-                            <source media="(max-width: 1023.98px)" srcset="{{ 'blog-post-def.png' | asset_img_url: '700x730' }} 1x, {{ 'blog-post-def.png' | asset_img_url: '1400x1460' }} 2x">
-                            <source media="(max-width: 767.98px)" srcset="{{ 'blog-post-def.png' | asset_img_url: '700x703' }} 1x, {{ 'blog-post-def.png' | asset_img_url: '1400x1406' }} 1x">
-                            <img src="{{ 'blog-post-def.png' | asset_img_url: '505x505' }}" alt="{{ block.settings.name }}" class="popup-team__image">
+                            <source media="(max-width: 1023.98px)" srcset="{{ image_popup_default | asset_img_url: '700x730' }} 1x, {{ image_popup_default | asset_img_url: '1400x1460' }} 2x">
+                            <source media="(max-width: 767.98px)" srcset="{{ image_popup_default | asset_img_url: '700x703' }} 1x, {{ image_popup_default | asset_img_url: '1400x1406' }} 1x">
+                            <img src="{{ image_popup_default | asset_img_url: '505x505' }}" alt="{{ block.settings.name }}" class="popup-team__image">
                         {% endif %}
                     </picture>
 
