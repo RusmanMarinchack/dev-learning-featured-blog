@@ -29,7 +29,7 @@
               {% endif %}
 
               {% if section.settings.show_products_count %}
-                <div class="collections-list-description__length" {% if section.settings.text_position == "inside" %}style="color: {{ section.settings.image_text_color }}"{% endif %}>{{ collection.products_count }} products</div>
+                <div class="collections-list-description__length"><span {% if section.settings.text_position == "inside" %}style="color: {{ section.settings.image_text_color }}"{% endif %}>{{ collection.products_count }}</span> products</div>
               {% endif %}
             </div>
           </div>
