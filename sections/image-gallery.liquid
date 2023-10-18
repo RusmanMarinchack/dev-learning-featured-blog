@@ -1,16 +1,103 @@
 {{ 'image-gallery.css' | asset_url | stylesheet_tag }}
 
+<script src="{{ 'image-gallery.js' | asset_url }}" defer="defer"></script>
+
 <section class="image-gallery">
     <div class="image-gallery__container">
-        image-galleryf
+        <div class="image-gallery__wrapper" data-row-decstop="{{ section.settings.cards_row_desktop }}" data-row-mobile="{{ section.settings.cards_row_mobile }}">
+            {% for block in section.blocks %}
+                {% assign image = block.settings.image %}
+                {% assign rowDesktop = section.settings.cards_row_desktop %}
+
+                <div class="image-gallery__item" >
+                    <picture>
+                        {% if image %}
+                            <img class="image-gallery__image" src="{{ image | image_url: width: 300 }}" alt="{% if image %}{{ image.alt }}{% else %} Image {% endif %}">
+                        {% else %}
+                            <img class="image-gallery__image" src="{{ 'blog-post-def.png' | asset_img_url: '300x' }}" alt="Image">
+                        {% endif %}
+                    </picture>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 
 {% schema %}
 {
   "name": "Image gallery",
-  "settings": [],
-  "blocks": [],
+  "settings": [
+    {
+      "type": "select",
+      "id": "cards_row_desktop",
+      "label": "Cards per row desktop",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        }
+      ],
+      "default": "6"
+    },
+    {
+      "type": "select",
+      "id": "cards_row_mobile",
+      "label": "Cards per row mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "image_aspect_ratio",
+      "label": "Image aspect ratio",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "landscape",
+          "label": "Landscape"
+        }
+      ]
+    },
+    {
+      "type": "color_background",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "linear-gradient(#ffffff, #000000)"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Image",
+      "type": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
       "name": "Image gallery"
