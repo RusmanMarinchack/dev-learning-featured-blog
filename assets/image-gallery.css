@@ -7,24 +7,12 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 32px 16px;
+    gap: 16px;
 }
 .image-gallery .image-gallery__item {
     position: relative;
-    border-radius: 16px;
+    border-radius: 8px;
     overflow: hidden;
-}
-.image-gallery .image-gallery__item.image-gallery__item-row--6 {
-    width: calc(16.66% - 14px);
-    padding-bottom: calc(16.66% - 14px);
-}
-.image-gallery .image-gallery__item.image-gallery__item-row--4 {
-    width: calc(25% - 12px);
-    padding-bottom: calc(25% - 12px);
-}
-.image-gallery .image-gallery__item.image-gallery__item-row--2 {
-    width: calc(50% - 8px);
-    padding-bottom: calc(50% - 276px);
 }
 .image-gallery .image-gallery__image {
     position: absolute;
@@ -32,4 +20,57 @@
     left: 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+}
+.image-gallery .image-gallery__overlay {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width: 991.98px) {
+    .image-gallery .image-gallery__wrapper {
+        gap: 8px;
+    }
+    .image-gallery .image-gallery__item.image-gallery__row-mob--2 {
+        width: calc(50% - 4px);
+        padding-bottom: calc(50% - 4px);
+    }
+    .image-gallery .image-gallery__row-mob--2.image-gallery__item--landscape {
+        padding-bottom: calc(33% - 4px);
+    }
+    .image-gallery .image-gallery__item.image-gallery__row-mob--1 {
+        width: 100%;
+        padding-bottom: 100%;
+    }
+    .image-gallery .image-gallery__row-mob--1.image-gallery__item--landscape {
+        padding-bottom: calc(60% - 4px);
+    }
+}
+
+@media screen and (min-width: 991.98px) {
+    .image-gallery .image-gallery__item.image-gallery__row-desktop--6 {
+        width: calc(16.66% - 14px);
+        padding-bottom: calc(16.66% - 14px);
+    }
+    .image-gallery .image-gallery__row-desktop--6.image-gallery__item--landscape {
+        padding-bottom: calc(11% - 14px);
+    }
+    .image-gallery .image-gallery__item.image-gallery__row-desktop--4 {
+        width: calc(25% - 12px);
+        padding-bottom: calc(25% - 12px);
+    }
+    .image-gallery .image-gallery__row-desktop--4.image-gallery__item--landscape {
+        padding-bottom: calc(17% - 12px);
+    }
+    .image-gallery .image-gallery__item.image-gallery__row-desktop--2 {
+        width: calc(50% - 8px);
+        padding-bottom: calc(50% - 8px);
+    }
+    .image-gallery .image-gallery__row-desktop--2.image-gallery__item--landscape {
+        padding-bottom: calc(33% - 8px);
+    }
 }

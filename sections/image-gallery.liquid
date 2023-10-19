@@ -1,22 +1,73 @@
 {{ 'image-gallery.css' | asset_url | stylesheet_tag }}
 
-<script src="{{ 'image-gallery.js' | asset_url }}" defer="defer"></script>
+{% assign tabel_2_row_1x = 476 %}
+{% assign tabel_2_row_2x = tabel_2_row_1x | times: 2 %}
+{% assign min_tabel_2_row_1x = 364 %}
+{% assign min_tabel_2_row_2x = min_tabel_2_row_1x | times: 2 %}
+{% assign phone_2_row_1x = 190 %}
+{% assign phone_2_row_2x = phone_2_row_1x | times: 2 %}
+
+{% assign tabel_1_row_1x = 959 %}
+{% assign tabel_1_row_2x = tabel_1_row_1x | times: 2 %}
+{% assign min_tabel_1_row_1x = 734 %}
+{% assign min_tabel_1_row_2x = min_tabel_2_row_1x | times: 2 %}
+{% assign phone_1_row_1x = 388 %}
+{% assign phone_1_row_2x = phone_2_row_2x | times: 2 %}
+
+{% assign decstop_row_6 = 266 %}
+{% assign decstop_row_4 = 408 %}
+{% assign decstop_row_2 = 832 %}
 
 <section class="image-gallery">
     <div class="image-gallery__container">
-        <div class="image-gallery__wrapper" data-row-decstop="{{ section.settings.cards_row_desktop }}" data-row-mobile="{{ section.settings.cards_row_mobile }}">
+        <div class="image-gallery__wrapper">
             {% for block in section.blocks %}
                 {% assign image = block.settings.image %}
-                {% assign rowDesktop = section.settings.cards_row_desktop %}
+                {% assign image_default = 'blog-post-def.png' %}
+                {% assign row_desktop = section.settings.cards_row_desktop %}
+                {% assign row_mob = section.settings.cards_row_mobile %}
 
-                <div class="image-gallery__item" >
+                <div class="image-gallery__item image-gallery__row-desktop--{{ row_desktop }} image-gallery__row-mob--{{ row_mob }}{% if section.settings.image_aspect_ratio == 'landscape' %} image-gallery__item--landscape{% endif %}" >
                     <picture>
                         {% if image %}
-                            <img class="image-gallery__image" src="{{ image | image_url: width: 300 }}" alt="{% if image %}{{ image.alt }}{% else %} Image {% endif %}">
+                          {% if row_mob == "2" %}
+                            <source media="(max-width: 991.98px)" srcset="{{ image | image_url: width: tabel_2_row_1x }} 1x, {{ image | image_url: width: tabel_2_row_2x }} 2x" >
+                            <source media="(max-width: 767.98px)" srcset="{{ image | image_url: width: min_tabel_2_row_1x }} 1x, {{ image | image_url: width: min_tabel_2_row_2x }} 2x" >
+                            <source media="(max-width: 420.98px)" srcset="{{ image | image_url: width: phone_2_row_1x }} 1x, {{ image | image_url: width: phone_2_row_2x }} 2x" >
+                          {% else %}
+                            <source media="(max-width: 991.98px)" srcset="{{ image | image_url: width: tabel_1_row_1x }} 1x, {{ image | image_url: width: tabel_1_row_2x }} 2x" >
+                            <source media="(max-width: 767.98px)" srcset="{{ image | image_url: width: min_tabel_1_row_1x }} 1x, {{ image | image_url: width: min_tabel_1_row_2x }} 2x" >
+                            <source media="(max-width: 420.98px)" srcset="{{ image | image_url: width: phone_1_row_1x }} 1x, {{ image | image_url: width: phone_1_row_2x }} 2x" >
+                          {% endif %}
+
+                          {% if row_desktop == "6" %}
+                            <img class="image-gallery__image" src="{{ image | image_url: width: decstop_row_6 }}" alt="{% if image %}{{ image.alt }}{% else %} Image {% endif %}">
+                          {% elsif row_desktop == "4" %}
+                            <img class="image-gallery__image" src="{{ image | image_url: width: decstop_row_4 }}" alt="{% if image %}{{ image.alt }}{% else %} Image {% endif %}">
+                          {% else %}
+                            <img class="image-gallery__image" src="{{ image | image_url: width: decstop_row_2 }}" alt="{% if image %}{{ image.alt }}{% else %} Image {% endif %}">
+                          {% endif %}
                         {% else %}
-                            <img class="image-gallery__image" src="{{ 'blog-post-def.png' | asset_img_url: '300x' }}" alt="Image">
+                          {% if row_mob == "2" %}
+                            <source media="(max-width: 991.98px)" srcset="{{ image_default | asset_img_url: tabel_2_row_1x | append: 'x' }} 1x, {{ image_default | asset_img_url: tabel_2_row_2x | append: 'x' }} 2x" >
+                            <source media="(max-width: 767.98px)" srcset="{{ image_default | asset_img_url: min_tabel_2_row_1x | append: 'x' }} 1x, {{ image_default | asset_img_url: min_tabel_2_row_2x | append: 'x' }} 2x" >
+                            <source media="(max-width: 420.98px)" srcset="{{ image_default | asset_img_url: phone_2_row_1x | append: 'x' }} 1x, {{ image_default | asset_img_url: phone_2_row_2x | append: 'x' }} 2x" >
+                          {% else %}
+                            <source media="(max-width: 991.98px)" srcset="{{ image_default | asset_img_url: tabe_1_row_1x | append: 'x' }} 1x, {{ image_default | asset_img_url: phone_1_row_2x | append: 'x' }} 2x" >
+                            <source media="(max-width: 767.98px)" srcset="{{ image_default | asset_img_url: min_tabel_1_row_1x | append: 'x' }} 1x, {{ image_default | asset_img_url: phone_1_row_2x | append: 'x' }} 2x" >
+                            <source media="(max-width: 420.98px)" srcset="{{ image_default | asset_img_url: phone_1_row_1x | append: 'x' }} 1x, {{ image_default | asset_img_url: phone_1_row_2x | append: 'x' }} 2x" >
+                          {% endif %}
+
+                          {% if row_desktop == "6" %}
+                            <img class="image-gallery__image" src="{{ image_default | asset_img_url: decstop_row_6 | append: 'x' }}" alt="Image Default">
+                          {% elsif row_desktop == "4" %}
+                            <img class="image-gallery__image" src="{{ image_default | asset_img_url: decstop_row_4 | append: 'x' }}" alt="Image Default">
+                          {% else %}
+                            <img class="image-gallery__image" src="{{ image_default | asset_img_url: decstop_row_2 | append: 'x' }}" alt="Image Default">
+                          {% endif %}
                         {% endif %}
                     </picture>
+                  <div class="image-gallery__overlay" {% if section.settings.overlay_color %}style="background: {{ section.settings.overlay_color }}"{% endif %}></div>
                 </div>
             {% endfor %}
         </div>
@@ -82,7 +133,7 @@
       "type": "color_background",
       "id": "overlay_color",
       "label": "Overlay color",
-      "default": "linear-gradient(#ffffff, #000000)"
+      "default": "linear-gradient(180deg, rgba(245, 245, 245, 0) 100%, rgba(0, 0, 0, 1) 100%)"
     }
   ],
   "blocks": [
