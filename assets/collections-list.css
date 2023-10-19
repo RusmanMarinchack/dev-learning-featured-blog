@@ -20,6 +20,14 @@
 .collections-list .collections-item-inside .collections-list__box-img {
     margin-bottom: 0;
 }
+.collections-list .collections-list__overlay {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 132px;
+}
 .collections-list .collections-item-inside .collections-list__description {
     position: absolute;
     bottom: 0;
