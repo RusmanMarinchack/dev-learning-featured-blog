@@ -49,13 +49,19 @@
                           {% endif %}
                         {% else %}
                           {% if row_mob == "2" %}
-                            <source media="(max-width: 991.98px)" srcset="{{ image_default | asset_img_url: tabel_2_row_1x | append: 'x' }} 1x, {{ image_default | asset_img_url: tabel_2_row_2x | append: 'x' }} 2x" >
-                            <source media="(max-width: 767.98px)" srcset="{{ image_default | asset_img_url: min_tabel_2_row_1x | append: 'x' }} 1x, {{ image_default | asset_img_url: min_tabel_2_row_2x | append: 'x' }} 2x" >
-                            <source media="(max-width: 420.98px)" srcset="{{ image_default | asset_img_url: phone_2_row_1x | append: 'x' }} 1x, {{ image_default | asset_img_url: phone_2_row_2x | append: 'x' }} 2x" >
+                            <source media="(max-width: 991.98px)" srcset="{{ image_default | asset_img_url: tabel_2_row_1x | append: 'x' }} 1x,
+                                                                          {{ image_default | asset_img_url: tabel_2_row_2x | append: 'x' }} 2x" >
+                            <source media="(max-width: 767.98px)" srcset="{{ image_default | asset_img_url: min_tabel_2_row_1x | append: 'x' }} 1x,
+                                                                          {{ image_default | asset_img_url: min_tabel_2_row_2x | append: 'x' }} 2x" >
+                            <source media="(max-width: 420.98px)" srcset="{{ image_default | asset_img_url: phone_2_row_1x | append: 'x' }} 1x,
+                                                                          {{ image_default | asset_img_url: phone_2_row_2x | append: 'x' }} 2x" >
                           {% else %}
-                            <source media="(max-width: 991.98px)" srcset="{{ image_default | asset_img_url: tabe_1_row_1x | append: 'x' }} 1x, {{ image_default | asset_img_url: phone_1_row_2x | append: 'x' }} 2x" >
-                            <source media="(max-width: 767.98px)" srcset="{{ image_default | asset_img_url: min_tabel_1_row_1x | append: 'x' }} 1x, {{ image_default | asset_img_url: phone_1_row_2x | append: 'x' }} 2x" >
-                            <source media="(max-width: 420.98px)" srcset="{{ image_default | asset_img_url: phone_1_row_1x | append: 'x' }} 1x, {{ image_default | asset_img_url: phone_1_row_2x | append: 'x' }} 2x" >
+                            <source media="(max-width: 991.98px)" srcset="{{ image_default | asset_img_url: tabe_1_row_1x | append: 'x' }} 1x,
+                                                                          {{ image_default | asset_img_url: phone_1_row_2x | append: 'x' }} 2x" >
+                            <source media="(max-width: 767.98px)" srcset="{{ image_default | asset_img_url: min_tabel_1_row_1x | append: 'x' }} 1x,
+                                                                          {{ image_default | asset_img_url: phone_1_row_2x | append: 'x' }} 2x" >
+                            <source media="(max-width: 420.98px)" srcset="{{ image_default | asset_img_url: phone_1_row_1x | append: 'x' }} 1x,
+                                                                          {{ image_default | asset_img_url: phone_1_row_2x | append: 'x' }} 2x" >
                           {% endif %}
 
                           {% if row_desktop == "6" %}
