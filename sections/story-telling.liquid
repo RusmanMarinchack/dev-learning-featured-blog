@@ -1,0 +1,242 @@
+{{ 'story-telling.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'story-telling.js' | asset_url }}" defer="defer"></script>
+
+{% assign index_tab_btn = 1 %}
+{% assign index_tab_body = 1 %}
+
+<section class="story-telling">
+    <div class="story-telling__container">
+        <div class="story-telling__tabs-wrapper tabs">
+            <div class="story-telling__tabs-header">
+              <div class="story-telling__tabs-header-wrap">
+                {% for block in section.blocks %}
+                  <button class="story-telling__tabs-btn{% if forloop.first %} active-tab{% endif %} tabs-btn" data-tab-index="{{ index_tab_btn }}">{{ block.settings.tab_heading }}</button>
+                  {% assign index_tab_btn = index_tab_btn | plus: 1 %}
+                {% endfor %}
+              </div>
+            </div>
+            {% for block in section.blocks %}
+                {% assign block_settings = block.settings %}
+                {% assign image_desktop = block_settings.image_desktop %}
+                {% assign image_mobile = block_settings.image_mobile | default: image_desktop %}
+
+                {%- capture tab_style -%}
+                  --bg:{{ block_settings.background }};
+                  --heading_color:{{ block_settings.heading_colo }};
+                  --subheading_color:{{ block_settings.subheading_color }};
+                  --text_color:{{ block_settings.text_color }};
+                  --button_label_color:{{ block_settings.button_label_color }};
+                  --button_label_hover_color:{{ block_settings.button_label_hover_color }};
+                  --button_bg_color:{{ block_settings.button_background_color }};
+                  --button_bg_hover_color:{{ block_settings.button_background_hover_color }};
+                  --button_border_color:{{ block_settings.button_border_color }};
+                  --button_border_hover_color:{{ block_settings.button_border_hover_color }};
+                {%- endcapture -%}
+
+                <div style="{{- tab_style -}}" class="story-telling__tabs-body{% if forloop.first %} active-tab-body{% endif %} tabs-body tabs-body--{{ index_tab_body }}">
+                      <div class="story-telling__tabs-content">
+                        <div class="story-telling__tabs-box-image{% if block_settings.image_aspect_ratio == 'landscape' %} story-telling__image--{{ block_settings.image_aspect_ratio }}{% endif %}{% if block_settings.image_position == 'right' %} story-telling__position--{{ block_settings.image_position }}{% endif %}">
+                          {% if image_mobile %}
+                            <picture>
+                              <source media="(max-width: 991.98px)" srcset="{{ image_mobile | image_url: width: 927 }} 1x, {{ image_mobile | image_url: width: 1854 }} 2x">
+                              <img src="{{ image_desktop | image_url: width: 800 }}" alt="{% if image_decstop.alt %}{{ block.image_decstop.alt }}{% else %}Image{% endif %}" class="story-telling__tabs-image">
+                            </picture>
+                          {% else %}
+                            {{ "image" | placeholder_svg_tag: 'story-telling__tabs-image' }}
+                          {% endif %}
+                        </div>
+                        <div class="story-telling__tabs-box-text">
+                          <div class="story-telling__tabs-text-inner{% if block_settings.text_alignment %} story-telling__tabs-text--{{ block_settings.text_alignment }}{% endif %}">
+                            <div class="story-telling__tabs-label">{{ block_settings.label }}</div>
+                            <h3 class="story-telling__tabs-title">{{ block_settings.heading }}</h3>
+                            <div class="story-telling__tabs-text">{{ block_settings.text }}</div>
+                            <div class="story-telling__tabs-box-link">
+                              <a href="{{ block_settings.button_link }}" class="story-telling__tabs-link">{{ block_settings.button_label }}</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+              {% assign index_tab_body = index_tab_body | plus: 1 %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+    {
+      "name": "Story telling",
+      "settings": [],
+      "blocks": [
+        {
+          "name": "Tab",
+          "type": "tab",
+          "limit": 7,
+          "settings": [
+            {
+              "type": "text",
+              "id": "tab_heading",
+              "label": "Tab heading",
+              "default": "0000"
+            },
+            {
+              "type": "image_picker",
+              "id": "image_desktop",
+              "label": "Image desktop"
+            },
+            {
+              "type": "image_picker",
+              "id": "image_mobile",
+              "label": "Image mobile"
+            },
+            {
+              "type": "select",
+              "id": "image_aspect_ratio",
+              "label": "Image aspect ratio",
+              "options": [
+                {
+                  "value": "square",
+                  "label": "Square"
+                },
+                {
+                  "value": "landscape",
+                  "label": "Landscape"
+                }
+              ],
+              "default": "square"
+            },
+            {
+              "type": "select",
+              "id": "image_position",
+              "label": "Image position",
+              "options": [
+                {
+                  "value": "left",
+                  "label": "Left"
+                },
+                {
+                  "value": "right",
+                  "label": "Right"
+                }
+              ],
+              "default": "left"
+            },
+            {
+              "type": "select",
+              "id": "text_alignment",
+              "label": "Text alignment",
+              "options": [
+                {
+                  "value": "left",
+                  "label": "Left"
+                },
+                {
+                  "value": "center",
+                  "label": "Center"
+                },
+                {
+                  "value": "right",
+                  "label": "Right"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "heading",
+              "label": "Heading",
+              "default": "Quick links"
+            },
+            {
+              "type": "text",
+              "id": "label",
+              "label": "Label",
+              "default": "Our Story"
+            },
+            {
+              "type": "richtext",
+              "id": "text",
+              "label": "Text"
+            },
+            {
+              "type": "text",
+              "id": "button_label",
+              "label": "Button label",
+              "default": "Button label"
+            },
+            {
+              "type": "url",
+              "id": "button_link",
+              "label": "Button link"
+            },
+            {
+              "type": "color_background",
+              "id": "background",
+              "label": "Background",
+              "default": "linear-gradient(#ffffff, #000000)"
+            },
+            {
+              "type": "color",
+              "id": "heading_colo",
+              "label": "Heading colo",
+              "default": "#000000"
+            },
+            {
+              "type": "color",
+              "id": "subheading_color",
+              "label": "Subheading color",
+              "default": "#000000"
+            },
+            {
+              "type": "color",
+              "id": "text_color",
+              "label": "Text color",
+              "default": "#000000"
+            },
+            {
+              "type": "color",
+              "id": "button_label_color",
+              "label": "Button label color",
+              "default": "#000000"
+            },
+            {
+              "type": "color",
+              "id": "button_background_color",
+              "label": "Button background color",
+              "default": "transparent"
+            },
+            {
+              "type": "color",
+              "id": "button_border_color",
+              "label": "Button border color",
+              "default": "#000000"
+            },
+            {
+              "type": "color",
+              "id": "button_label_hover_color",
+              "label": "Button label (hover)",
+              "default": "#000000"
+            },
+            {
+              "type": "color",
+              "id": "button_background_hover_color",
+              "label": "Button background (hover)",
+              "default": "#000000"
+            },
+            {
+              "type": "color",
+              "id": "button_border_hover_color",
+              "label": "Button border (hover) color",
+              "default": "#000000"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "Story telling"
+        }
+      ]
+    }
+{% endschema %}
