@@ -137,6 +137,9 @@
     .story-telling .story-telling__tabs-header::-webkit-scrollbar {
         background-color: transparent;
     }
+    .story-telling .story-telling__tabs-header-wrap {
+        gap: 32px;
+    }
     .story-telling .story-telling__tabs-content {
         flex-direction: column;
     }
