@@ -44,7 +44,7 @@
     background-color: #000;
 }
 .story-telling .story-telling__tabs-body {
-    background: var(--bg);
+    background: var(--bg, #F6F6F6);
     border-radius: 16px;
 }
 .story-telling .story-telling__tabs-content {
