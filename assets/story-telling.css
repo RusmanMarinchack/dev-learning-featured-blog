@@ -140,6 +140,9 @@
     .story-telling .story-telling__tabs-box-image {
         width: 100%;
     }
+    .story-telling .story-telling__tabs-title {
+        font-size: 28px;
+    }
     .story-telling .story-telling__tabs-box-text {
         width: 100%;
     }
