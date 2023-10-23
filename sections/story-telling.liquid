@@ -11,7 +11,9 @@
             <div class="story-telling__tabs-header">
               <div class="story-telling__tabs-header-wrap">
                 {% for block in section.blocks %}
-                  <button class="story-telling__tabs-btn{% if forloop.first %} active-tab{% endif %} tabs-btn" data-tab-index="{{ index_tab_btn }}">{{ block.settings.tab_heading }}</button>
+                  {% if block.settings.tab_heading %}
+                    <button class="story-telling__tabs-btn{% if forloop.first %} active-tab{% endif %} tabs-btn" data-tab-index="{{ index_tab_btn }}">{{ block.settings.tab_heading }}</button>
+                  {% endif %}
                   {% assign index_tab_btn = index_tab_btn | plus: 1 %}
                 {% endfor %}
               </div>
@@ -48,12 +50,20 @@
                         </div>
                         <div class="story-telling__tabs-box-text">
                           <div class="story-telling__tabs-text-inner{% if block_settings.text_alignment %} story-telling__tabs-text--{{ block_settings.text_alignment }}{% endif %}">
-                            <div class="story-telling__tabs-label">{{ block_settings.label }}</div>
-                            <h3 class="story-telling__tabs-title">{{ block_settings.heading }}</h3>
-                            <div class="story-telling__tabs-text">{{ block_settings.text }}</div>
-                            <div class="story-telling__tabs-box-link">
-                              <a href="{{ block_settings.button_link }}" class="story-telling__tabs-link">{{ block_settings.button_label }}</a>
-                            </div>
+                            {% if block_settings.label %}
+                              <div class="story-telling__tabs-label">{{ block_settings.label }}</div>
+                            {% endif %}
+                            {% if block_settings.heading %}
+                              <h3 class="story-telling__tabs-title">{{ block_settings.heading }}</h3>
+                            {% endif %}
+                            {% if block_settings.text %}
+                              <div class="story-telling__tabs-text">{{ block_settings.text }}</div>
+                            {% endif %}
+                            {% if block_settings.button_label and block_settings.button_link %}
+                              <div class="story-telling__tabs-box-link">
+                                <a href="{{ block_settings.button_link }}" class="story-telling__tabs-link">{{ block_settings.button_label }}</a>
+                              </div>
+                            {% endif %}
                           </div>
                         </div>
                       </div>
