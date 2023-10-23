@@ -1,19 +1,19 @@
 'use strict'
 
 document.addEventListener('DOMContentLoaded', () => {
-    // We make an active slider on mobile devices in the block .out-team__container
-    const sliderContent = document.querySelector('.out-team__container')
+    // We make an active slider on mobile devices in the block .our-team__container
+    const sliderContent = document.querySelector('.our-team__container')
 
     if (sliderContent) {
         const mdl = window.matchMedia("(max-width: 1023.98px)")
         let teamSlide
 
         function initSlider() {
-            teamSlide = new Swiper('.out-team__container', {
+            teamSlide = new Swiper('.our-team__container', {
                 slidesPerView: 1,
                 spaceBetween: 20,
                 pagination: {
-                    el: '.out-team__swiper-pagination',
+                    el: '.our-team__swiper-pagination',
                     clickable: true
                 },
                 breakpoints: {

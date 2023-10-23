@@ -1,25 +1,25 @@
 body.look {
     overflow: hidden;
 }
-.out-team__container.swiper {
+.our-team__container.swiper {
     max-width: 1712px;
     margin: 32px auto;
     padding: 0 16px;
 }
 
-.out-team .out-team__card {
+.our-team .our-team__card {
     width: calc(25% - 12px);
     position: relative;
     overflow: hidden;
     border-radius: 16px;
 }
-.out-team .out-team__box-photo {
+.our-team .our-team__box-photo {
     position: relative;
     padding-bottom: 126%;
     overflow: hidden;
     border-radius: 16px;
 }
-.out-team .out-team__box-photo .out-team__photo {
+.our-team .our-team__box-photo .our-team__photo {
     position: absolute;
     top: 0;
     left: 0;
@@ -27,7 +27,7 @@ body.look {
     height: 100%;
     object-fit: cover;
 }
-.out-team .out-team__info {
+.our-team .our-team__info {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -39,44 +39,44 @@ body.look {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.80) 100%);
     padding: 48px 24px 24px 24px;
 }
-.out-team .out-team__info {
+.our-team .our-team__info {
     text-align: center;
     color: #fff;
     transition: margin 0.3s;
 }
-.out-team .out-team__name {
+.our-team .our-team__name {
     font-size: 22px;
     font-style: normal;
     font-weight: 500;
     line-height: 118%;
     margin: 0 0 12px 0;
 }
-.out-team .out-team__role {
+.our-team .our-team__role {
     margin-bottom: 12px;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: 128.571%;
 }
-.out-team .out-team__description p {
+.our-team .our-team__description p {
     margin: 0 0 12px 0;
 }
-.out-team .out-team-social {
+.our-team .our-team-social {
     position: absolute;
     top: 20px;
     right: 20px;
 }
-.out-team .out-team-social__item {
+.our-team .our-team-social__item {
     width: 48px;
     height: 48px;
     border-radius: 50%;
     background-color: #fff;
     transition: all 0.3s;
 }
-.out-team .out-team-social__item:not(:last-child) {
+.our-team .our-team-social__item:not(:last-child) {
     margin-bottom: 8px;
 }
-.out-team .out-team-social__link {
+.our-team .our-team-social__link {
     width: 100%;
     height: 100%;
     display: flex;
@@ -84,11 +84,11 @@ body.look {
     justify-content: center;
     transition: transform 0.3s;
 }
-.out-team .out-team-social__image {
+.our-team .our-team-social__image {
     width: 16px;
     height: 16px;
 }
-.out-team .out-team__btn-popup {
+.our-team .our-team__btn-popup {
     padding: 0;
     font-size: 16px;
     font-style: normal;
@@ -101,16 +101,16 @@ body.look {
     cursor: pointer;
     transition: all 0.3s;
 }
-.out-team .out-team__btn-popup:hover {
+.our-team .our-team__btn-popup:hover {
     border-color: transparent;
 }
-.out-team .out-team__swiper-pagination.swiper-pagination .swiper-pagination-bullet {
+.our-team .our-team__swiper-pagination.swiper-pagination .swiper-pagination-bullet {
     width: 8px;
     height: 8px;
     margin: 0 6px;
     transition: all 0.3s;
 }
-.out-team .out-team__swiper-pagination.swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+.our-team .our-team__swiper-pagination.swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
     width: 24px;
     border-radius: 8px;
     margin: 0 8px;
@@ -266,7 +266,7 @@ body.look {
         max-width: 700px;
         padding-bottom: 80%;
     }
-    .out-team .out-team__wrapper {
+    .our-team .our-team__wrapper {
         padding-bottom: 57px;
     }
 }
@@ -274,19 +274,19 @@ body.look {
     .popup-team .popup-team__box-image {
         padding-bottom: 100%;
     }
-    .out-team .out-team__box-photo {
+    .our-team .our-team__box-photo {
         padding-bottom: 154%;
     }
 }
 
 @media screen and (min-width: 1023.98px) {
-    .out-team .out-team__wrapper {
+    .our-team .our-team__wrapper {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
         gap: 32px 16px;
     }
-    .out-team .out-team__swiper-pagination {
+    .our-team .our-team__swiper-pagination {
         display: none;
     }
 }
@@ -295,18 +295,18 @@ body.look {
     .social:hover .social-link {
         transform: scale(1.1);
     }
-    .out-team .out-team__info {
+    .our-team .our-team__info {
         margin-bottom: -45px;
     }
-    .out-team .out-team__card:hover .out-team__info {
+    .our-team .our-team__card:hover .our-team__info {
         margin-bottom: 0;
     }
-    .out-team .out-team-social__item {
+    .our-team .our-team-social__item {
         opacity: 0;
         visibility: hidden;
         transform: scale(0);
     }
-    .out-team .out-team__card:hover .out-team-social__item {
+    .our-team .our-team__card:hover .our-team-social__item {
         opacity: 1;
         visibility: visible;
         transform: scale(1);

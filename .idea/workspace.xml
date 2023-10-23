@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af405bfb-2f86-43db-89c7-216a6ffae4fb" name="Changes" comment="" />
+    <list default="true" id="af405bfb-2f86-43db-89c7-216a6ffae4fb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/out-team.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/our-team.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/out-team.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/our-team.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sections/out-team.liquid" beforeDir="false" afterPath="$PROJECT_DIR$/sections/our-team.liquid" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,7 +35,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "our-team",
     "last_opened_file_path": "D:/test-shopify-blog-post",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -54,6 +59,7 @@
       <workItem from="1697197332434" duration="322000" />
       <workItem from="1697197661246" duration="570000" />
       <workItem from="1697198241176" duration="25279000" />
+      <workItem from="1698048563700" duration="498000" />
     </task>
     <servers />
   </component>
