@@ -29,22 +29,32 @@
                             {% endif %}
                         </picture>
                     </div>
-                    <div class="our-team-social">
-                        <div class="our-team-social__item social">
-                            <a href="{{ block.settings.facebook_link }}" target="_blank" class="our-team-social__link social-link">
-                                <img class="our-team-social__image" src="{{ 'facebook.svg' | asset_url }}" alt="Icon">
-                            </a>
+                    {% if block.settings.facebook_link or block.settings.instagram_link %}
+                        <div class="our-team-social">
+                            <div class="our-team-social__item social">
+                                <a href="{{ block.settings.facebook_link }}" target="_blank" class="our-team-social__link social-link">
+                                    <img class="our-team-social__image" src="{{ 'facebook.svg' | asset_url }}" alt="Icon">
+                                </a>
+                            </div>
+                            <div class="our-team-social__item social">
+                                <a href="{{ block.settings.instagram_link }}" target="_blank" class="our-team-social__link social-link">
+                                    <img class="our-team-social__image" src="{{ 'instagram.svg' | asset_url }}" alt="Icon">
+                                </a>
+                            </div>
                         </div>
-                        <div class="our-team-social__item social">
-                            <a href="{{ block.settings.instagram_link }}" target="_blank" class="our-team-social__link social-link">
-                                <img class="our-team-social__image" src="{{ 'instagram.svg' | asset_url }}" alt="Icon">
-                            </a>
-                        </div>
-                    </div>
+                    {% endif %}
+
                     <div class="our-team__info">
-                        <div class="our-team__name">{{ block.settings.name }}</div>
-                        <div class="our-team__role">{{ block.settings.role }}</div>
-                        <button class="our-team__btn-popup js-popup-btn" data-id="{{ section.id }}--{{ indexItem }}">{{ section.settings.btn_popup }}</button>
+                        {% if block.settings.name %}
+                            <div class="our-team__name">{{ block.settings.name }}</div>
+                        {% endif %}
+                        {% if block.settings.role %}
+                            <div class="our-team__role">{{ block.settings.role }}</div>
+                        {% endif %}
+                        {% if block.settings.btn_popup %}
+                            <button class="our-team__btn-popup js-popup-btn" data-id="{{ section.id }}--{{ indexItem }}">{{ section.settings.btn_popup }}</button>
+                        {% endif %}
+
                     </div>
                 </div>
 
@@ -89,23 +99,25 @@
                     {% if block.settings.description %}
                         <div class="popup-text__description">{{ block.settings.description }}</div>
                     {% endif %}
-                    <ul class="popup-text__socials">
-                        <li class="popup-text__item social">
-                            <a href="{{ block.settings.facebook_link }}" target="_blank" class="popup-text__link social-link">
-                                <img src="{{ 'facebook.svg' | asset_url }}" alt="Icon" class="popup-text__image">
-                            </a>
-                        </li>
-                        <li class="popup-text__item social">
-                            <a href="{{ block.settings.instagram_link }}" target="_blank" class="popup-text__link social-link">
-                                <img src="{{ 'instagram.svg' | asset_url }}" alt="Icon" class="popup-text__image">
-                            </a>
-                        </li>
-                        <li class="popup-text__item social">
-                            <a href="{{ block.settings.youtube_link }}" target="_blank" class="popup-text__link social-link">
-                                <img src="{{ 'youtube.svg' | asset_url }}" alt="Icon" class="popup-text__image">
-                            </a>
-                        </li>
-                    </ul>
+                    {% if block.settings.facebook_link or block.settings.instagram_link or block.settings.youtube_link %}
+                        <ul class="popup-text__socials">
+                            <li class="popup-text__item social">
+                                <a href="{{ block.settings.facebook_link }}" target="_blank" class="popup-text__link social-link">
+                                    <img src="{{ 'facebook.svg' | asset_url }}" alt="Icon" class="popup-text__image">
+                                </a>
+                            </li>
+                            <li class="popup-text__item social">
+                                <a href="{{ block.settings.instagram_link }}" target="_blank" class="popup-text__link social-link">
+                                    <img src="{{ 'instagram.svg' | asset_url }}" alt="Icon" class="popup-text__image">
+                                </a>
+                            </li>
+                            <li class="popup-text__item social">
+                                <a href="{{ block.settings.youtube_link }}" target="_blank" class="popup-text__link social-link">
+                                    <img src="{{ 'youtube.svg' | asset_url }}" alt="Icon" class="popup-text__image">
+                                </a>
+                            </li>
+                        </ul>
+                    {% endif %}
                 </div>
             </div>
         </div>
