@@ -1,15 +1,15 @@
 {{ 'our-team.css' | asset_url | stylesheet_tag }}
 {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
 
-<script src="{{ 'our-team.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'our-team.js' | asset_url }}" defer="defer"></script>
 
 {% assign card = section.blocks.settings %}
 {% assign indexItem = 1 %}
 {% assign indexPopup = 1 %}
 
-<section class="our-team aut-team-{{ section.id }}">
-    <div class="our-team__container swiper">
+<section class="our-team" id="{{ section.id }}">
+    <div class="our-team__container swiper js-our-team-slider">
         <div class="our-team__wrapper swiper-wrapper">
             {% for block in section.blocks %}
                 {% assign image = block.settings.card_image %}
@@ -19,24 +19,24 @@
                     <div class="our-team__box-photo">
                         <picture>
                             {% if block.settings.card_image %}
-                                <source media="(max-width: 575.98px)" srcset="{{ image | image_url: width: 543 }} 1x, {{ image | image_url: width: 1086 }} 2x">
-                                <source media="(max-width: 1023.98px)" srcset="{{ image | image_url: width: 668 }} 1x, {{ image | image_url: width: 1336 }} 2x">
-                                <img src="{{ image | image_url: width: 400 }}" alt="{{ block.settings.name }}" class="our-team__photo">
+                                <source media="(max-width: 575.98px)" srcset="{{ image | image_url: width: 467 }} 1x, {{ image | image_url: width: 934 }} 2x">
+                                <source media="(max-width: 1023.98px)" srcset="{{ image | image_url: width: 486 }} 1x, {{ image | image_url: width: 972 }} 2x">
+                                <img src="{{ image | image_url: width: 400 }}" alt="{% if image.alt %}{{ image.alt }}{% elsif block.settings.name %}{{ block.settings.name }}{% else %}Card{% endif %}" class="our-team__photo">
                             {% else %}
-                                <source media="(max-width: 575.98px)" srcset="{{ image_defaoult | asset_img_url: '543x' }} 1x, {{ image_defaoult | asset_img_url: '1086x' }} 2x">
-                                <source media="(max-width: 1023.98px)" srcset="{{ image_defaoult | asset_img_url: '668x' }} 1x, {{ image_defaoult | asset_img_url: '1336x' }} 2x">
-                                <img src="{{ image_defaoult | asset_img_url: '400x' }}" alt="{{ block.settings.name }}" class="our-team__photo">
+                                <source media="(max-width: 575.98px)" srcset="{{ image_defaoult | asset_img_url: '467x' }} 1x, {{ image_defaoult | asset_img_url: '934x' }} 2x">
+                                <source media="(max-width: 1023.98px)" srcset="{{ image_defaoult | asset_img_url: '486x' }} 1x, {{ image_defaoult | asset_img_url: '972x' }} 2x">
+                                <img src="{{ image_defaoult | asset_img_url: '400x' }}" alt="{% if block.settings.name %}{{ block.settings.name }}{% else %}Image{% endif %}" class="our-team__photo">
                             {% endif %}
                         </picture>
                     </div>
                     <div class="our-team-social">
                         <div class="our-team-social__item social">
-                            <a href="https://uk-ua.facebook.com/" target="_blank" class="our-team-social__link social-link">
+                            <a href="{{ block.settings.facebook_link }}" target="_blank" class="our-team-social__link social-link">
                                 <img class="our-team-social__image" src="{{ 'facebook.svg' | asset_url }}" alt="Icon">
                             </a>
                         </div>
                         <div class="our-team-social__item social">
-                            <a href="https://www.instagram.com/" target="_blank" class="our-team-social__link social-link">
+                            <a href="{{ block.settings.instagram_link }}" target="_blank" class="our-team-social__link social-link">
                                 <img class="our-team-social__image" src="{{ 'instagram.svg' | asset_url }}" alt="Icon">
                             </a>
                         </div>
@@ -44,56 +44,64 @@
                     <div class="our-team__info">
                         <div class="our-team__name">{{ block.settings.name }}</div>
                         <div class="our-team__role">{{ block.settings.role }}</div>
-                        <button class="our-team__btn-popup _popup-btn" data-id="card-team-{{ indexItem }}">{{ section.settings.btn_popup }}</button>
+                        <button class="our-team__btn-popup js-popup-btn" data-id="{{ section.id }}--{{ indexItem }}">{{ section.settings.btn_popup }}</button>
                     </div>
                 </div>
 
                 {% assign indexItem = indexItem | plus: 1 %}
             {% endfor %}
         </div>
-        <div class="our-team__swiper-pagination swiper-pagination"></div>
+        <div class="our-team__swiper-pagination swiper-pagination" id="our-team__swiper-pagination-{{ section.id }}"></div>
     </div>
 </section>
 
 {% for block in section.blocks %}
-    {% assign image_popup_defoult = block.settings.popup_image | default: block.settings.card_image %}
+    {% assign image_popup = block.settings.popup_image | default: block.settings.card_image %}
     {% assign image_popup_default = 'blog-post-def.png' %}
 
     <div class="popup-shadow" >
-        <div class="popup-team" id="card-team-{{ indexPopup }}">
-            <button class="popup-team__close _popup-btn">&#10005;</button>
+        <div class="popup-team" id="{{ section.id }}--{{ indexPopup }}">
+            <button class="popup-team__close _popup-btn">
+                <img src="{{ 'X.svg' | asset_url }}" alt="X">
+            </button>
             <div class="popup-team__content">
                 <div class="popup-team__box-image">
                     <picture>
-                        {% if image_popup_defoult %}
-                            <source media="(max-width: 1023.98px)" srcset="{{ image_popup_defoult | image_url: width: 700, height: 730 }} 1x, {{ block.settings.popup_image | image_url: width: 1400, height: 1460 }} 2x">
-                            <source media="(max-width: 767.98px)" srcset="{{ image_popup_defoult | image_url: width: 700, height: 703 }} 1x, {{ block.settings.popup_image | image_url: width: 1400, height: 1406 }} 2x">
-                            <img src="{{ image_popup_defoult | image_url: width: 505, height: 505 }}" alt="{{ block.settings.name }}" class="popup-team__image">
+                        {% if image_popup %}
+                            <source media="(max-width: 1023.98px)" srcset="{{ image_popup | image_url: width: 668, height: 534 }} 1x, {{ image_popup | image_url: width: 1336, height: 1068 }} 2x">
+                            <source media="(max-width: 767.98px)" srcset="{{ image_popup | image_url: width: 511, height: 511 }} 1x, {{ image_popup | image_url: width: 1022, height: 1022 }} 2x">
+                            <img src="{{ image_popup | image_url: width: 505, height: 505 }}" alt="{% if image_popup.alt %}{{ image_popup.alt }}{% elsif block.settings.name %}{{ block.settings.name }}{% else %}Image{% endif %}" class="popup-team__image">
                         {% else %}
-                            <source media="(max-width: 1023.98px)" srcset="{{ image_popup_default | asset_img_url: '700x730' }} 1x, {{ image_popup_default | asset_img_url: '1400x1460' }} 2x">
-                            <source media="(max-width: 767.98px)" srcset="{{ image_popup_default | asset_img_url: '700x703' }} 1x, {{ image_popup_default | asset_img_url: '1400x1406' }} 1x">
-                            <img src="{{ image_popup_default | asset_img_url: '505x505' }}" alt="{{ block.settings.name }}" class="popup-team__image">
+                            <source media="(max-width: 1023.98px)" srcset="{{ image_popup_default | asset_img_url: '668x534' }} 1x, {{ image_popup_default | asset_img_url: '1336x1068' }} 2x">
+                            <source media="(max-width: 767.98px)" srcset="{{ image_popup_default | asset_img_url: '511x511' }} 1x, {{ image_popup_default | asset_img_url: '1022x1022' }} 1x">
+                            <img src="{{ image_popup_default | asset_img_url: '505x505' }}" alt="{% if block.settings.name %}{{ block.settings.name }}{% else %}Image{% endif %}" class="popup-team__image">
                         {% endif %}
                     </picture>
 
                 </div>
                 <div class="popup-team__box-text popup-text">
-                    <h5 class="popup-text__name">{{ block.settings.name }}</h5>
-                    <div class="popup-text__role">{{ block.settings.role }}</div>
-                    <div class="popup-text__description">{{ block.settings.description }}</div>
+                    {% if block.settings.name %}
+                        <h5 class="popup-text__name">{{ block.settings.name }}</h5>
+                    {%endif%}
+                    {% if block.settings.role %}
+                        <div class="popup-text__role">{{ block.settings.role }}</div>
+                    {%endif%}
+                    {% if block.settings.description %}
+                        <div class="popup-text__description">{{ block.settings.description }}</div>
+                    {% endif %}
                     <ul class="popup-text__socials">
                         <li class="popup-text__item social">
-                            <a href="https://uk-ua.facebook.com/" target="_blank" class="popup-text__link social-link">
+                            <a href="{{ block.settings.facebook_link }}" target="_blank" class="popup-text__link social-link">
                                 <img src="{{ 'facebook.svg' | asset_url }}" alt="Icon" class="popup-text__image">
                             </a>
                         </li>
                         <li class="popup-text__item social">
-                            <a href="https://www.instagram.com/" target="_blank" class="popup-text__link social-link">
+                            <a href="{{ block.settings.instagram_link }}" target="_blank" class="popup-text__link social-link">
                                 <img src="{{ 'instagram.svg' | asset_url }}" alt="Icon" class="popup-text__image">
                             </a>
                         </li>
                         <li class="popup-text__item social">
-                            <a href="https://www.youtube.com/" target="_blank" class="popup-text__link social-link">
+                            <a href="{{ block.settings.youtube_link }}" target="_blank" class="popup-text__link social-link">
                                 <img src="{{ 'youtube.svg' | asset_url }}" alt="Icon" class="popup-text__image">
                             </a>
                         </li>
@@ -114,7 +122,7 @@
           "type": "text",
           "id": "btn_popup",
           "label": "Btn popup",
-          "default": "Read more label"
+          "default": "Read More"
         }
       ],
       "blocks": [
@@ -148,6 +156,21 @@
               "type": "richtext",
               "id": "description",
               "label": "Description"
+            },
+            {
+              "type": "url",
+              "id": "facebook_link",
+              "label": "Facebook Link"
+            },
+            {
+              "type": "url",
+              "id": "instagram_link",
+              "label": "Instagram Link"
+            },
+            {
+              "type": "url",
+              "id": "youtube_link",
+              "label": "YouTube Link"
             }
           ]
         }
