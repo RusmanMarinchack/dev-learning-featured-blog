@@ -19,7 +19,7 @@
                     <div class="our-team__box-photo">
                         <picture>
                             {% if block.settings.card_image %}
-                                <source media="(max-width: 575.98px)" srcset="{{ image | image_url: width: 467 }} 1x, {{ image | image_url: width: 934 }} 2x">
+                                <source media="(max-width: 575.98px)" srcset="{{ image | image_url: width: 542 }} 1x, {{ image | image_url: width: 584 }} 2x">
                                 <source media="(max-width: 1023.98px)" srcset="{{ image | image_url: width: 486 }} 1x, {{ image | image_url: width: 972 }} 2x">
                                 <img src="{{ image | image_url: width: 400 }}" alt="{% if image.alt %}{{ image.alt }}{% elsif block.settings.name %}{{ block.settings.name }}{% else %}Card{% endif %}" class="our-team__photo">
                             {% else %}
