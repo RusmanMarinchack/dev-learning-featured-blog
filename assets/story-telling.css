@@ -2,6 +2,7 @@
     max-width: 1712px;
     padding: 0 16px;
     margin: 32px auto;
+    font-size: 16px;
 }
 .story-telling .story-telling__tabs-header {
     margin-bottom: 32px;
@@ -42,6 +43,7 @@
     width: 0;
     height: 1px;
     background-color: #000;
+    transition: width 0.3s;
 }
 .story-telling .story-telling__tabs-body {
     background: var(--bg, #F6F6F6);
@@ -87,7 +89,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: 150%;
-    color: var(--subheading_color);
+    color: var(--subheading_color, #000);
     margin-bottom: 16px;
 }
 .story-telling .story-telling__tabs-title {
@@ -96,11 +98,13 @@
     font-weight: 500;
     line-height: 121.053%;
     margin: 0 0 16px 0;
-    color: var(--heading_color);
+    color: var(--heading_color, #000);
 }
 .story-telling .story-telling__tabs-text {
     margin-bottom: 32px;
-    color: var(--text_color, #000);
+    font-weight: 400;
+    line-height: 150%;
+    color: var(--text_color, #535353);
 }
 .story-telling .story-telling__tabs-link {
     display: inline-block;
@@ -110,12 +114,15 @@
     text-decoration: none;
     border-radius: 32px;
     padding: 16px 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 137.5%;
     transition: all 0.3s;
 }
 .story-telling .story-telling__tabs-link:hover {
-    border: 1px solid var(--button_border_hover_color);
-    background-color: var(--button_bg_hover_color);
-    color: var(--button_label_hover_color);
+    border: 1px solid var(--button_border_hover_color, #000);
+    background-color: var(--button_bg_hover_color, #000);
+    color: var(--button_label_hover_color, #fff);
 }
 .tabs-body {
     display: none;
@@ -131,20 +138,30 @@
 }
 
 @media screen and (max-width: 991.98px) {
+    .story-telling .story-telling__tabs-wrapper {
+        max-width: 750px;
+        margin: 0 auto;
+    }
     .story-telling .story-telling__tabs-header {
         margin-bottom: 16px;
     }
     .story-telling .story-telling__tabs-header::-webkit-scrollbar {
         background-color: transparent;
+        height: 0;
     }
     .story-telling .story-telling__tabs-header-wrap {
-        gap: 32px;
+        column-gap: 32px;
+        padding: 8px 0;
     }
     .story-telling .story-telling__tabs-content {
         flex-direction: column;
     }
     .story-telling .story-telling__tabs-box-image {
         width: 100%;
+        padding-bottom: 100%;
+    }
+    .story-telling .story-telling__tabs-box-image.story-telling__image--landscape {
+        padding-bottom: 70%;
     }
     .story-telling .story-telling__tabs-title {
         font-size: 28px;

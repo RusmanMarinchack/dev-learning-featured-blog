@@ -34,12 +34,12 @@
                   --button_border_hover_color:{{ block_settings.button_border_hover_color }};
                 {%- endcapture -%}
 
-                <div style="{{- tab_style -}}" class="story-telling__tabs-body{% if forloop.first %} active-tab-body{% endif %} tabs-body tabs-body--{{ index_tab_body }}">
+              <div style="{{- tab_style -}}" class="story-telling__tabs-body{% if forloop.first %} active-tab-body{% endif %} tabs-body tabs-body--{{ index_tab_body }}">
                       <div class="story-telling__tabs-content">
                         <div class="story-telling__tabs-box-image{% if block_settings.image_aspect_ratio == 'landscape' %} story-telling__image--{{ block_settings.image_aspect_ratio }}{% endif %}{% if block_settings.image_position == 'right' %} story-telling__position--{{ block_settings.image_position }}{% endif %}">
                           {% if image_mobile %}
                             <picture>
-                              <source media="(max-width: 991.98px)" srcset="{{ image_mobile | image_url: width: 927 }} 1x, {{ image_mobile | image_url: width: 1854 }} 2x">
+                              <source media="(max-width: 991.98px)" srcset="{{ image_mobile | image_url: width: 718 }} 1x, {{ image_mobile | image_url: width: 1436 }} 2x">
                               <img src="{{ image_desktop | image_url: width: 800 }}" alt="{% if image_decstop.alt %}{{ block.image_decstop.alt }}{% else %}Image{% endif %}" class="story-telling__tabs-image">
                             </picture>
                           {% else %}
@@ -216,7 +216,7 @@
               "type": "color",
               "id": "button_label_hover_color",
               "label": "Button label (hover)",
-              "default": "#000000"
+              "default": "#ffffff"
             },
             {
               "type": "color",
