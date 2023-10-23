@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const sectionId = section.getAttribute('id');
             const mdl = window.matchMedia("(max-width: 1023.98px)");
             let teamSlide;
-            console.log(sectionId);
+
             function initSlider() {
                 teamSlide = new Swiper(`#${sectionId} .js-our-team-slider`, {
                     slidesPerView: 1,
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             slidesPerView: 1,
 
                         },
-                        575: {
+                        576: {
                             slidesPerView: 2,
                         }
                     }
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                  })
 
                                  let popupShadow = popup.closest('.popup-shadow')
-                                    console.log(popupShadow)
+
                                  if(popupShadow) {
                                      popupShadow.classList.add('active')
 
