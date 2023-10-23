@@ -29,7 +29,6 @@
                             {% endif %}
                         </picture>
                     </div>
-                    {% if  or block.settings.instagram_link %}
                         <div class="our-team-social">
                             {% if block.settings.facebook_link %}
                                 <div class="our-team-social__item social">
@@ -37,17 +36,15 @@
                                         <img class="our-team-social__image" src="{{ 'facebook.svg' | asset_url }}" alt="Icon">
                                     </a>
                                 </div>
-                            {% else %}
+                            {% endif %}
                             {% if block.settings.instagram_link %}
                                 <div class="our-team-social__item social">
                                     <a href="{{ block.settings.instagram_link }}" target="_blank" class="our-team-social__link social-link">
                                         <img class="our-team-social__image" src="{{ 'instagram.svg' | asset_url }}" alt="Icon">
                                     </a>
                                 </div>
-                            {% else %}
-
+                            {% endif %}
                         </div>
-                    {% endif %}
 
                     <div class="our-team__info">
                         {% if block.settings.name %}
