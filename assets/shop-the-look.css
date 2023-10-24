@@ -179,6 +179,9 @@
     }
 }
 @media screen and (max-width: 991.98px) {
+    .shop-look .shop-look__container {
+        margin-bottom: 40px;
+    }
     .shop-look .shop-look__wrapper {
         flex-direction: column;
     }
