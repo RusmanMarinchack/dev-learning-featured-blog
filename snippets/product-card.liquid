@@ -1,0 +1,17 @@
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+
+<div class="product-card">
+        {{ card-image }}
+        {%- if card-image -%}
+                <picture>
+                        <source media="(max-width: 991.98px)" srcset="{{ card-image | image_url: width: 959 }} 1x, {{ card-image | image_url: width: 1918 }} 2x">
+                        <img class="product-card__img" src="{{ card-image | image_url: width: 832  }}" alt="{%- if card-image -%}{{ card-image.alt }}{%- else -%}image{%- endif -%}">
+                </picture>
+        {%- else -%}
+                <picture>
+                        <source media="(max-width: 991.98px)" srcset="{{ 'def.png' | asset_img_url: '959x' }} 1x, {{ 'def.png' | asset_img_url: '1918x' }} 2x">
+                        <img class="product-card__img" src="{{ 'def.png' | asset_img_url: '832x' }}" alt="Image">
+                </picture>
+        {%- endif -%}
+
+</div>
