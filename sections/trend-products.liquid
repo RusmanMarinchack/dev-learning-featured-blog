@@ -1,0 +1,192 @@
+{{ 'trend-products.css' | asset_url | stylesheet_tag }}
+{{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'trend-products.js' | asset_url }}" defer="defer"></script>
+
+<section class="trend-products" id="{{ section.id }}">
+    <div class="trend-products__container swiper js-trend-products-slider">
+        <div class="trend-products__wrapper swiper-wrapper">
+            {% for block in section.blocks %}
+                {%- assign block_settings = block.settings -%}
+                {%- assign image = block_settings.card_image -%}
+
+                <div class="trend-products__item swiper-slide">
+                    {% if block.settings.product_1 != empty %}
+                        {% assign product = block.settings.product_1 %}
+
+                        <div class="trend-products__box-spot" style="top: {{ block_settings.spot_vertical_position_1 }}%; left: {{ block_settings.spot_horizontal_position_1 }}%;">
+                            <button class="trend-products__btn-plus">
+                                <img class="trend-products__icon-plus" src="{{ 'plus.svg' | asset_url }}" alt="Plus">
+                            </button>
+                            <div class="trend-products__popup">
+                                <div class="trend-products__popup-box-img">
+                                    <img class="trend-products__popup-img" src="{{ product.featured_image | image_url: width: 200 }}" alt="{{ product.featured_image.alt }}">
+                                </div>
+                                <div class="trend-products__popup-description">
+                                    <h5 class="trend-products__popup-title">{{ product.title }}</h5>
+                                    <div class="trend-products__popup-price">{{ product.price }}</div>
+                                    <a class="trend-products__popup-link" href="{{ product.url }}">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="trend-products__box-img">
+                        {%- if image -%}
+                            <picture>
+                                <img src="{{ image | image_url: width: 200 }}" alt="{%- if image.alt -%}{{ image.alt }}{%- else -%}Image{%- endif -%}" class="trend-products__img">
+                            </picture>
+                        {%- else -%}
+                            <picture>
+                                <img src="{{ 'def.png' | asset_img_url: '200x'}}" alt="Image" class="trend-products__img">
+                            </picture>
+                        {%- endif -%}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trend products",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "card_image",
+          "label": "Card image"
+        },
+        {
+          "type": "header",
+          "content": "Product 1"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Product 1"
+        },
+        {
+          "type": "range",
+          "id": "spot_horizontal_position_1",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Spot horizontal position",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "spot_vertical_position_1",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Spot vertical position",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Product 2"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Product 2"
+        },
+        {
+          "type": "range",
+          "id": "spot_horizontal_position_2",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Spot horizontal position",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "spot_vertical_position_2",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Spot vertical position",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Product 3"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Product 3"
+        },
+        {
+          "type": "range",
+          "id": "spot_horizontal_position_3",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Spot horizontal position",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "spot_vertical_position_3",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Spot vertical position",
+          "default": 16
+        },
+        {
+          "type": "header",
+          "content": "Product 4"
+        },
+        {
+          "type": "product",
+          "id": "product_4",
+          "label": "Product 4"
+        },
+        {
+          "type": "range",
+          "id": "spot_horizontal_position_4",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Spot horizontal position",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "spot_vertical_position_4",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Spot vertical position",
+          "default": 16
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trend products"
+    }
+  ]
+}
+
+{% endschema %}
