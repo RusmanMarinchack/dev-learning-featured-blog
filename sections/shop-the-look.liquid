@@ -18,10 +18,12 @@
                     {% assign indexSlide = indexSlide | plus: 1 %}
                 {% endfor %}
 
-                {%- include 'product-card' with card-image: section.settings.image -%}
+                {%- render 'product-card', card-image: section.settings.image -%}
             </div>
             <div class="shop-look__box-slider">
-                <h3 class="shop-look__title">{{ section.settings.heading }}</h3>
+                {%- if section.settings.heading -%}
+                    <h3 class="shop-look__title">{{ section.settings.heading }}</h3>
+                {%- endif -%}
                 <div class="shop-look__slider swiper js-shop-look-slider">
                     <div class="shop-look__slider-wrapper swiper-wrapper">
                         {%- for block in section.blocks -%}

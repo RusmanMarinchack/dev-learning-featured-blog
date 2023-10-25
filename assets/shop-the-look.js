@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // We add a class for activity '.shop-look__spot'.
             function handlerSpotActiveSlide() {
-                const spots = document.querySelectorAll('.shop-look__spot');
+                const spots = document.querySelectorAll(`#${sectionId} .shop-look__spot`);
 
                 if (spots.length >= 1) {
                     spots.forEach(spot => {
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // We transfer the element to the desired block when adaptive.
             const mql = window.matchMedia("(max-width: 991.98px)")
             function processedForTransferAnotherSection(media) {
-                const shopLookContainer = document.querySelector('.shop-look__container')
+                const shopLookContainer = document.querySelector(`#${sectionId} .shop-look__container`)
 
                 if (shopLookContainer) {
                     const shopLookBoxSlider = shopLookContainer.querySelector('.shop-look__box-slider')

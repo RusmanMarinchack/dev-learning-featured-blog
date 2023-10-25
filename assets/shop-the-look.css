@@ -1,6 +1,6 @@
 .shop-look__container {
     max-width: 1712px;
-    margin: 32px auto;
+    margin: 32px auto 60px auto;
     padding: 0 16px;
 }
 .shop-look .shop-look__wrapper {
@@ -84,7 +84,7 @@
 }
 .shop-look .shop-look__slide-box-img {
     position: relative;
-    width: calc(100% - 2px);
+    width: 100%;
     padding-bottom: 100%;
     margin-bottom: 16px;
     border-radius: 16px;
@@ -186,6 +186,7 @@
         flex-direction: column;
     }
     .shop-look .shop-look__title {
+        font-size: 28px;
         margin-bottom: 24px;
     }
     .shop-look .shop-look__box-image {
@@ -204,10 +205,10 @@
     .shop-look .shop-look__swiper-button-prev {
         display: none;
     }
-    .shop-look .shop-look__slide-box-img {
-        width: 100%;
-    }
     .shop-look .shop-look__slide-prices {
         font-size: 14px;
+    }
+    .shop-look .shop-look__swiper-pagination.swiper-pagination {
+        bottom: -32px;
     }
 }
