@@ -5,45 +5,144 @@
 <script src="{{ 'trend-products.js' | asset_url }}" defer="defer"></script>
 
 <section class="trend-products" id="{{ section.id }}">
-    <div class="trend-products__container swiper js-trend-products-slider">
-        <div class="trend-products__wrapper swiper-wrapper">
+    <div class="trend-products__container">
+        <div class="trend-product__box-slider swiper js-trend-products-slider">
+          <div class="trend-products__wrapper swiper-wrapper">
+
             {% for block in section.blocks %}
-                {%- assign block_settings = block.settings -%}
-                {%- assign image = block_settings.card_image -%}
+              {%- assign block_settings = block.settings -%}
+              {%- assign image = block_settings.card_image -%}
 
-                <div class="trend-products__item swiper-slide">
-                    {% if block.settings.product_1 != empty %}
-                        {% assign product = block.settings.product_1 %}
+              <div class="trend-products__item swiper-slide">
+                {% if block.settings.product_1 != empty %}
+                  {% assign product = block.settings.product_1 %}
 
-                        <div class="trend-products__box-spot" style="top: {{ block_settings.spot_vertical_position_1 }}%; left: {{ block_settings.spot_horizontal_position_1 }}%;">
-                            <button class="trend-products__btn-plus">
-                                <img class="trend-products__icon-plus" src="{{ 'plus.svg' | asset_url }}" alt="Plus">
-                            </button>
-                            <div class="trend-products__popup">
-                                <div class="trend-products__popup-box-img">
-                                    <img class="trend-products__popup-img" src="{{ product.featured_image | image_url: width: 200 }}" alt="{{ product.featured_image.alt }}">
-                                </div>
-                                <div class="trend-products__popup-description">
-                                    <h5 class="trend-products__popup-title">{{ product.title }}</h5>
-                                    <div class="trend-products__popup-price">{{ product.price }}</div>
-                                    <a class="trend-products__popup-link" href="{{ product.url }}">Add to cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
-                    <div class="trend-products__box-img">
-                        {%- if image -%}
-                            <picture>
-                                <img src="{{ image | image_url: width: 200 }}" alt="{%- if image.alt -%}{{ image.alt }}{%- else -%}Image{%- endif -%}" class="trend-products__img">
-                            </picture>
-                        {%- else -%}
-                            <picture>
-                                <img src="{{ 'def.png' | asset_img_url: '200x'}}" alt="Image" class="trend-products__img">
-                            </picture>
+                  <div class="trend-products__box-spot">
+                    <button class="trend-products__btn-plus" style="top: {{ block_settings.spot_vertical_position_1 }}%; left: {{ block_settings.spot_horizontal_position_1 }}%;">
+                      <img class="trend-products__icon-plus" src="{{ 'plus.svg' | asset_url }}" alt="Plus">
+                    </button>
+                    <div class="trend-products__popup">
+                      <div class="trend-products__popup-box-img">
+
+                        {%- if product.featured_image -%}
+                          <img class="trend-products__popup-img" src="{{ product.featured_image | image_url: width: 64 }}" alt="{{ product.featured_image.alt }}">
+                        {% else %}
+                          <img class="trend-products__popup-img" src="{{ 'def.png' | asset_url: '64x' }}" alt="{{ product.featured_image.alt }}">
                         {%- endif -%}
+
+                      </div>
+                      <div class="trend-products__popup-description">
+                        <h5 class="trend-products__popup-title">{{ product.title }}</h5>
+                        <div class="trend-products__popup-price">{{ product.price }}</div>
+                        <a class="trend-products__popup-link" href="{{ product.url }}">Add to cart</a>
+                      </div>
                     </div>
+                  </div>
+                {% endif %}
+
+                {% if block.settings.product_2 != empty %}
+                  {% assign product = block.settings.product_2 %}
+
+                  <div class="trend-products__box-spot">
+                    <button class="trend-products__btn-plus" style="top: {{ block_settings.spot_vertical_position_2 }}%; left: {{ block_settings.spot_horizontal_position_2 }}%;">
+                      <img class="trend-products__icon-plus" src="{{ 'plus.svg' | asset_url }}" alt="Plus">
+                    </button>
+                    <div class="trend-products__popup">
+                      <div class="trend-products__popup-box-img">
+
+                        {%- if product.featured_image -%}
+                          <img class="trend-products__popup-img" src="{{ product.featured_image | image_url: width: 64 }}" alt="{{ product.featured_image.alt }}">
+                        {% else %}
+                          <img class="trend-products__popup-img" src="{{ 'def.png' | asset_url: '64x' }}" alt="{{ product.featured_image.alt }}">
+                        {%- endif -%}
+
+                      </div>
+                      <div class="trend-products__popup-description">
+                        <h5 class="trend-products__popup-title">{{ product.title }}</h5>
+                        <div class="trend-products__popup-price">{{ product.price }}</div>
+                        <a class="trend-products__popup-link" href="{{ product.url }}">Add to cart</a>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+
+                {% if block.settings.product_3 != empty %}
+                  {% assign product = block.settings.product_3 %}
+
+                  <div class="trend-products__box-spot">
+                    <button class="trend-products__btn-plus" style="top: {{ block_settings.spot_vertical_position_3 }}%; left: {{ block_settings.spot_horizontal_position_3 }}%;">
+                      <img class="trend-products__icon-plus" src="{{ 'plus.svg' | asset_url }}" alt="Plus">
+                    </button>
+                    <div class="trend-products__popup">
+                      <div class="trend-products__popup-box-img">
+
+                        {%- if product.featured_image -%}
+                          <img class="trend-products__popup-img" src="{{ product.featured_image | image_url: width: 64 }}" alt="{{ product.featured_image.alt }}">
+                        {% else %}
+                          <img class="trend-products__popup-img" src="{{ 'def.png' | asset_url: '64x' }}" alt="{{ product.featured_image.alt }}">
+                        {%- endif -%}
+
+                      </div>
+                      <div class="trend-products__popup-description">
+                        <h5 class="trend-products__popup-title">{{ product.title }}</h5>
+                        <div class="trend-products__popup-price">{{ product.price }}</div>
+                        <a class="trend-products__popup-link" href="{{ product.url }}">Add to cart</a>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+
+                {% if block.settings.product_4 != empty %}
+                  {% assign product = block.settings.product_4 %}
+
+                  <div class="trend-products__box-spot">
+                    <button class="trend-products__btn-plus" style="top: {{ block_settings.spot_vertical_position_4 }}%; left: {{ block_settings.spot_horizontal_position_4 }}%;">
+                      <img class="trend-products__icon-plus" src="{{ 'plus.svg' | asset_url }}" alt="Plus">
+                    </button>
+                    <div class="trend-products__popup">
+                      <div class="trend-products__popup-box-img">
+
+                        {%- if product.featured_image -%}
+                          <img class="trend-products__popup-img" src="{{ product.featured_image | image_url: width: 64 }}" alt="{{ product.featured_image.alt }}">
+                        {% else %}
+                          <img class="trend-products__popup-img" src="{{ 'def.png' | asset_url: '64x' }}" alt="{{ product.featured_image.alt }}">
+                        {%- endif -%}
+
+                      </div>
+                      <div class="trend-products__popup-description">
+                        <h5 class="trend-products__popup-title">{{ product.title }}</h5>
+                        <div class="trend-products__popup-price">{{ product.price }}</div>
+                        <a class="trend-products__popup-link" href="{{ product.url }}">Add to cart</a>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+
+                <div class="trend-products__box-img">
+
+                  {%- if image -%}
+                    <picture>
+                      <source media="(max-width: 767.98px)" srcset="{{ image | image_url: width: 734 }} 1x, {{ image | image_url: width: 1468 }} 2x">
+                      <source media="(max-width: 991.98px)" srcset="{{ image | image_url: width: 476 }} 1x, {{ image | image_url: width: 952 }} 2x">
+                      <source media="(max-width: 1279.98px)" srcset="{{ image | image_url: width: 405 }} 1x, {{ image | image_url: width: 810 }} 2x">
+                      <img src="{{ image | image_url: width: 396 }}" alt="{%- if image.alt -%}{{ image.alt }}{%- else -%}Image{%- endif -%}" class="trend-products__img">
+                    </picture>
+                  {%- else -%}
+                    <picture>
+                      <source media="(max-width: 767.98px)" srcset="{{ 'def.png' | asset_img_url: '734x'}} 1x, {{ 'def.png' | asset_img_url: '1468x'}} 2x">
+                      <source media="(max-width: 991.98px)" srcset="{{ 'def.png' | asset_img_url: '476x'}} 1x, {{ 'def.png' | asset_img_url: '952x'}} 2x">
+                      <source media="(max-width: 1279.98px)" srcset="{{ 'def.png' | asset_img_url: '405x'}} 1x, {{ 'def.png' | asset_img_url: '810x'}} 2x">
+                      <img src="{{ 'def.png' | asset_img_url: '396x'}}" alt="Image" class="trend-products__img">
+                    </picture>
+                  {%- endif -%}
+
                 </div>
+              </div>
             {% endfor %}
+
+          </div>
+
+          <div class="trend-products__swiper-pagination swiper-pagination"></div>
         </div>
     </div>
 </section>
