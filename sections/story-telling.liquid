@@ -42,7 +42,7 @@
                           {% if image_mobile %}
                             <picture>
                               <source media="(max-width: 991.98px)" srcset="{{ image_mobile | image_url: width: 718 }} 1x, {{ image_mobile | image_url: width: 1436 }} 2x">
-                              <img src="{{ image_desktop | image_url: width: 800 }}" alt="{% if image_decstop.alt %}{{ block.image_decstop.alt }}{% else %}Image{% endif %}" class="story-telling__tabs-image">
+                              <img src="{{ image_desktop | image_url: width: 800 }}" srcset="{{ image_desktop | image_url: width: 800 }} 1x, {{ image_desktop | image_url: width: 1600 }} 2x" alt="{% if image_decstop.alt %}{{ block.image_decstop.alt }}{% endif %}" class="story-telling__tabs-image">
                             </picture>
                           {% else %}
                             {{ "image" | placeholder_svg_tag: 'story-telling__tabs-image' }}
@@ -50,20 +50,25 @@
                         </div>
                         <div class="story-telling__tabs-box-text">
                           <div class="story-telling__tabs-text-inner{% if block_settings.text_alignment %} story-telling__tabs-text--{{ block_settings.text_alignment }}{% endif %}">
+
                             {% if block_settings.label %}
                               <div class="story-telling__tabs-label">{{ block_settings.label }}</div>
                             {% endif %}
+
                             {% if block_settings.heading %}
                               <h3 class="story-telling__tabs-title">{{ block_settings.heading }}</h3>
                             {% endif %}
+
                             {% if block_settings.text %}
                               <div class="story-telling__tabs-text">{{ block_settings.text }}</div>
                             {% endif %}
+
                             {% if block_settings.button_label and block_settings.button_link %}
                               <div class="story-telling__tabs-box-link">
                                 <a href="{{ block_settings.button_link }}" class="story-telling__tabs-link">{{ block_settings.button_label }}</a>
                               </div>
                             {% endif %}
+
                           </div>
                         </div>
                       </div>

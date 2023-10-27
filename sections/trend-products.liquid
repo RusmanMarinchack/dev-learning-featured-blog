@@ -25,9 +25,9 @@
                       <div class="trend-products__popup-box-img">
 
                         {%- if product.featured_image -%}
-                          <img class="trend-products__popup-img" src="{{ product.featured_image | image_url: width: 64 }}" alt="{{ product.featured_image.alt }}">
+                          <img class="trend-products__popup-img" src="{{ product.featured_image | image_url: width: 64 }}" srcset="{{ product.featured_image | image_url: width: 64 }} 1x, {{ product.featured_image | image_url: width: 128 }} 2x" alt="{{ product.featured_image.alt }}">
                         {% else %}
-                          <img class="trend-products__popup-img" src="{{ 'def.png' | asset_url: '64x' }}" alt="{{ product.featured_image.alt }}">
+                          <img class="trend-products__popup-img" src="{{ 'def.png' | asset_url: '64x' }}" srcset="{{ 'def.png' | asset_url: '64x' }}, {{ 'def.png' | asset_url: '128x' }}" alt="{{ product.featured_image.alt }}">
                         {%- endif -%}
 
                       </div>
@@ -51,9 +51,9 @@
                       <div class="trend-products__popup-box-img">
 
                         {%- if product.featured_image -%}
-                          <img class="trend-products__popup-img" src="{{ product.featured_image | image_url: width: 64 }}" alt="{{ product.featured_image.alt }}">
+                          <img class="trend-products__popup-img" src="{{ product.featured_image | image_url: width: 64 }}" srcset="{{ product.featured_image | image_url: width: 64 }} 1x, {{ product.featured_image | image_url: width: 128 }} 2x" alt="{{ product.featured_image.alt }}">
                         {% else %}
-                          <img class="trend-products__popup-img" src="{{ 'def.png' | asset_url: '64x' }}" alt="{{ product.featured_image.alt }}">
+                          <img class="trend-products__popup-img" src="{{ 'def.png' | asset_url: '64x' }}" srcset="{{ 'def.png' | asset_url: '64x' }}, {{ 'def.png' | asset_url: '128x' }}" alt="{{ product.featured_image.alt }}">
                         {%- endif -%}
 
                       </div>
@@ -77,9 +77,9 @@
                       <div class="trend-products__popup-box-img">
 
                         {%- if product.featured_image -%}
-                          <img class="trend-products__popup-img" src="{{ product.featured_image | image_url: width: 64 }}" alt="{{ product.featured_image.alt }}">
+                          <img class="trend-products__popup-img" src="{{ product.featured_image | image_url: width: 64 }}" srcset="{{ product.featured_image | image_url: width: 64 }} 1x, {{ product.featured_image | image_url: width: 128 }} 2x" alt="{{ product.featured_image.alt }}">
                         {% else %}
-                          <img class="trend-products__popup-img" src="{{ 'def.png' | asset_url: '64x' }}" alt="{{ product.featured_image.alt }}">
+                          <img class="trend-products__popup-img" src="{{ 'def.png' | asset_url: '64x' }}" srcset="{{ 'def.png' | asset_url: '64x' }}, {{ 'def.png' | asset_url: '128x' }}" alt="{{ product.featured_image.alt }}">
                         {%- endif -%}
 
                       </div>
@@ -103,9 +103,9 @@
                       <div class="trend-products__popup-box-img">
 
                         {%- if product.featured_image -%}
-                          <img class="trend-products__popup-img" src="{{ product.featured_image | image_url: width: 64 }}" alt="{{ product.featured_image.alt }}">
+                          <img class="trend-products__popup-img" src="{{ product.featured_image | image_url: width: 64 }}" srcset="{{ product.featured_image | image_url: width: 64 }} 1x, {{ product.featured_image | image_url: width: 128 }} 2x" alt="{{ product.featured_image.alt }}">
                         {% else %}
-                          <img class="trend-products__popup-img" src="{{ 'def.png' | asset_url: '64x' }}" alt="{{ product.featured_image.alt }}">
+                          <img class="trend-products__popup-img" src="{{ 'def.png' | asset_url: '64x' }}" srcset="{{ 'def.png' | asset_url: '64x' }}, {{ 'def.png' | asset_url: '128x' }}" alt="{{ product.featured_image.alt }}">
                         {%- endif -%}
 
                       </div>
@@ -125,14 +125,14 @@
                       <source media="(max-width: 767.98px)" srcset="{{ image | image_url: width: 734 }} 1x, {{ image | image_url: width: 1468 }} 2x">
                       <source media="(max-width: 991.98px)" srcset="{{ image | image_url: width: 476 }} 1x, {{ image | image_url: width: 952 }} 2x">
                       <source media="(max-width: 1279.98px)" srcset="{{ image | image_url: width: 405 }} 1x, {{ image | image_url: width: 810 }} 2x">
-                      <img src="{{ image | image_url: width: 396 }}" alt="{%- if image.alt -%}{{ image.alt }}{%- endif -%}" class="trend-products__img">
+                      <img src="{{ image | image_url: width: 396 }}" srcset="{{ image | image_url: width: 396 }} 1x, {{ image | image_url: width: 792 }} 2x" alt="{%- if image.alt -%}{{ image.alt }}{%- endif -%}" class="trend-products__img">
                     </picture>
                   {%- else -%}
                     <picture>
                       <source media="(max-width: 767.98px)" srcset="{{ 'def.png' | asset_img_url: '734x'}} 1x, {{ 'def.png' | asset_img_url: '1468x'}} 2x">
                       <source media="(max-width: 991.98px)" srcset="{{ 'def.png' | asset_img_url: '476x'}} 1x, {{ 'def.png' | asset_img_url: '952x'}} 2x">
                       <source media="(max-width: 1279.98px)" srcset="{{ 'def.png' | asset_img_url: '405x'}} 1x, {{ 'def.png' | asset_img_url: '810x'}} 2x">
-                      <img src="{{ 'def.png' | asset_img_url: '396x'}}" alt="Image" class="trend-products__img">
+                      <img src="{{ 'def.png' | asset_img_url: '396x'}}" srcset="{{ 'def.png' | asset_img_url: '396x'}} 1x, {{ 'def.png' | asset_img_url: '792x'}} 2x" alt="Image" class="trend-products__img">
                     </picture>
                   {%- endif -%}
 
@@ -141,7 +141,6 @@
             {% endfor %}
 
           </div>
-
           <div class="trend-products__swiper-pagination swiper-pagination"></div>
         </div>
     </div>
