@@ -16,8 +16,10 @@
                     {% assign authorName = block.settings.name_author %}
                     {% assign authorRole = block.settings.role_author %}
 
-                    {% if product != empty %}
+
                         <div class="customer-reviews__item swiper-slide">
+
+                        {% if product != empty %}
                             <div class="customer-reviews__product">
                                 <a href="{{ product.url }}" class="customer-reviews__product-box-img">
                                     <picture>
@@ -42,6 +44,8 @@
                                     </div>
                                 </div>
                             </div>
+                        {% endif %}
+
                             <div class="customer-reviews__box-info">
                                 <div class="customer-reviews__rating">
                                     <img src="{{ 'rating.svg' | asset_url }}" alt="Icon rating" class="customer-reviews__icon-rating">
@@ -75,7 +79,7 @@
                                 </div>
                             </div>
                         </div>
-                    {% endif %}
+
                 {%- endfor -%}
 
             </div>
