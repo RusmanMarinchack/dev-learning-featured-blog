@@ -5,7 +5,7 @@
     font-size: 16px;
 }
 .story-telling .story-telling__tabs-header {
-    margin-bottom: 32px;
+    margin-bottom: 16px;
     text-align: center;
     overflow-x: auto;
 }
@@ -58,12 +58,14 @@
 .story-telling .story-telling__tabs-box-image {
     position: relative;
     width: calc(50% - 8px);
-    padding-bottom: calc(50% - 8px);
     border-radius: 16px;
     overflow: hidden;
 }
-.story-telling .story-telling__tabs-box-image.story-telling__image--landscape {
-    padding-bottom: calc(35.5% - 8px);
+.story-telling .story-telling__tabs-image-wrap {
+    padding-bottom: calc(100% - 8px);
+}
+.story-telling .story-telling__tabs-image-wrap.story-telling__image--landscape {
+    padding-bottom: calc(71% - 8px);
 }
 .story-telling .story-telling__tabs-image {
     position: absolute;
@@ -141,9 +143,6 @@
     .story-telling .story-telling__tabs-wrapper {
         max-width: 750px;
         margin: 0 auto;
-    }
-    .story-telling .story-telling__tabs-header {
-        margin-bottom: 16px;
     }
     .story-telling .story-telling__tabs-header::-webkit-scrollbar {
         background-color: transparent;

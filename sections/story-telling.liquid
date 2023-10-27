@@ -2,20 +2,18 @@
 
 <script src="{{ 'story-telling.js' | asset_url }}" defer="defer"></script>
 
-{% assign index_tab_btn = 1 %}
-{% assign index_tab_body = 1 %}
-
 <section class="story-telling">
     <div class="story-telling__container">
         <div class="story-telling__tabs-wrapper tabs">
             <div class="story-telling__tabs-header">
               <div class="story-telling__tabs-header-wrap">
+
                 {% for block in section.blocks %}
                   {% if block.settings.tab_heading %}
-                    <button class="story-telling__tabs-btn{% if forloop.first %} active-tab{% endif %} tabs-btn" data-tab-index="{{ index_tab_btn }}">{{ block.settings.tab_heading }}</button>
+                    <button class="story-telling__tabs-btn{% if forloop.first %} active-tab{% endif %} tabs-btn" data-tab-index="{{ forloop.index }}">{{ block.settings.tab_heading }}</button>
                   {% endif %}
-                  {% assign index_tab_btn = index_tab_btn | plus: 1 %}
                 {% endfor %}
+
               </div>
             </div>
             {% for block in section.blocks %}
@@ -36,20 +34,24 @@
                   --button_border_hover_color:{{ block_settings.button_border_hover_color }};
                 {%- endcapture -%}
 
-              <div style="{{- tab_style -}}" class="story-telling__tabs-body{% if forloop.first %} active-tab-body{% endif %} tabs-body tabs-body--{{ index_tab_body }}">
+              <div style="{{- tab_style -}}" class="story-telling__tabs-body{% if forloop.first %} active-tab-body{% endif %} tabs-body tabs-body--{{ forloop.index }}">
                       <div class="story-telling__tabs-content">
-                        <div class="story-telling__tabs-box-image{% if block_settings.image_aspect_ratio == 'landscape' %} story-telling__image--{{ block_settings.image_aspect_ratio }}{% endif %}{% if block_settings.image_position == 'right' %} story-telling__position--{{ block_settings.image_position }}{% endif %}">
-                          {% if image_mobile %}
-                            <picture>
-                              <source media="(max-width: 991.98px)" srcset="{{ image_mobile | image_url: width: 718 }} 1x, {{ image_mobile | image_url: width: 1436 }} 2x">
-                              <img src="{{ image_desktop | image_url: width: 800 }}" alt="{% if image_decstop.alt %}{{ block.image_decstop.alt }}{% else %}Image{% endif %}" class="story-telling__tabs-image">
-                            </picture>
-                          {% else %}
-                            {{ "image" | placeholder_svg_tag: 'story-telling__tabs-image' }}
-                          {% endif %}
+                        <div class="story-telling__tabs-box-image{% if block_settings.image_position == 'right' %} story-telling__position--{{ block_settings.image_position }}{% endif %}">
+                          <div class="story-telling__tabs-image-wrap{% if block_settings.image_aspect_ratio == 'landscape' %} story-telling__image--{{ block_settings.image_aspect_ratio }}{% endif %}">
+
+                            {%- if image_mobile -%}
+                              <picture>
+                                <source media="(max-width: 991.98px)" srcset="{{ image_mobile | image_url: width: 718 }} 1x, {{ image_mobile | image_url: width: 1436 }} 2x">
+                                <img src="{{ image_desktop | image_url: width: 800 }}" srcset="{{ image_desktop | image_url: width: 800 }} 1x, {{ image_desktop | image_url: width: 1600 }} 2x" alt="{% if image_decstop.alt %}{{ block.image_decstop.alt }}{% endif %}" class="story-telling__tabs-image">
+                              </picture>
+                            {%- else -%}
+                              {{ "image" | placeholder_svg_tag: 'story-telling__tabs-image' }}
+                            {%- endif -%}
+
+                          </div>
                         </div>
                         <div class="story-telling__tabs-box-text">
-                          <div class="story-telling__tabs-text-inner{% if block_settings.text_alignment %} story-telling__tabs-text--{{ block_settings.text_alignment }}{% endif %}">
+                          <div class="story-telling__tabs-text-inner story-telling__tabs-text--{{ block_settings.text_alignment }}">
                             {% if block_settings.label %}
                               <div class="story-telling__tabs-label">{{ block_settings.label }}</div>
                             {% endif %}
@@ -68,9 +70,8 @@
                         </div>
                       </div>
                   </div>
-
-              {% assign index_tab_body = index_tab_body | plus: 1 %}
             {% endfor %}
+
         </div>
     </div>
 </section>
