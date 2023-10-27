@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 .story-telling__container {
     max-width: 1712px;
     padding: 0 16px;
@@ -11,14 +14,14 @@
 }
 .story-telling .story-telling__tabs-header-wrap {
     display: inline-flex;
-    column-gap: 48px;
-    padding: 16px 0;
+    column-gap: 50px;
+    padding: 8px 0;
 }
 .story-telling .story-telling__tabs-btn {
     position: relative;
     border: none;
     background-color: transparent;
-    padding: 8px 0;
+    padding: 15px 0;
     text-align: center;
     font-size: 16px;
     font-style: normal;
@@ -62,10 +65,10 @@
     overflow: hidden;
 }
 .story-telling .story-telling__tabs-image-wrap {
-    padding-bottom: calc(100% - 8px);
+    padding-bottom: calc(100% - 14px);
 }
 .story-telling .story-telling__tabs-image-wrap.story-telling__image--landscape {
-    padding-bottom: calc(71% - 8px);
+    padding-bottom: calc(71% - 14px);
 }
 .story-telling .story-telling__tabs-image {
     position: absolute;
@@ -103,7 +106,7 @@
     color: var(--heading_color, #000);
 }
 .story-telling .story-telling__tabs-text {
-    margin-bottom: 32px;
+    margin-bottom: 34px;
     font-weight: 400;
     line-height: 150%;
     color: var(--text_color, #535353);
