@@ -1,0 +1,105 @@
+{{ 'page-faq.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'page-faq.js' | asset_url }}"></script>
+
+{% assign title = section.settings.heading %}
+{% assign lenght = title | split: '' | size %}
+
+<section class="page-faq" id="{{ section.id }}">
+    <div class="page-faq__container">
+      <h2 class="page-faq__title">{% if lenght != 0 %}{{ title }}{% else %}Frequently Asked Questions{% endif %}</h2>
+        <div class="page-faq__wrapper">
+          <div class="page-faq__group">
+
+            {% for block in section.blocks %}
+              {% if block.type == 'group' %}
+                <div class="page-faq__group-item">
+                  <button data-id="group-anchors-{{ forloop.index }}" class="page-faq__group-anchors _btn-anchor">{{ block.settings.group_heading }}</button>
+                </div>
+              {% endif %}
+            {% endfor %}
+
+          </div>
+          <div class="page-faq__questions">
+            {% for block in section.blocks %}
+              {% assign icon = block.settings.icon %}
+
+              {% if block.type == 'group' %}
+                <h4 class="page-faq__questions-title" id="group-anchors-{{ forloop.index }}">{{ block.settings.group_heading }}</h4>
+              {% elsif block.type == 'question' %}
+                <div class="page-faq__questions-wrapper">
+                  <div class="page-faq__accordion accordions">
+                    <div class="page-faq__accordion-box-btn accordions-header">
+
+                      {% if icon %}
+                        <img class="page-faq__accordion-icon" src="{{ icon | image_url: width: 24 }}" alt="{{ icon.alt }}">
+                      {% endif %}
+                      <button class="page-faq__accordion-btn">
+                        {{ block.settings.question_heading }}
+                      </button>
+                    </div>
+                    <div class="page-faq__accordion-content accordions-content">{{ block.settings.answer }}</div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+
+          </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+    {
+      "name": "Page faq",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Frequently Asked Questions"
+        }
+      ],
+      "blocks": [
+        {
+          "name": "Group",
+          "type": "group",
+          "settings": [
+            {
+              "type": "text",
+              "id": "group_heading",
+              "label": "Heading",
+              "default": "Quick links"
+            }
+          ]
+        },
+        {
+          "name": "Question",
+          "type": "question",
+          "settings": [
+            {
+              "type": "text",
+              "id": "question_heading",
+              "label": "Heading",
+              "default": "Quick links"
+            },
+            {
+              "type": "richtext",
+              "id": "answer",
+              "label": "Answer"
+            },
+            {
+              "type": "image_picker",
+              "id": "icon",
+              "label": "Icon"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "Page faq"
+        }
+      ]
+    }
+{% endschema %}
