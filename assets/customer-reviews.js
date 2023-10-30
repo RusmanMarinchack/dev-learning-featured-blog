@@ -23,14 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 on: {
                     init: function () {
                         if (this.slides.length <= 1) {
-                            this.params.spaceBetween = 0
+                            this.params.spaceBetween = 0;
                         }
                     }
                 }
-            })
-
-
-
-        })
+            });
+        });
     }
 });

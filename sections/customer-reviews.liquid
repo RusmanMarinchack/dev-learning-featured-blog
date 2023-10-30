@@ -21,26 +21,30 @@
 
                         {% if product != empty %}
                             <div class="customer-reviews__product">
-                                <a href="{{ product.url }}" class="customer-reviews__product-box-img">
-                                    <picture>
+                                <div class="customer-reviews__product-box-img">
+                                    <a href="{{ product.url }}" class="customer-reviews__product-img-link">
+                                        <picture>
 
-                                        {%- if image -%}
-                                            <img src="{{ image | image_url: width: 376 }}" srcset="{{ image | image_url: width: 376 }} 1x, {{ image | image_url: width: 752 }} 2x" alt="{{ image.alt }}" class="customer-reviews__product-img">
-                                        {%- else -%}
-                                            {{ 'image' | placeholder_svg_tag }}
-                                        {%- endif -%}
+                                            {%- if image -%}
+                                                <source media="(max-width: 1279.98px)" srcset="{{ image | image_url: width: 909 }} 1x, {{ image | image_url: width: 1818 }} 2x">
+                                                <source media="(max-width: 1279.98px)" srcset="{{ image | image_url: width: 380 }} 1x, {{ image | image_url: width: 760 }} 2x">
+                                                <img src="{{ image | image_url: width: 375 }}" srcset="{{ image | image_url: width: 375 }} 1x, {{ image | image_url: width: 750 }} 2x" alt="{{ image.alt }}" class="customer-reviews__product-img">
+                                            {%- else -%}
+                                                {{ 'image' | placeholder_svg_tag }}
+                                            {%- endif -%}
 
-                                    </picture>
-                                </a>
-                                <div class="customer-reviews__product-description">
-                                    <a href="{{ product.url }}" class="customer-reviews__product-name">{{ product.title }}</a>
-                                    <div class="customer-reviews__product-prices">
-                                        <div class="customer-reviews__price">{{ product.price | money }}</div>
+                                        </picture>
+                                    </a>
+                                    <div class="customer-reviews__product-description">
+                                        <a href="{{ product.url }}" class="customer-reviews__product-name">{{ product.title }}</a>
+                                        <div class="customer-reviews__product-prices">
+                                            <div class="customer-reviews__price">{{ product.price | money }}</div>
 
-                                        {%- if product.compare_at_price -%}
-                                            <div class="customer-reviews__price-old">{{ product.compare_at_price | money }}</div>
-                                        {%- endif -%}
+                                            {%- if product.compare_at_price -%}
+                                                <div class="customer-reviews__price-old">{{ product.compare_at_price | money }}</div>
+                                            {%- endif -%}
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
