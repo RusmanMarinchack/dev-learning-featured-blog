@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     } else {
                                         this.classList.add('_active');
                                         body.classList.add('_active');
-                                        body.style.height = `${bodyHeight - 22}px`;
+                                        body.style.height = `${bodyHeight - 19}px`;
                                     }
                                 });
                             });
