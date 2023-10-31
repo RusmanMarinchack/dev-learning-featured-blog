@@ -16,7 +16,7 @@
 }
 .page-faq .page-faq__wrapper {
     display: flex;
-    gap: 32px;
+    gap: 31px;
 }
 .page-faq .page-faq__group {
     min-width: 280px;
