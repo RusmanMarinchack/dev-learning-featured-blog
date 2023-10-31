@@ -1,26 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll(".page-faq");
+    const mql = window.matchMedia("(max-width: 991.98px)");
 
     if (sections.length >= 1) {
         sections.forEach(section => {
-            const sectionId = section.getAttribute("id");
+
+            // On mobile devices we get the height of the Group, when clicking on the wire while scrolling we subtract this height and get it in return.
+            const group = section.querySelector('.page-faq__group');
+            let groupHeight;
+
+            function handlerGroupHeight(media) {
+                if (media.matches) {
+                    groupHeight = group.clientHeight;
+                } else {
+                    groupHeight = 0;
+                }
+            }
+
+            handlerGroupHeight(mql)
+            mql.addEventListener('change', handlerGroupHeight);
 
             // We make a smooth scroll to the anchors.
             function goAnchor() {
-                const btnAnchors = section.querySelectorAll('._btn-anchor');
+                const linkAnchors = section.querySelectorAll('._btn-anchor');
 
-                if(btnAnchors.length > 0) {
-                    btnAnchors.forEach(btn => {
-                        btn.addEventListener('click', function(e) {
-                            removeActiveClass()
-                            this.classList.add('_active')
+                if(linkAnchors.length > 0) {
+                    linkAnchors.forEach(link => {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            removeActiveClass();
+                            this.classList.add('_active');
 
-                            const id = btn.dataset.id;
+                            const id = link.getAttribute('href').substring(1);
                             const block = section.querySelector(`#${id}`);
 
                             if(block) {
                                 window.scrollBy({
-                                    top: (block.getBoundingClientRect().top),
+                                    top: (block.getBoundingClientRect().top - groupHeight),
                                     behavior: 'smooth'
                                 });
                             }
@@ -28,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         // delete the active class.
                         function removeActiveClass() {
-                            btnAnchors.forEach(btn => {
+                            linkAnchors.forEach(btn => {
                                 btn.classList.remove('_active')
                             })
                         }
@@ -38,9 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
             goAnchor();
 
 
-            // Робимо акардеони по сайту.
-            function accardeonsSite() {
-                let accordions = document.querySelectorAll('.accordions')
+            // We make accordions.
+            function accordionsSite() {
+                let accordions = section.querySelectorAll('.accordions')
 
                 if (accordions.length > 0) {
                     accordions.forEach(accordion => {
@@ -57,30 +73,17 @@ document.addEventListener('DOMContentLoaded', () => {
                                         body.classList.remove('_active');
                                         body.style.height = `0px`;
                                     } else {
-                                        removeClassActive();
                                         this.classList.add('_active');
                                         body.classList.add('_active');
                                         body.style.height = `${bodyHeight}px`;
                                     }
                                 });
                             });
-
-                            // delete the active class.
-                            function removeClassActive() {
-                                accordionHeader.forEach(header => {
-                                    header.classList.remove('active');
-                                    let body = header.nextElementSibling;
-                                    if (body) {
-                                        body.classList.remove('active');
-                                        body.style.height = `0px`;
-                                    }
-                                });
-                            }
                         }
                     });
                 }
             }
-            accardeonsSite()
+            accordionsSite()
         });
     }
 });
