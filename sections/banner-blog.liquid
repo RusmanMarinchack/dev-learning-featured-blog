@@ -1,0 +1,70 @@
+{{ 'banner-blog.css' | asset_url | stylesheet_tag }}
+
+{% assign blogs = section.settings.blog_tags %}
+
+<section class="banner-blog">
+    <div class="banner-blog__container">
+        <div class="banner-blog__wrapper">
+
+          {%- for block in section.blocks -%}
+            {%- assign title = block.settings.page_blog_title -%}
+
+            {%- if title -%}
+              <h2 class="banner-blog__title">{{ title }}</h2>
+            {%- endif -%}
+          {%- endfor -%}
+
+          <div class="banner-blog__tags">
+
+            {%- for tag in blogs.all_tags -%}
+              <div class="banner-blog__tags-item">
+                <a class="banner-blog__tags-link" href="/blogs/{{- blog.handle -}}/tagged/{{- tag | handle -}}" class="tag">{{- tag -}}</a>
+              </div>
+            {%- endfor -%}
+
+          </div>
+          <div class="banner-blog__pagination">
+
+            {%- paginate blog.articles by 1 -%}
+              {%- for article in blog.articles -%}
+              {%- endfor %}
+
+              {{- paginate | default_pagination -}}
+            {%- endpaginate -%}
+
+          </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Banner blog",
+    "settings": [
+      {
+        "type": "blog",
+        "id": "blog_tags",
+        "label": "Blog"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Banner title",
+        "type": "banner_title",
+        "settings": [
+          {
+            "type": "text",
+            "id": "page_blog_title",
+            "label": "Page title",
+            "default": "Stories that inspire and empower"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Banner blog"
+      }
+    ]
+  }
+{% endschema %}
