@@ -45,10 +45,10 @@
     transform: scale(0);
     transition: transform 0.3s;
 }
-.banner-blog .banner-blog__pagination-link:hover {
+.banner-blog .banner-blog__tags-link:hover {
     color: #000;
 }
-.banner-blog .banner-blog__pagination-link:hover::before {
+.banner-blog .banner-blog__tags-link:hover::before {
     transform: scale(1);
 }
 .banner-blog .banner-blog__pagination {

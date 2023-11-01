@@ -1,0 +1,275 @@
+{{ "banner.css" | asset_url | stylesheet_tag }}
+
+{% assign section_setings = section.settings %}
+{% assign bg_desktop = section_setings.video_desktop %}
+{% assign bg_mob = section_setings.video_mobile | default: section_setings.image_mobile %}
+
+{%- capture styles -%}
+    --desktop-min-height: {{ section_setings.desktop_banner_min_height }}px;
+    --mob-min-height: {{ section_setings.mobile_banner_min_height }}px;
+{%- endcapture -%}
+
+<section class="banner" style="{{- styles -}}">
+    <div class="banner__wrapper">
+        {% if section_setings.video_desktop %}
+            <picture>
+                <source media="(max-width: 767.98px)" srcset="{{ section_setings.video_mobile | video_tag }}">
+                <video class="banner__bg" src="{{ section_setings.video_desktop | video_url }}"></video>
+            </picture>
+        {% else %}
+            <picture>
+                <img class="banner__bg" src="{{ section_setings.image_desktop | image_url: width: 1680 }}" alt="{{ section_setings.image_desktop.alt }}">
+            </picture>
+        {% endif %}
+
+        {%- if section_setings.heading -%}
+            <h1 class="banner__title" style="color: {{- section_setings.text_color -}};">{{- section_setings.heading -}}</h1>
+        {%- endif -%}
+
+        {%- if section_setings.text -%}
+            <div class="banner__subtext" style="color: {{- section_setings.text_color -}};">{{- section_setings.text -}}</div>
+        {%- endif -%}
+
+        {%- if section_setings.button_link -%}
+            <div class="banner__box-link">
+                <a href="{{- section_setings.button_link -}}" class="banner__link">{{- section_setings.button_label -}}</a>
+            </div>
+        {%- endif -%}
+
+    </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Banner",
+    "settings": [
+      {
+        "type": "select",
+        "id": "desktop_banner_min_height",
+        "label": "Desktop banner min height",
+        "options": [
+          {
+            "value": "200",
+            "label": "200"
+          },
+          {
+            "value": "250",
+            "label": "250"
+          },
+          {
+            "value": "300",
+            "label": "300"
+          },
+          {
+            "value": "350",
+            "label": "350"
+          },
+          {
+            "value": "400",
+            "label": "400"
+          },
+          {
+            "value": "450",
+            "label": "450"
+          },
+          {
+            "value": "500",
+            "label": "500"
+          },
+          {
+            "value": "550",
+            "label": "550"
+          },
+          {
+            "value": "600",
+            "label": "600"
+          },
+          {
+            "value": "650",
+            "label": "650"
+          },
+          {
+            "value": "700",
+            "label": "700"
+          },
+          {
+            "value": "750",
+            "label": "750"
+          },
+          {
+            "value": "800",
+            "label": "800"
+          }
+        ],
+        "default": "400"
+      },
+      {
+        "type": "select",
+        "id": "mobile_banner_min_height",
+        "label": "Mobile banner min height",
+        "options": [
+          {
+            "value": "200",
+            "label": "200"
+          },
+          {
+            "value": "250",
+            "label": "250"
+          },
+          {
+            "value": "300",
+            "label": "300"
+          },
+          {
+            "value": "350",
+            "label": "350"
+          },
+          {
+            "value": "400",
+            "label": "400"
+          },
+          {
+            "value": "450",
+            "label": "450"
+          },
+          {
+            "value": "500",
+            "label": "500"
+          },
+          {
+            "value": "550",
+            "label": "550"
+          },
+          {
+            "value": "600",
+            "label": "600"
+          },
+          {
+            "value": "650",
+            "label": "650"
+          },
+          {
+            "value": "700",
+            "label": "700"
+          },
+          {
+            "value": "750",
+            "label": "750"
+          },
+          {
+            "value": "800",
+            "label": "800"
+          }
+        ],
+        "default": "400"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Satisfy your top obsession with the range of new arrivals"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label",
+        "default": "Shop Now"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      },
+      {
+        "type": "header",
+        "content": "Media"
+      },
+      {
+        "type": "select",
+        "id": "media_type",
+        "label": "Media type",
+        "options": [
+          {
+            "value": "image",
+            "label": "Image"
+          },
+          {
+            "value": "video",
+            "label": "HTML5 video"
+          }
+        ],
+        "default": "image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_desktop",
+        "label": "Image desktop"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Image mobile"
+      },
+      {
+        "type": "video",
+        "id": "video_desktop",
+        "label": "Video desktop"
+      },
+      {
+        "type": "video",
+        "id": "video_mobile",
+        "label": "Video mobile"
+      },
+      {
+        "type": "header",
+        "content": "Colors"
+      },
+      {
+        "type": "color_background",
+        "id": "overlay",
+        "label": "Overlay",
+        "default": "linear-gradient(#ffffff, #000000)"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "button_text_color",
+        "label": "Button text color",
+        "default": "#000000"
+      },
+      {
+        "type": "color_background",
+        "id": "button_bg",
+        "label": "button_background",
+        "default": "linear-gradient(#ffffff, #000000)"
+      },
+      {
+        "type": "color",
+        "id": "button_text_color_hover",
+        "label": "Button text color hover",
+        "default": "#000000"
+      },
+      {
+        "type": "color_background",
+        "id": "button_bg_hover",
+        "label": "button background hover",
+        "default": "linear-gradient(#ffffff, #000000)"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Banner"
+      }
+    ]
+  }
+{% endschema %}
