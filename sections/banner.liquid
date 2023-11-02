@@ -1,42 +1,59 @@
 {{ "banner.css" | asset_url | stylesheet_tag }}
 
-{% assign section_setings = section.settings %}
-{% assign bg_desktop = section_setings.video_desktop %}
-{% assign bg_mob = section_setings.video_mobile | default: section_setings.image_mobile %}
+<script src="{{ "banner.js" | asset_url }}" defer="defer"></script>
+
+{% assign section_settings = section.settings %}
+{% assign video_desktop = section_settings.video_desktop %}
+{% assign image_desktop = section_settings.image_desktop %}
+{% assign video_mob = section_settings.video_mobile | default: video_desktop %}
+{% assign image_mob = section_settings.image_mobile | default: image_desktop %}
 
 {%- capture styles -%}
-    --desktop-min-height: {{ section_setings.desktop_banner_min_height }}px;
-    --mob-min-height: {{ section_setings.mobile_banner_min_height }}px;
+    --desktop-min-height: {{- section_settings.desktop_banner_min_height -}}px;
+    --mob-min-height: {{- section_settings.mobile_banner_min_height -}}px;
+    --text-color: {{ section_settings.text_color }};
+    --button_bg: {{ section_settings.button_bg }};
+    --button_text_color_hover: {{ section_settings.button_text_color_hover }};
+    --button_bg_hover: {{ section_settings.button_bg_hover }};
 {%- endcapture -%}
 
-<section class="banner" style="{{- styles -}}">
+<section class="banner" style="{{- styles -}}" id="banner-{{ section.id }}">
     <div class="banner__wrapper">
-        {% if section_setings.video_desktop %}
-            <picture>
-                <source media="(max-width: 767.98px)" srcset="{{ section_setings.video_mobile | video_tag }}">
-                <video class="banner__bg" src="{{ section_setings.video_desktop | video_url }}"></video>
-            </picture>
-        {% else %}
-            <picture>
-                <img class="banner__bg" src="{{ section_setings.image_desktop | image_url: width: 1680 }}" alt="{{ section_setings.image_desktop.alt }}">
-            </picture>
-        {% endif %}
 
-        {%- if section_setings.heading -%}
-            <h1 class="banner__title" style="color: {{- section_setings.text_color -}};">{{- section_setings.heading -}}</h1>
+      {%- if section_settings.media_type == "video" -%}
+        {{- video_mob | video_tag: class: "banner__bg video mob", autoplay: true, loop: true -}}
+        {{- video_desktop | video_tag: class: "banner__bg video ", autoplay: true, loop: true -}}
+      {%- else -%}
+        {% if image_mob %}
+          <picture>
+            <source media="(max-width: 767.98px)" srcset="{{- image_mob | image_url: width: 736 -}} 1x, {{- image_mob | image_url: width: 1472 -}} 2x">
+            <img class="banner__bg" src="{{- image_desktop | image_url: width: 1648 -}}" srcset="{{- image_desktop | image_url: width: 1616 -}} 1x, {{- image_desktop | image_url: width: 3360 -}} 2x" alt="{{- image_desktop.alt -}}">
+          </picture>
+        {%- else -%}
+          {{- "image" | placeholder_svg_tag: "banner__bg" -}}
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if section_settings.video_mobile -%}
+
+      {%- endif -%}
+
+        {%- if section_settings.heading -%}
+            <h1 class="banner__title" style="color: {{- section_settings.text_color -}};">{{- section_settings.heading -}}</h1>
         {%- endif -%}
 
-        {%- if section_setings.text -%}
-            <div class="banner__subtext" style="color: {{- section_setings.text_color -}};">{{- section_setings.text -}}</div>
+        {%- if section_settings.text -%}
+            <div class="banner__subtext" style="color: {{- section_settings.text_color -}};">{{- section_settings.text -}}</div>
         {%- endif -%}
 
-        {%- if section_setings.button_link -%}
+        {%- if section_settings.button_link -%}
             <div class="banner__box-link">
-                <a href="{{- section_setings.button_link -}}" class="banner__link">{{- section_setings.button_label -}}</a>
+                <a href="{{- section_settings.button_link -}}" class="banner__link">{{- section_settings.button_label -}}</a>
             </div>
         {%- endif -%}
 
     </div>
+    <div class="banner__overlay" {%- if section_settings.overlay -%}style="background: {{- section_settings.overlay -}};" {%- endif -%}></div>
 </section>
 
 {% schema %}
@@ -233,13 +250,13 @@
         "type": "color_background",
         "id": "overlay",
         "label": "Overlay",
-        "default": "linear-gradient(#ffffff, #000000)"
+        "default": "linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(0, 0, 0, 1) 100%)"
       },
       {
         "type": "color",
         "id": "text_color",
         "label": "Text color",
-        "default": "#000000"
+        "default": "#ffffff"
       },
       {
         "type": "color",
@@ -251,7 +268,7 @@
         "type": "color_background",
         "id": "button_bg",
         "label": "button_background",
-        "default": "linear-gradient(#ffffff, #000000)"
+        "default": "#ffffff"
       },
       {
         "type": "color",
