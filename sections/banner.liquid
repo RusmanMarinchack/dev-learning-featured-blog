@@ -34,23 +34,19 @@
         {%- endif -%}
       {%- endif -%}
 
-      {%- if section_settings.video_mobile -%}
-
+      {%- if section_settings.heading -%}
+        <h1 class="banner__title" style="color: {{- section_settings.text_color -}};">{{- section_settings.heading -}}</h1>
       {%- endif -%}
 
-        {%- if section_settings.heading -%}
-            <h1 class="banner__title" style="color: {{- section_settings.text_color -}};">{{- section_settings.heading -}}</h1>
-        {%- endif -%}
+      {%- if section_settings.text -%}
+        <div class="banner__subtext" style="color: {{- section_settings.text_color -}};">{{- section_settings.text -}}</div>
+      {%- endif -%}
 
-        {%- if section_settings.text -%}
-            <div class="banner__subtext" style="color: {{- section_settings.text_color -}};">{{- section_settings.text -}}</div>
-        {%- endif -%}
-
-        {%- if section_settings.button_link -%}
-            <div class="banner__box-link">
-                <a href="{{- section_settings.button_link -}}" class="banner__link">{{- section_settings.button_label -}}</a>
-            </div>
-        {%- endif -%}
+      {%- if section_settings.button_link -%}
+        <div class="banner__box-link">
+          <a href="{{- section_settings.button_link -}}" class="banner__link">{{- section_settings.button_label -}}</a>
+        </div>
+      {%- endif -%}
 
     </div>
     <div class="banner__overlay" {%- if section_settings.overlay -%}style="background: {{- section_settings.overlay -}};" {%- endif -%}></div>
