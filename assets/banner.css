@@ -61,7 +61,7 @@
     background: var(--button_bg, #fff);
     border-radius: 32px;
     text-decoration: none;
-    color: #000;
+    color: var(button_text_color, #000);
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
