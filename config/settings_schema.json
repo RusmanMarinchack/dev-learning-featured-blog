@@ -36,7 +36,7 @@
         "type": "text",
         "id": "heading",
         "label": "Heading",
-        "default": "Quick links"
+        "default": "Subscribe to our newsletter"
       },
       {
         "type": "textarea",
@@ -48,25 +48,25 @@
         "type": "text",
         "id": "input_label",
         "label": "Input label",
-        "default": "Quick links"
+        "default": "Email"
       },
       {
         "type": "text",
         "id": "input_placeholder",
         "label": "Input placeholder",
-        "default": "Quick links"
+        "default": "john.smith@example.com"
       },
       {
         "type": "text",
         "id": "button_submit_label",
         "label": "Button submit label",
-        "default": "Quick links"
+        "default": "Sign Up"
       },
       {
         "type": "text",
         "id": "button_close_label",
         "label": "Button close label",
-        "default": "Quick links"
+        "default": "No Thanks"
       },
       {
         "type": "image_picker",
