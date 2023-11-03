@@ -1,0 +1,17 @@
+{{ "newsletter-popup.css" | asset_url | stylesheet_tag }}
+
+<script src="{{ "newsletter-popup.liquid" | asset_url }}" defer="defer"></script>
+
+{% assign image_desktop = secttings.image_desktop %}
+
+{%- if settings.enable -%}
+    <div class="newsletter-popup">
+        <div class="newsletter-popup__wrapper">
+            <div class="newsletter-popup__box-image">
+
+
+
+            </div>
+        </div>
+    </div>
+{%- endif -%}
