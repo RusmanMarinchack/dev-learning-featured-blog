@@ -6,16 +6,17 @@
 {% assign image_mobile = settings.image_mobile | image_desktop %}
 
 {%- if settings.enable -%}
-    <div class="newsletter-popup shadow _close" id="newsletter-popup-{{ section.id }}">
-        <div class="newsletter-popup__wrapper">
-            <button class="newsletter-popup__close _close">
+    <div class="newsletter-popup shadow js-close">
+        <div class="newsletter-popup__wrapper" data-cookie-time="{{ settings.cookie_time }}">
+            <button class="newsletter-popup__close js-close">
                 <img class="newsletter-popup__close-icon" src="{{ "close.svg" | asset_url }}" alt="Icon">
             </button>
 
             {%- if image_desktop -%}
                 <div class="newsletter-popup__box-image">
                     <picture>
-                        <source media="(max-width: 991.98px)" srcset="{{ image_mobile | image_url: width: 504 }} 1x, {{ image_mobile | image_url: width: 1008 }} 2x">
+                        <source media="(max-width: 991.98px)" srcset="{{ image_mobile | image_url: width: 329 }} 1x, {{ image_mobile | image_url: width: 658 }} 2x">
+                        <source media="(max-width: 1279.98px)" srcset="{{ image_mobile | image_url: width: 420 }} 1x, {{ image_mobile | image_url: width: 840 }} 2x">
                         <img src="{{ image_desktop | image_url: width: 504 }}" srcset="{{ image_desktop | image_url: width: 504 }} 1x, {{ image_desktop | image_url: width: 1008 }} 2x" alt="{{ image_desktop.alt }}" class="newsletter-popup__image">
                     </picture>
                 </div>
@@ -24,26 +25,70 @@
             <div class="newsletter-popup__box-content">
                 <div class="newsletter-popup__content">
 
-                    {% if settings.heading %}
-                        <h4 class="newsletter-popup__content-title">{{ settings.heading }}</h4>
-                    {% endif %}
+                    {%- if settings.heading -%}
+                        <h4 class="newsletter-popup__content-title">{{- settings.heading -}}</h4>
+                    {%- endif -%}
 
-                    {% if settings.textarea %}
-                        <div class="newsletter-popup__content-text">{{ settings.textarea }}</div>
-                    {% endif %}
+                    {%- if settings.textarea -%}
+                        <div class="newsletter-popup__content-text">{{- settings.textarea -}}</div>
+                    {%- endif -%}
 
-                    {% form 'customer', class: 'newsletter-popup__form' %}
-                        <div class="newsletter-popup__form-email">
-                            <label class="newsletter-popup__form-label" for="email">{{ settings.input_label }}</label>
-                            <input class="newsletter-popup__form-input" type="email" name="contact[email]" placeholder="{{ settings.input_placeholder }}" />
+                    {%- form 'customer', class: 'newsletter-popup__form', id: 'my-form', novalidate: 'novalidate' -%}
+
+                        {%- if form.posted_successfully? -%}
+                            <h4 class="gratitude__messages gratitude">Thank you for subscribing to our newsletter!</h4>
+                        {%- else -%}
+
+                            <div class="newsletter-popup__form-email">
+                                <label class="newsletter-popup__form-label" for="email">{{- settings.input_label -}}</label>
+                                <input class="newsletter-popup__form-input" type="email" name="contact[email]" placeholder="{{- settings.input_placeholder -}}" />
+                                <ul class="newsletter-popup__form-list-error">
+
+                                    {%- for error in form.errors -%}
+                                        <li class="newsletter-popup__form-error">
+
+                                            {%- if error == 'form' -%}
+                                                {%- render 'icon-error' -%}
+                                                {{- form.errors.messages[error] -}}
+                                            {%- else %}
+                                                {{- form.errors.translated_fields[error] -}} - {{- form.errors.messages[error] -}}
+                                            {%- endif -%}
+
+                                        </li>
+                                    {%- endfor -%}
+
+                                </ul>
+                            </div>
+                            <div class="newsletter-popup__box-submit">
+                                <input class="newsletter-popup__submit js-close" type="submit" value="{{- settings.button_submit_label -}}" />
+                            </div>
+                            <div class="newsletter-popup__content-links">
+                                <a href="#" class="newsletter-popup__content-link js-close">{{- settings.button_close_label -}}</a>
+                            </div>
+                        {%- endif -%}
+                    {%- endform -%}
+
+                    {%- if settings.show_socials -%}
+                        <div class="newsletter-popup__box-social">
+                            <ul class="newsletter-popup__social-list">
+                                <li class="newsletter-popup__social-item">
+                                    <a href="#" class="newsletter-popup__social-link">
+                                        <img class="newsletter-popup__social-image" src="{{- 'facebook.svg' | asset_url -}}" alt="Icon">
+                                    </a>
+                                </li>
+                                <li class="newsletter-popup__social-item">
+                                    <a href="#" class="newsletter-popup__social-link">
+                                        <img class="newsletter-popup__social-image" src="{{- 'instagram.svg' | asset_url -}}" alt="Icon">
+                                    </a>
+                                </li>
+                                <li class="newsletter-popup__social-item">
+                                    <a href="#" class="newsletter-popup__social-link">
+                                        <img class="newsletter-popup__social-image" src="{{- 'youtube.svg' | asset_url -}}" alt="Icon">
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="newsletter-popup__box-submit">
-                            <input class="newsletter-popup__submit" type="submit" value="{{ settings.button_submit_label }}" />
-                        </div>
-                        <div class="newsletter-popup__content-links">
-                            <a href="#" class="newsletter-popup__content-link">{{ settings.button_close_label }}</a>
-                        </div>
-                    {% endform %}
+                    {%- endif -%}
 
                 </div>
             </div>
