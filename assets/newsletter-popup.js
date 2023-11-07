@@ -53,9 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // We delete the class of active.
                 closes.forEach(close => {
-                    close.addEventListener('click', function (e) {
-                        e.preventDefault();
-
+                    close.addEventListener('click', function () {
                         if (popup.classList.contains('active')) {
                             popup.classList.remove('active');
                             popupWrapper.classList.remove('active');
