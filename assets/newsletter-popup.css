@@ -46,8 +46,8 @@
     width: 40px;
     height: 40px;
     position: absolute;
-    right: 6px;
-    top: 6px;
+    right: 8px;
+    top: 10px;
     border-radius: 50%;
     background: #fff;
     border: none;
@@ -65,7 +65,7 @@
     overflow: hidden;
 }
 .newsletter-popup .newsletter-popup__box-image picture {
-    display: inline-block;
+    display: block;
     padding-bottom: 100%;
 }
 .newsletter-popup .newsletter-popup__image {
@@ -78,16 +78,17 @@
 }
 .newsletter-popup .newsletter-popup__box-content {
     display: flex;
-    align-items: center;
     justify-content: center;
+    margin-top: 22px;
 }
 .newsletter-popup .newsletter-popup__content {
+    width: 100%;
     text-align: center;
     padding: 24px 32px;
 }
 .newsletter-popup .newsletter-popup__content-title {
     margin: 0 0 16px 0;
-    font-size: 28px;
+    font-size: 29px;
     font-style: normal;
     font-weight: 600;
     line-height: 121.429%;
@@ -100,10 +101,10 @@
     line-height:  150%;
 }
 .newsletter-popup .newsletter-popup__form {
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 .newsletter-popup .newsletter-popup__form-email {
-    margin-bottom: 32px;
+    margin-bottom: 33px;
 }
 .newsletter-popup .newsletter-popup__form-label {
     display: block;
@@ -120,7 +121,7 @@
     border-radius: 32px;
     border: 1px solid #CDCDCD;
     background-color: #FFF;
-    padding: 16px;
+    padding: 20px;
     outline: none;
     transition: border 0.3s;
 }
@@ -136,7 +137,7 @@
     background: #000;
     color: #fff;
     border: none;
-    padding: 16px 32px;
+    padding: 18px 32px;
     outline: solid 2px #000;
     cursor: pointer;
     transition: all 0.3s;
@@ -163,7 +164,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 20px;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -218,6 +219,9 @@
     .newsletter-popup .newsletter-popup__close {
         top: 0;
         right: 0;
+    }
+    .newsletter-popup .newsletter-popup__box-content {
+        margin-top: 0;
     }
     .newsletter-popup .newsletter-popup__content {
         padding: 24px;
