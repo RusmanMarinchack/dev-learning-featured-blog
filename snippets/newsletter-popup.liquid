@@ -16,7 +16,7 @@
                 <div class="newsletter-popup__box-image">
                     <picture>
                         <source media="(max-width: 991.98px)" srcset="{{ image_mobile | image_url: width: 329 }} 1x, {{ image_mobile | image_url: width: 658 }} 2x">
-                        <source media="(max-width: 1279.98px)" srcset="{{ image_mobile | image_url: width: 420 }} 1x, {{ image_mobile | image_url: width: 840 }} 2x">
+                        <source media="(max-width: 1279.98px)" srcset="{{ image_desktop | image_url: width: 420 }} 1x, {{ image_mobile | image_url: width: 840 }} 2x">
                         <img src="{{ image_desktop | image_url: width: 504 }}" srcset="{{ image_desktop | image_url: width: 504 }} 1x, {{ image_desktop | image_url: width: 1008 }} 2x" alt="{{ image_desktop.alt }}" class="newsletter-popup__image">
                     </picture>
                 </div>
