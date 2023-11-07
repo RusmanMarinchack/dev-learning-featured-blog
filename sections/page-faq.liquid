@@ -3,11 +3,10 @@
 <script src="{{ 'page-faq.js' | asset_url }}"></script>
 
 {% assign title = section.settings.heading %}
-{% assign lenght = title | split: '' | size %}
 
 <section class="page-faq" id="{{ section.id }}">
     <div class="page-faq__container">
-      <h2 class="page-faq__title">{% if lenght != 0 %}{{ title }}{% else %}Frequently Asked Questions{% endif %}</h2>
+      <h2 class="page-faq__title">{% if title != blank %}{{ title }}{% else %}Frequently Asked Questions{% endif %}</h2>
         <div class="page-faq__wrapper">
           <div class="page-faq__group">
             <div class="page-faq__group-wrap">
@@ -15,7 +14,7 @@
               {% for block in section.blocks %}
                 {% if block.type == 'group' %}
                   <div class="page-faq__group-item">
-                    <a href="#group-anchors-{{ forloop.index }}" class="page-faq__group-anchors _btn-anchor {% if forloop.first %}_active{% endif %}">{{ block.settings.group_heading }}</a>
+                    <a href="#group-anchors-{{ forloop.index }}" class="page-faq__group-anchors js-btn-anchor {% if forloop.first %}_active{% endif %}">{{ block.settings.group_heading }}</a>
                   </div>
                 {% endif %}
               {% endfor %}
@@ -30,17 +29,17 @@
                 <h4 class="page-faq__questions-title" id="group-anchors-{{ forloop.index }}">{{ block.settings.group_heading }}</h4>
               {% elsif block.type == 'question' %}
                 <div class="page-faq__questions-wrapper">
-                  <div class="page-faq__accordion accordions">
-                    <div class="page-faq__accordion-box-btn accordions-header">
+                  <div class="page-faq__accordion js-accordions">
+                    <button class="page-faq__accordion-box-btn js-accordions-header">
 
                       {% if icon %}
                         <img class="page-faq__accordion-icon" src="{{ icon | image_url: width: 24 }}" alt="{{ icon.alt }}">
                       {% endif %}
-                      <button class="page-faq__accordion-btn">
+                      <span class="page-faq__accordion-btn">
                         {{ block.settings.question_heading }}
-                      </button>
-                    </div>
-                    <div class="page-faq__accordion-content accordions-content">{{ block.settings.answer }}</div>
+                      </span>
+                    </button>
+                    <div class="page-faq__accordion-content js-accordions-content">{{ block.settings.answer }}</div>
                   </div>
                 </div>
               {% endif %}

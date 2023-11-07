@@ -51,10 +51,10 @@
     background-color: #000;
     transition: width 0.3s;
 }
-.page-faq .page-faq__group-anchors._active {
+.page-faq .page-faq__group-anchors.active {
     color: #000;
 }
-.page-faq .page-faq__group-anchors._active::before {
+.page-faq .page-faq__group-anchors.active::before {
     width: 100%;
 }
 .page-faq .page-faq__questions {
@@ -78,8 +78,11 @@
 .page-faq .page-faq__accordion-box-btn {
     display: flex;
     align-items: center;
+    width: 100%;
+    border: none;
+    background: transparent;
 }
-.page-faq .page-faq__accordion-box-btn._active .page-faq__accordion-btn::after {
+.page-faq .page-faq__accordion-box-btn.active .page-faq__accordion-btn::after {
     transform: rotate(180deg);
 }
 .page-faq .page-faq__accordion-btn {
@@ -102,6 +105,7 @@
     display: inline-block;
     width: 24px;
     height: 24px;
+    margin-left: 15px;
     transition: transform 0.3s;
 }
 .page-faq .page-faq__accordion-icon {

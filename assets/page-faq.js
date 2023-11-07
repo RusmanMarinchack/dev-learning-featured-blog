@@ -22,14 +22,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // We make a smooth scroll to the anchors.
             function goAnchor() {
-                const linkAnchors = section.querySelectorAll('._btn-anchor');
+                const linkAnchors = section.querySelectorAll('.js-btn-anchor');
 
                 if(linkAnchors.length > 0) {
                     linkAnchors.forEach(link => {
                         link.addEventListener('click', function(e) {
                             e.preventDefault();
                             removeActiveClass();
-                            this.classList.add('_active');
+                            this.classList.add('active');
 
                             const id = link.getAttribute('href').substring(1);
                             const block = section.querySelector(`#${id}`);
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // delete the active class.
                         function removeActiveClass() {
                             linkAnchors.forEach(btn => {
-                                btn.classList.remove('_active')
+                                btn.classList.remove('active')
                             })
                         }
                     });
@@ -56,11 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // We make accordions.
             function accordionsSite() {
-                let accordions = section.querySelectorAll('.accordions')
+                let accordions = section.querySelectorAll('.js-accordions')
 
                 if (accordions.length > 0) {
                     accordions.forEach(accordion => {
-                        let accordionHeader = accordion.querySelectorAll('.accordions-header')
+                        let accordionHeader = accordion.querySelectorAll('.js-accordions-header')
 
                         if (accordionHeader.length > 0) {
                             accordionHeader.forEach(header => {
@@ -68,13 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
                                     let body = this.nextElementSibling
                                     let bodyHeight = body.scrollHeight
 
-                                    if (this.classList.contains('_active')) {
-                                        this.classList.remove('_active');
-                                        body.classList.remove('_active');
+                                    if (this.classList.contains('active')) {
+                                        this.classList.remove('active');
+                                        body.classList.remove('active');
                                         body.style.height = `0px`;
                                     } else {
-                                        this.classList.add('_active');
-                                        body.classList.add('_active');
+                                        this.classList.add('active');
+                                        body.classList.add('active');
                                         body.style.height = `${bodyHeight - 19}px`;
                                     }
                                 });
