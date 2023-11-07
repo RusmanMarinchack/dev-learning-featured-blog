@@ -192,7 +192,10 @@
     text-align: left;
     color: red;
 }
-
+.newsletter-popup .gratitude__messages {
+    font-weight: 600;
+    font-size: 18px;
+}
 
 @media screen and (max-width: 1279.98px) {
     .newsletter-popup .newsletter-popup__wrapper {
