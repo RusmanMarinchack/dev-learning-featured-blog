@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let matches = document.cookie.match(new RegExp( "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)" ));
         return matches ? decodeURIComponent(matches[1]) : undefined;
     }
-    console.log(document.cookie)
+
     if (newsletterPopup.length >= 1) {
         newsletterPopup.forEach(popup => {
             const popupWrapper = popup.querySelector('.newsletter-popup__wrapper');
