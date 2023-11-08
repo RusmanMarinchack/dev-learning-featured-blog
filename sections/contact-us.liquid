@@ -3,207 +3,331 @@
 {% assign image = section.settings.image %}
 {% assign title = section.settings.heading %}
 
-<section class="contact-us" id="contact-us-{{ section.id }}">
-    <div class="contact-us__info">
-        <div class="contact-us__info-container">
-            <div class="contact-us__info-wrapper">
-                <div class="contact-us__info-contact">
-                    <h4 class="contact-us__info-title">{% if title != blank %}{{ title }}{% else %}Mantraband Store{% endif %}</h4>
+{% assign google_map = section.settings.google_map_code %}
 
-                    {% if section.settings.text %}
-                        <div class="contact-us__info-subtext">{{ section.settings.text }}</div>
-                    {% endif %}
+<section class="contact-us" id="contact-us-{{- section.id -}}">
+  <div class="contact-us__info">
+    <div class="contact-us__info-container">
+      <div class="contact-us__info-wrapper">
+        <div class="contact-us__info-contact">
+          <h4 class="contact-us__info-title">{%- if title != blank -%}{{- title -}}{%- else -%}Mantraband Store{%- endif
+            -%}</h4>
 
-                    <div class="contact-us__info-inner">
-                        <div class="contact-us__info-item">
-                            {% assign address_icon = section.settings.address_icon %}
+          {%- if section.settings.text -%}
+            <div class="contact-us__info-subtext">{{- section.settings.text -}}</div>
+          {%- endif -%}
 
-                            <div class="contact-us__info-label">
+          <div class="contact-us__info-inner">
 
-                                {% if address_icon %}
-                                    <img class="contact-us__info-label-icon" src="{{ address_icon | image_url }}" alt="{{ address_icon.alt }}">
-                                {% endif %}
+            {%- if section.settings.address_text != blank -%}
+            <div class="contact-us__info-item">
+              {%- assign address_icon = section.settings.address_icon -%}
 
-                                <span class="contact-us__info-label-text">{{ section.settings.address_heading }}</span>
-                            </div>
-                            <div class="contact-us__info-text">{{ section.settings.address_text }}</div>
-                        </div>
-                        <div class="contact-us__info-item">
-                            {% assign phone_icon = section.settings.phone_icon %}
+              <div class="contact-us__info-label">
 
-                            <div class="contact-us__info-label">
+                {%- if address_icon -%}
+                <img class="contact-us__info-label-icon" src="{{- address_icon | image_url: width: 24 -}}"
+                  alt="{{- address_icon.alt -}}">
+                {%- endif -%}
 
-                                {% if phone_icon %}
-                                    <img class="contact-us__info-label-icon" src="{{ phone_icon | image_url }}" alt="{{ phone_icon.alt }}">
-                                {% endif %}
-
-                                <span class="contact-us__info-label-text">{{ section.settings.phone_heading }}</span>
-                            </div>
-                            <div class="contact-us__info-text">{{ section.settings.phone_text }}</div>
-                        </div>
-                        <div class="contact-us__info-item">
-                            {% assign email_icon = section.settings.email_icon %}
-
-                            <div class="contact-us__info-label">
-
-                                {% if email_icon %}
-                                    <img class="contact-us__info-label-icon" src="{{ email_icon | image_url }}" alt="{{ email_icon.alt }}">
-                                {% endif %}
-
-                                <span class="contact-us__info-label-text">{{ section.settings.email_heading }}</span>
-                            </div>
-                            <div class="contact-us__info-text">{{ section.settings.email_text }}</div>
-                        </div>
-
-                        <div class="contact-us__info-item">
-                            {% assign schedule_icon = section.settings.schedule_icon %}
-
-                            <div class="contact-us__info-label">
-
-                                {% if schedule_icon %}
-                                    <img class="contact-us__info-label-icon" src="{{ schedule_icon | image_url }}" alt="{{ schedule_icon.alt }}">
-                                {% endif %}
-
-                                <span class="contact-us__info-label-text">{{ section.settings.schedule_heading }}</span>
-                            </div>
-                            <div class="contact-us__info-text">{{ section.settings.schedule_text }}</div>
-                        </div>
-                    </div>
-                </div>
-
-                {% if image %}
-                    <div class="contact-us__info-box-image">
-                        <picture>
-                            <img src="{{- image | image_url: width: 500 -}}" alt="{{ image.url }}" class="contact-us__info-image">
-                        </picture>
-                    </div>
-                {% endif %}
-
+                <span class="contact-us__info-label-text">{{- section.settings.address_heading -}}</span>
+              </div>
+              <div class="contact-us__info-text">{{- section.settings.address_text -}}</div>
             </div>
+            {%- endif -%}
+
+            {%- if section.settings.phone_text != blank -%}
+            <div class="contact-us__info-item">
+              {%- assign phone_icon = section.settings.phone_icon -%}
+
+              <div class="contact-us__info-label">
+
+                {%- if phone_icon -%}
+                <img class="contact-us__info-label-icon" src="{{- phone_icon | image_url: width: 24 -}}"
+                  alt="{{- phone_icon.alt -}}">
+                {%- endif -%}
+
+                <span class="contact-us__info-label-text">{{- section.settings.phone_heading -}}</span>
+              </div>
+              <div class="contact-us__info-text">{{- section.settings.phone_text -}}</div>
+            </div>
+            {%- endif -%}
+
+            {%- if section.settings.email_text != blank -%}
+            <div class="contact-us__info-item">
+              {%- assign email_icon = section.settings.email_icon -%}
+
+              <div class="contact-us__info-label">
+
+                {%- if email_icon -%}
+                <img class="contact-us__info-label-icon" src="{{- email_icon | image_url: width: 24 -}}"
+                  alt="{{- email_icon.alt -}}">
+                {%- endif -%}
+
+                <span class="contact-us__info-label-text">{{- section.settings.email_heading -}}</span>
+              </div>
+              <div class="contact-us__info-text">{{- section.settings.email_text -}}</div>
+            </div>
+            {%- endif -%}
+
+            {%- if section.settings.schedule_text != blank -%}
+            <div class="contact-us__info-item">
+              {%- assign schedule_icon = section.settings.schedule_icon -%}
+
+              <div class="contact-us__info-label">
+
+                {%- if schedule_icon -%}
+                <img class="contact-us__info-label-icon" src="{{- schedule_icon | image_url: width: 24 -}}"
+                  alt="{{- schedule_icon.alt -}}">
+                {%- endif -%}
+
+                <span class="contact-us__info-label-text">{{- section.settings.schedule_heading -}}</span>
+              </div>
+              <div class="contact-us__info-text">{{- section.settings.schedule_text -}}</div>
+            </div>
+            {%- endif -%}
+
+          </div>
+          <div class="contact-us__info-box-link">
+            <a href="{{- section.settings.button_first_link -}}" class="contact-us__info-link">{{- section.settings.button_first_label -}}</a>
+            <a href="{{- section.settings.button_second_link -}}" class="contact-us__info-link btn-white">{{- section.settings.button_second_label -}}</a>
+          </div>
         </div>
+
+        {%- if image -%}
+        <div class="contact-us__info-box-image">
+          <picture>
+            <source media="(max-width: 991.98px)"
+              srcset="{{- image | image_url: width: 959 -}} 1x, {{- image | image_url: width: 1918 -}} 2x">
+            <img src="{{- image | image_url: width: 816 -}}"
+              srcset="{{- image | image_url: width: 816 -}} 1x, {{- image | image_url: width: 1632 -}} 2x"
+              alt="{{ image.url }}" class="contact-us__info-image">
+          </picture>
+        </div>
+        {%- endif -%}
+
+      </div>
     </div>
+  </div>
+
+  {%- if google_map != blank -%}
+  <div class="contact-us__map">
+    <div class="contact-us__map-container">
+      {{- section.settings.google_map_code -}}
+    </div>
+  </div>
+  {%- elsif section.settings.map_image -%}
+  <div class="contact-us__map">
+    <div class="contact-us__map-container">
+      <a href="{{- section.settings.map_link -}}" class="contact-us__map-link">
+        <img class="contact-us__map-image" src="{{- section.settings.map_image | image_url: width: 1680 -}}"
+          srcset="{{- section.settings.map_image | image_url: width: 1680 -}} 1x, {{- section.settings.map_image | image-url: width: 3360 -}} 2x"
+          alt="{{- section.settings.map_image.alt -}}">
+      </a>
+    </div>
+  </div>
+  {%- endif -%}
+
+  <div class="contact-us__box-form">
+    <div class="contact-us__form-container">
+
+      {% form 'contact', class: "contact-us__form", id: "contact-us-form-1" %}
+
+      <h4 class="contact-us__form-title">{{- section.settings.form_heading -}}</h4>
+
+      {%- if form.posted_successfully? -%}
+        <div class="contact-us__form-message">{{- section.settings.home_welcome_message -}}</div>
+      {%- endif -%}
+
+      {{- form.errors | default_errors -}}
+
+      <div class="contact-us__form-inner">
+        <div class="contact-us__form-item">
+          <label class="contact-us__form-label" for="first-name">Name</label>
+          <input class="contact-us__form-input" type="text" name="contact[name]" id="name" placeholder="Enter your name" />
+        </div>
+  
+        <div class="contact-us__form-item">
+          <label class="contact-us__form-label" for="email">Email</label>
+          <input class="contact-us__form-input" type="email" name="contact[email]" id="email" placeholder="john.smith@example.com" />
+        </div>
+      </div>
+
+      <div class="contact-us__form-item">
+        <label class="contact-us__form-label" for="phone">Phone</label>
+        <input class="contact-us__form-input" type="tel" name="contact[phone]" id="phone" placeholder="Enter your phone number" />
+      </div>
+
+      <div class="contact-us__form-item">
+        <label class="contact-us__form-label" for="message">Message</label>
+        <textarea class="contact-us__form-text" name="contact[body]" id="message" placeholder="Enter your message"></textarea>
+      </div>
+
+      <div class="contact-us__form-submit">
+        <input class="contact-us__form-submit-input" type="submit" value="Send a message" />
+      </div>
+      {% endform %}
+
+    </div>
+  </div>
 </section>
 
 {% schema %}
-  {
-    "name": "Contact us",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Store information"
-      },
-      {
-        "type": "text",
-        "id": "heading",
-        "label": "Heading",
-        "default": "Mantraband Store "
-      },
-      {
-        "type": "text",
-        "id": "text",
-        "label": "Text",
-        "default": "To live inspired, is to live a life true to your values, a life that’s meaningful, and a life of purpose.  "
-      },
-      {
-        "type": "text",
-        "id": "address_heading",
-        "label": "Address heading",
-        "default": "Address:"
-      },
-      {
-        "type": "text",
-        "id": "address_text",
-        "label": "Address text",
-        "default": "2205 Rosewood Lane"
-      },
-      {
-        "type": "image_picker",
-        "id": "addrress_icon",
-        "label": "Addrress icon"
-      },
-      {
-        "type": "text",
-        "id": "phone_heading",
-        "label": "Phone heading",
-        "default": "Phone:"
-      },
-      {
-        "type": "text",
-        "id": "phone_text",
-        "label": "Phone text",
-        "default": "213 443 6364:"
-      },
-      {
-        "type": "image_picker",
-        "id": "phone_icon",
-        "label": "Phone icon"
-      },
-      {
-        "type": "text",
-        "id": "email_heading",
-        "label": "Email heading",
-        "default": "Email:"
-      },
-      {
-        "type": "text",
-        "id": "email_text",
-        "label": "Email text",
-        "default": "hello@revellabel.com"
-      },
-      {
-        "type": "image_picker",
-        "id": "email_icon",
-        "label": "Email icon"
-      },
-      {
-        "type": "text",
-        "id": "schedule_heading",
-        "label": "Schedule heading",
-        "default": "Schedule:"
-      },
-      {
-        "type": "text",
-        "id": "schedule_text",
-        "label": "Schedule text",
-        "default": "Mn - Fr. 8:00-17:00:"
-      },
-      {
-        "type": "image_picker",
-        "id": "schedule_icon",
-        "label": "Schedule icon"
-      },
-      {
-        "type": "text",
-        "id": "button_first_label",
-        "label": "Button first label",
-        "default": "Send a message"
-      },
-      {
-        "type": "url",
-        "id": "button_first_link",
-        "label": "Button first link"
-      },
-      {
-        "type": "text",
-        "id": "button_second_label",
-        "label": "Button second label",
-        "default": "Send a message"
-      },
-      {
-        "type": "url",
-        "id": "button_second_link",
-        "label": "Button second link"
-      },
-      {
-        "type": "image_picker",
-        "id": "image",
-        "label": "Image"
-      }
-    ],
-    "presets": [
-      {
-        "name": "Contact us"
-      }
-    ]
-  }
+{
+"name": "Contact us",
+"settings": [
+{
+"type": "header",
+"content": "Store information"
+},
+{
+"type": "text",
+"id": "heading",
+"label": "Heading",
+"default": "Mantraband Store "
+},
+{
+"type": "text",
+"id": "text",
+"label": "Text",
+"default": "To live inspired, is to live a life true to your values, a life that’s meaningful, and a life of purpose. "
+},
+{
+"type": "text",
+"id": "address_heading",
+"label": "Address heading",
+"default": "Address:"
+},
+{
+"type": "text",
+"id": "address_text",
+"label": "Address text",
+"default": "2205 Rosewood Lane"
+},
+{
+"type": "image_picker",
+"id": "address_icon",
+"label": "Address icon"
+},
+{
+"type": "text",
+"id": "phone_heading",
+"label": "Phone heading",
+"default": "Phone:"
+},
+{
+"type": "text",
+"id": "phone_text",
+"label": "Phone text",
+"default": "213 443 6364:"
+},
+{
+"type": "image_picker",
+"id": "phone_icon",
+"label": "Phone icon"
+},
+{
+"type": "text",
+"id": "email_heading",
+"label": "Email heading",
+"default": "Email:"
+},
+{
+"type": "text",
+"id": "email_text",
+"label": "Email text",
+"default": "hello@revellabel.com"
+},
+{
+"type": "image_picker",
+"id": "email_icon",
+"label": "Email icon"
+},
+{
+"type": "text",
+"id": "schedule_heading",
+"label": "Schedule heading",
+"default": "Schedule:"
+},
+{
+"type": "text",
+"id": "schedule_text",
+"label": "Schedule text",
+"default": "Mn - Fr. 8:00-17:00:"
+},
+{
+"type": "image_picker",
+"id": "schedule_icon",
+"label": "Schedule icon"
+},
+{
+"type": "text",
+"id": "button_first_label",
+"label": "Button first label",
+"default": "Send a message"
+},
+{
+"type": "url",
+"id": "button_first_link",
+"label": "Button first link"
+},
+{
+"type": "text",
+"id": "button_second_label",
+"label": "Button second label",
+"default": "Support"
+},
+{
+"type": "url",
+"id": "button_second_link",
+"label": "Button second link"
+},
+{
+"type": "image_picker",
+"id": "image",
+"label": "Image"
+},
+{
+"type": "header",
+"content": "Map"
+},
+{
+"type": "image_picker",
+"id": "map_image",
+"label": "Image"
+},
+{
+"type": "url",
+"id": "map_link",
+"label": "Link"
+},
+{
+"type": "textarea",
+"id": "google_map_code",
+"label": "Google map code",
+"default": "Welcome to my shop!"
+},
+{
+"type": "header",
+"content": "Contact form"
+},
+{
+"type": "text",
+"id": "form_heading",
+"label": "Form heading",
+"default": "Send a message"
+},
+{
+"type": "textarea",
+"id": "home_welcome_message",
+"label": "Welcome message",
+"default": "Thank you for subscribing to our newsletter!"
+}
+],
+"presets": [
+{
+"name": "Contact us"
+}
+]
+}
 {% endschema %}
