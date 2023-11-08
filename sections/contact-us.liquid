@@ -130,10 +130,9 @@
 
   <div class="contact-us__box-form">
     <div class="contact-us__form-container">
+      <h4 class="contact-us__form-title">{{- section.settings.form_heading -}}</h4>
 
       {% form 'contact', class: "contact-us__form", id: "contact-us-form-1" %}
-
-      <h4 class="contact-us__form-title">{{- section.settings.form_heading -}}</h4>
 
       {%- if form.posted_successfully? -%}
         <div class="contact-us__form-message">{{- section.settings.home_welcome_message -}}</div>
@@ -174,160 +173,160 @@
 
 {% schema %}
 {
-"name": "Contact us",
-"settings": [
-{
-"type": "header",
-"content": "Store information"
-},
-{
-"type": "text",
-"id": "heading",
-"label": "Heading",
-"default": "Mantraband Store "
-},
-{
-"type": "text",
-"id": "text",
-"label": "Text",
-"default": "To live inspired, is to live a life true to your values, a life that’s meaningful, and a life of purpose. "
-},
-{
-"type": "text",
-"id": "address_heading",
-"label": "Address heading",
-"default": "Address:"
-},
-{
-"type": "text",
-"id": "address_text",
-"label": "Address text",
-"default": "2205 Rosewood Lane"
-},
-{
-"type": "image_picker",
-"id": "address_icon",
-"label": "Address icon"
-},
-{
-"type": "text",
-"id": "phone_heading",
-"label": "Phone heading",
-"default": "Phone:"
-},
-{
-"type": "text",
-"id": "phone_text",
-"label": "Phone text",
-"default": "213 443 6364:"
-},
-{
-"type": "image_picker",
-"id": "phone_icon",
-"label": "Phone icon"
-},
-{
-"type": "text",
-"id": "email_heading",
-"label": "Email heading",
-"default": "Email:"
-},
-{
-"type": "text",
-"id": "email_text",
-"label": "Email text",
-"default": "hello@revellabel.com"
-},
-{
-"type": "image_picker",
-"id": "email_icon",
-"label": "Email icon"
-},
-{
-"type": "text",
-"id": "schedule_heading",
-"label": "Schedule heading",
-"default": "Schedule:"
-},
-{
-"type": "text",
-"id": "schedule_text",
-"label": "Schedule text",
-"default": "Mn - Fr. 8:00-17:00:"
-},
-{
-"type": "image_picker",
-"id": "schedule_icon",
-"label": "Schedule icon"
-},
-{
-"type": "text",
-"id": "button_first_label",
-"label": "Button first label",
-"default": "Send a message"
-},
-{
-"type": "url",
-"id": "button_first_link",
-"label": "Button first link"
-},
-{
-"type": "text",
-"id": "button_second_label",
-"label": "Button second label",
-"default": "Support"
-},
-{
-"type": "url",
-"id": "button_second_link",
-"label": "Button second link"
-},
-{
-"type": "image_picker",
-"id": "image",
-"label": "Image"
-},
-{
-"type": "header",
-"content": "Map"
-},
-{
-"type": "image_picker",
-"id": "map_image",
-"label": "Image"
-},
-{
-"type": "url",
-"id": "map_link",
-"label": "Link"
-},
-{
-"type": "textarea",
-"id": "google_map_code",
-"label": "Google map code",
-"default": "Welcome to my shop!"
-},
-{
-"type": "header",
-"content": "Contact form"
-},
-{
-"type": "text",
-"id": "form_heading",
-"label": "Form heading",
-"default": "Send a message"
-},
-{
-"type": "textarea",
-"id": "home_welcome_message",
-"label": "Welcome message",
-"default": "Thank you for subscribing to our newsletter!"
-}
-],
-"presets": [
-{
-"name": "Contact us"
-}
-]
-}
+  "name": "Contact us",
+  "settings": [
+          {
+            "type": "header",
+            "content": "Store information"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Mantraband Store "
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text",
+            "default": "To live inspired, is to live a life true to your values, a life that’s meaningful, and a life of purpose. "
+          },
+          {
+            "type": "text",
+            "id": "address_heading",
+            "label": "Address heading",
+            "default": "Address:"
+          },
+          {
+            "type": "text",
+            "id": "address_text",
+            "label": "Address text",
+            "default": "2205 Rosewood Lane"
+          },
+          {
+            "type": "image_picker",
+            "id": "address_icon",
+            "label": "Address icon"
+          },
+          {
+            "type": "text",
+            "id": "phone_heading",
+            "label": "Phone heading",
+            "default": "Phone:"
+          },
+          {
+            "type": "text",
+            "id": "phone_text",
+            "label": "Phone text",
+            "default": "213 443 6364:"
+          },
+          {
+            "type": "image_picker",
+            "id": "phone_icon",
+            "label": "Phone icon"
+          },
+          {
+            "type": "text",
+            "id": "email_heading",
+            "label": "Email heading",
+            "default": "Email:"
+          },
+          {
+            "type": "text",
+            "id": "email_text",
+            "label": "Email text",
+            "default": "hello@revellabel.com"
+          },
+          {
+            "type": "image_picker",
+            "id": "email_icon",
+            "label": "Email icon"
+          },
+          {
+            "type": "text",
+            "id": "schedule_heading",
+            "label": "Schedule heading",
+            "default": "Schedule:"
+          },
+          {
+            "type": "text",
+            "id": "schedule_text",
+            "label": "Schedule text",
+            "default": "Mn - Fr. 8:00-17:00:"
+          },
+          {
+            "type": "image_picker",
+            "id": "schedule_icon",
+            "label": "Schedule icon"
+          },
+          {
+            "type": "text",
+            "id": "button_first_label",
+            "label": "Button first label",
+            "default": "Send a message"
+          },
+          {
+            "type": "url",
+            "id": "button_first_link",
+            "label": "Button first link"
+          },
+          {
+            "type": "text",
+            "id": "button_second_label",
+            "label": "Button second label",
+            "default": "Support"
+          },
+          {
+            "type": "url",
+            "id": "button_second_link",
+            "label": "Button second link"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "header",
+            "content": "Map"
+          },
+          {
+            "type": "image_picker",
+            "id": "map_image",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "map_link",
+            "label": "Link"
+          },
+          {
+            "type": "textarea",
+            "id": "google_map_code",
+            "label": "Google map code",
+            "default": "Welcome to my shop!"
+          },
+          {
+            "type": "header",
+            "content": "Contact form"
+          },
+          {
+            "type": "text",
+            "id": "form_heading",
+            "label": "Form heading",
+            "default": "Send a message"
+          },
+          {
+            "type": "textarea",
+            "id": "home_welcome_message",
+            "label": "Welcome message",
+            "default": "Thank you for subscribing to our newsletter!"
+          }
+        ],
+        "presets": [
+          {
+            "name": "Contact us"
+          }
+        ]
+      }
 {% endschema %}
