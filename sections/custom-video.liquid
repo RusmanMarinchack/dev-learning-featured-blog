@@ -1,83 +1,92 @@
 {{ 'custom-video.css' | asset_url | stylesheet_tag }}
 
 <section class="custom-video">
-    <div class="custom-video__container">
-        custom-video
+  <div class="custom-video__container">
+    <h2 class="custom-video__title">{{- section.settings.heading -}}</h2>
+
+    {%- if section.settings.text != blank -%}
+    <div class="custom-video__subtext">{{- section.settings.text -}}</div>
+    {%- endif -%}
+
+    <div class="custom-video__wrapper">
+
+      {{ section.settings.product_description_video | extrenal_video_url }}
+
     </div>
+  </div>
+  </div>
 </section>
 
 {% schema %}
 {
-    "name": "Custom video",
-    "settings": [
-    {
-        "type": "select",
-        "id": "vertical_alignment",
-        "label": "Vertical alignment",
-        "options": [
-          {
-            "value": "popup",
-            "label": "Popup"
-          },
-          {
-            "value": "inline",
-            "label": "Inline"
-          }
-        ],
-        "default": "inline"
-      },
-      {
-        "type": "text",
-        "id": "heading",
-        "label": "Heading",
-        "default": "Live inspired"
-      },
-      {
-        "type": "richtext",
-        "id": "Text",
-        "label": "Text"
-      },
-      {
-        "type": "header",
-        "content": "Video"
-      },
-      {
-        "type": "select",
-        "id": "video_type",
-        "label": "Video type",
-        "options": [
-          {
-            "value": "youtube_vimeo",
-            "label": "Youtube/Vimeo”"
-          },
-          {
-            "value": "html5",
-            "label": "HTML5"
-          }
-        ],
-        "default": "youtube_vimeo"
-      },
-      {
-        "type": "video",
-        "id": "HTML5_desktop_video",
-        "label": "HTML5 desktop video"
-      },
-      {
-        "type": "video_url",
-        "id": "product_description_video",
-        "label": "Product description video",
-        "accept": [
-          "youtube"
-        ]
-      }
-      
-      
-      
-    ],
-    "presets": [
-        {
-            "name": "Custom video"
-        }
-    ]
+"name": "Custom video",
+"settings": [
+{
+"type": "select",
+"id": "vertical_alignment",
+"label": "Vertical alignment",
+"options": [
+{
+"value": "popup",
+"label": "Popup"
+},
+{
+"value": "inline",
+"label": "Inline"
+}
+],
+"default": "inline"
+},
+{
+"type": "text",
+"id": "heading",
+"label": "Heading",
+"default": "Live inspired"
+},
+{
+"type": "richtext",
+"id": "Text",
+"label": "Text"
+},
+{
+"type": "header",
+"content": "Video"
+},
+{
+"type": "select",
+"id": "video_type",
+"label": "Video type",
+"options": [
+{
+"value": "youtube_vimeo",
+"label": "Youtube/Vimeo”"
+},
+{
+"value": "html5",
+"label": "HTML5"
+}
+],
+"default": "youtube_vimeo"
+},
+{
+"type": "video",
+"id": "HTML5_desktop_video",
+"label": "HTML5 desktop video"
+},
+{
+"type": "video_url",
+"id": "product_description_video",
+"label": "Product description video",
+"accept": [
+"youtube",
+"vimeo"
+]
+}
+],
+"presets": [
+{
+"name": "Custom video"
+}
+]
 }
 {% endschema %}
