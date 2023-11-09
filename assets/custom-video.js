@@ -15,8 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
             // When you click on the button 'Play video', we start the video.
             if (btnPlay) { 
                 btnPlay.addEventListener('click', function() {
-                    body.classList.add('look');
-                    body.style.paddingRight = `${widthScroll}px`;
 
                     // We hide the picture when boxVideo has no class .video-popup.
                     if (boxVideo.classList.contains('video-popup') === false) {
@@ -29,6 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         boxVideo.classList.add('video-play');
                         
                         if (boxVideo.classList.contains('video-popup')) {
+                            body.classList.add('look');
+                            body.style.paddingRight = `${widthScroll}px`;
+
                             // We start the video when the animation ends.
                             boxVideo.addEventListener('transitionend', () => {
                                 if (boxVideo.classList.contains('video-play')) {
