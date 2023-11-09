@@ -1,92 +1,132 @@
 {{ 'custom-video.css' | asset_url | stylesheet_tag }}
 
-<section class="custom-video">
+<script src="{{- 'custom-video.js' | asset_url -}}" defer="defer"></script>
+
+{% assign video_url = section.settings.product_description_video %}
+{% assign image = section.settings.image %}
+{% assign vertical_alignment = section.settings.vertical_alignment %}
+
+<section class="custom-video" id="custom-video-{{- section.id -}}">
   <div class="custom-video__container">
     <h2 class="custom-video__title">{{- section.settings.heading -}}</h2>
-
+    
     {%- if section.settings.text != blank -%}
-    <div class="custom-video__subtext">{{- section.settings.text -}}</div>
+      <div class="custom-video__subtext">{{- section.settings.text -}}</div>
     {%- endif -%}
 
     <div class="custom-video__wrapper">
+      <div class="custom-video__banner">
 
-      {{ section.settings.product_description_video | extrenal_video_url }}
+        {%- if image -%}
+          <picture>
+            <source media="(max-width: 1279.98px)" srcset="{{- image | image_url: width: 1247 -}} 1x, {{- image | image_url: width: 2494 -}} 2x">
+            <img class="custom-video__banner-image" src="{{- image | image_url: width: 1400 -}}" srcset="{{- image | image_url: width: 1400 -}} 1x, {{- image | image_url: width: 2800 -}} 2x" alt="{{- image.alt -}}">
+          </picture>
+        {%- else -%}
+            {{- 'image' | placeholder_svg_tag: 'custom-video__banner-image' -}}
+        {%- endif -%}
 
+        <button class="custom-video__banner-btn">
+          <img class="custom-video__banner-btn-icon" src="{{- 'play.svg' | asset_url -}}" alt="Play">
+          Play video
+        </button>
+      </div>
+      <div class="custom-video__box-video{% if vertical_alignment == 'popup' %} video-popup{% endif %}">
+        <div class="custom-video__content{% if vertical_alignment == 'popup' %} video-popup-content{% endif %}">
+          <div class="custom-video__content-wrap">
+
+            {%- if section.settings.video_type == 'youtube_vimeo' -%}
+              {%- if video_url.type == 'youtube' -%}
+                <iframe data-src="https://www.youtube.com/embed/{{- video_url.id -}}?autoplay=1" src="" class="custom-video__video js-link" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              {%- else -%}
+                <iframe data-src="https://player.vimeo.com/video/{{- video_url.id -}}?autoplay=1&fullscreen=1" src="" class="custom-video__video js-link" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              {%- endif -%}
+            {%- else -%}
+              {{- section.settings.HTML5_desktop_video | video_tag: controls: true, class: "custom-video__video" -}}
+            {%- endif -%}
+
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
   </div>
 </section>
 
 {% schema %}
-{
-"name": "Custom video",
-"settings": [
-{
-"type": "select",
-"id": "vertical_alignment",
-"label": "Vertical alignment",
-"options": [
-{
-"value": "popup",
-"label": "Popup"
-},
-{
-"value": "inline",
-"label": "Inline"
-}
-],
-"default": "inline"
-},
-{
-"type": "text",
-"id": "heading",
-"label": "Heading",
-"default": "Live inspired"
-},
-{
-"type": "richtext",
-"id": "Text",
-"label": "Text"
-},
-{
-"type": "header",
-"content": "Video"
-},
-{
-"type": "select",
-"id": "video_type",
-"label": "Video type",
-"options": [
-{
-"value": "youtube_vimeo",
-"label": "Youtube/Vimeo”"
-},
-{
-"value": "html5",
-"label": "HTML5"
-}
-],
-"default": "youtube_vimeo"
-},
-{
-"type": "video",
-"id": "HTML5_desktop_video",
-"label": "HTML5 desktop video"
-},
-{
-"type": "video_url",
-"id": "product_description_video",
-"label": "Product description video",
-"accept": [
-"youtube",
-"vimeo"
-]
-}
-],
-"presets": [
-{
-"name": "Custom video"
-}
-]
+  {
+  "name": "Custom video",
+  "settings": [
+  {
+    "type": "select",
+    "id": "vertical_alignment",
+    "label": "Vertical alignment",
+    "options": [
+        {
+          "value": "popup",
+          "label": "Popup"
+        },
+        { 
+          "value": "inline",
+          "label": "Inline"
+        }
+      ],
+      "default": "inline"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Live inspired"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },    
+    {
+      "type": "header",
+      "content": "Video"
+    },
+    { 
+      "type": "select",
+      "id": "video_type",
+      "label": "Video type",
+      "options": [
+        {
+          "value": "youtube_vimeo",
+          "label": "Youtube/Vimeo”"
+        },
+        {
+          "value": "html5",
+          "label": "HTML5"
+        }
+      ],
+    "default": "youtube_vimeo"
+    },
+    {
+      "type": "video",
+      "id": "HTML5_desktop_video",
+      "label": "HTML5 desktop video"
+    },
+    {
+    "type": "video_url",
+    "id": "product_description_video",
+    "label": "Product description video",
+    "accept": [
+        "youtube",
+        "vimeo"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom video"
+    }
+  ]
 }
 {% endschema %}

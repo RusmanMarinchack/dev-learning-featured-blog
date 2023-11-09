@@ -1,5 +1,128 @@
+* {
+    box-sizing: border-box;
+}
+body.look {
+    overflow: hidden;
+}
 .custom-video__container {
     max-width: 1680px;
     margin: 32px auto;
     padding: 0 140px;
+}
+.custom-video .custom-video__title {
+    margin: 0 0 16px 0;
+    text-align: center;
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 121.053%;
+}
+.custom-video .custom-video__subtext {
+    max-width: 800px;
+    margin: 0 auto 32px auto;
+    text-align: center;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+}
+.custom-video .custom-video__wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+}
+.custom-video .custom-video__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.custom-video .custom-video__banner {
+    padding-bottom: 56%;
+    z-index: 1;
+}
+.custom-video .custom-video__banner.hidden-image {
+    display: none;
+}
+.custom-video .custom-video__box-video {
+    display: none;
+    
+}
+.custom-video .custom-video__box-video.video-play {
+    display: block;
+}
+.custom-video .custom-video__box-video.video-popup {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    background-color: rgba(9, 9, 9, 0.9);
+    overflow: auto;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 5;
+    transition: all 4s;
+    
+}
+.custom-video .custom-video__box-video.video-popup.video-play {
+    opacity: 1;
+    visibility: visible;
+}
+.custom-video .custom-video__box-video.video-popup.video-play .custom-video__content.video-popup-content {
+    transform: scale(1);
+}
+.custom-video .custom-video__content.video-popup-content {
+    position: relative;
+    max-width: 1000px;
+    width: 100%;
+    margin: auto;
+    transform: scale(0);
+    transition: transform 4s;
+}
+.custom-video .custom-video__content-wrap {
+    padding-bottom: 56%;
+}
+.custom-video .custom-video__banner-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.custom-video .custom-video__banner-btn {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 16px 32px;
+    border-radius: 32px;
+    background: #FFF;
+    border: transparent;
+    transform: translate(-50%, -50%);
+    outline: 1px solid #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.custom-video .custom-video__banner-btn:hover {
+    outline: 1px solid #fff;
+    outline-offset: 3px;
+}
+.custom-video .custom-video__banner-btn-icon {
+    display: block;
+    margin-right: 8px;
+}
+
+@media screen and (max-width: 1279.98px) {
+    .custom-video__container {
+        padding: 0 16px;
+    }
+}
+
+@media screen and (max-width: 991.98px) {
+
 }
