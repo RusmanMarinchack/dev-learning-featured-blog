@@ -64,7 +64,7 @@ body.look {
     opacity: 0;
     visibility: hidden;
     z-index: 5;
-    transition: all 4s;
+    transition: all 0.3s;
     
 }
 .custom-video .custom-video__box-video.video-popup.video-play {
@@ -80,7 +80,7 @@ body.look {
     width: 100%;
     margin: auto;
     transform: scale(0);
-    transition: transform 4s;
+    transition: transform 0.3s;
 }
 .custom-video .custom-video__content-wrap {
     padding-bottom: 56%;
