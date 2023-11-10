@@ -20,21 +20,22 @@
 {%- endcapture -%}
 
 <section class="banner" style="{{- styles -}}" id="banner-{{- section.id -}}">
-    <div class="banner__wrapper">
 
-      {%- if section_settings.media_type == "video" -%}
-        {{- video_mob | video_tag: class: "banner__bg video mob", autoplay: true, loop: true -}}
-        {{- video_desktop | video_tag: class: "banner__bg video ", autoplay: true, loop: true -}}
-      {%- else -%}
-        {% if image_mob %}
-          <picture>
-            <source media="(max-width: 767.98px)" srcset="{{- image_mob | image_url: width: 736 -}} 1x, {{- image_mob | image_url: width: 1472 -}} 2x">
-            <img class="banner__bg" src="{{- image_desktop | image_url: width: 1648 -}}" srcset="{{- image_desktop | image_url: width: 1616 -}} 1x, {{- image_desktop | image_url: width: 3360 -}} 2x" alt="{{- image_desktop.alt -}}">
-          </picture>
-        {%- else -%}
-          {{- "image" | placeholder_svg_tag: "banner__bg" -}}
-        {%- endif -%}
-      {%- endif -%}
+  {%- if section_settings.media_type == "video" -%}
+    {{- video_mob | video_tag: class: "banner__bg video mob", autoplay: true, loop: true -}}
+    {{- video_desktop | video_tag: class: "banner__bg video ", autoplay: true, loop: true -}}
+  {%- else -%}
+    {% if image_desktop %}
+      <picture>
+        <source media="(max-width: 767.98px)" srcset="{{- image_mob | image_url: width: 736 -}} 1x, {{- image_mob | image_url: width: 1472 -}} 2x">
+        <img class="banner__bg" src="{{- image_desktop | image_url: width: 1648 -}}" srcset="{{- image_desktop | image_url: width: 1616 -}} 1x, {{- image_desktop | image_url: width: 3360 -}} 2x" alt="{{- image_desktop.alt -}}">
+      </picture>
+    {%- else -%}
+      {{- "image" | placeholder_svg_tag: "banner__bg" -}}
+    {%- endif -%}
+  {%- endif -%}
+
+    <div class="banner__wrapper">
 
       {%- if section_settings.heading -%}
         <h1 class="banner__title" style="color: {{- section_settings.text_color -}};">{{- section_settings.heading -}}</h1>
@@ -46,7 +47,7 @@
 
       {%- if section_settings.button_link -%}
         <div class="banner__box-link">
-          <a href="{{- section_settings.button_link -}}" class="banner__link">{{- section_settings.button_label -}}</a>
+          <a href="{{- section_settings.button_link -}}" target="_blank" class="banner__link">{{- section_settings.button_label -}}</a>
         </div>
       {%- endif -%}
 
