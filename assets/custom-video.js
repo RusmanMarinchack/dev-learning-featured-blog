@@ -62,6 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
                                 video.pause(); 
                             }
                         });
+
+
+                        video.addEventListener("click", (e) => e.stopPropagation());
                     }
                 });
             }
