@@ -37,9 +37,9 @@
 
             {%- if section.settings.video_type == 'youtube_vimeo' -%}
               {%- if video_url.type == 'youtube' -%}
-                <iframe data-src="https://www.youtube.com/embed/{{- video_url.id -}}?autoplay=1" src="" class="custom-video__video js-link" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe data-src="https://www.youtube.com/embed/{{- video_url.id -}}?autoplay=1" src="" class="custom-video__video js-add-link" allow="autoplay; encrypted-media" allowfullscreen></iframe>
               {%- else -%}
-                <iframe data-src="https://player.vimeo.com/video/{{- video_url.id -}}?autoplay=1&fullscreen=1" src="" class="custom-video__video js-link" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe data-src="https://player.vimeo.com/video/{{- video_url.id -}}?autoplay=1&fullscreen=1" src="" class="custom-video__video js-add-link" allow="autoplay; encrypted-media" allowfullscreen></iframe>
               {%- endif -%}
             {%- else -%}
               {{- section.settings.HTML5_desktop_video | video_tag: controls: true, class: "custom-video__video" -}}

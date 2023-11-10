@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const banner = document.querySelector(`#${sectionId} .custom-video__banner`);
             const btnPlay = document.querySelector(`#${sectionId} .custom-video__banner-btn`);
             const boxVideo = document.querySelector(`#${sectionId} .custom-video__box-video`);
+            const videoContent = document.querySelector(`#${sectionId} .custom-video__content`);
             const video = document.querySelector(`#${sectionId} .custom-video__video`);
             const dataSrc = video.dataset.src;
             const body = document.body;
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             body.style.paddingRight = `${widthScroll}px`;
 
                             // We start the video when the animation ends.
-                            boxVideo.addEventListener('transitionend', () => {
+                            videoContent.addEventListener('transitionend', () => {
                                 if (boxVideo.classList.contains('video-play')) {
                                     handlerPlayVideo();
                                 }
@@ -42,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         
                         // Function to launch video.
                         function handlerPlayVideo() {
-                            if (video.classList.contains('js-link')) {
+                            if (video.classList.contains('js-add-link')) {
                                 video.src = dataSrc;
                             } else {
                                 video.play(); 
@@ -55,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             body.classList.remove('look');
                             body.style.paddingRight = `0px`;
 
-                            if (video.classList.contains('js-link')) {
+                            if (video.classList.contains('js-add-link')) {
                                 video.src = '';
                             } else {
                                 video.pause(); 
@@ -66,4 +67,4 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-})
+});

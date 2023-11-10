@@ -1,18 +1,19 @@
 * {
     box-sizing: border-box;
+    letter-spacing: normal !important;
 }
 body.look {
     overflow: hidden;
 }
 .custom-video__container {
-    max-width: 1680px;
+    max-width: 1648px;
     margin: 32px auto;
     padding: 0 140px;
 }
 .custom-video .custom-video__title {
     margin: 0 0 16px 0;
     text-align: center;
-    font-size: 38px;
+    font-size: 40px;
     font-style: normal;
     font-weight: 600;
     line-height: 121.053%;
@@ -39,7 +40,6 @@ body.look {
 }
 .custom-video .custom-video__banner {
     padding-bottom: 56%;
-    z-index: 1;
 }
 .custom-video .custom-video__banner.hidden-image {
     display: none;
@@ -99,6 +99,7 @@ body.look {
     position: absolute;
     top: 50%;
     left: 50%;
+    font-size: 16px;
     padding: 16px 32px;
     border-radius: 32px;
     background: #FFF;
