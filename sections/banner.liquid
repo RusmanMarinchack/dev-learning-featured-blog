@@ -9,7 +9,7 @@
 {% assign video_mob = section_settings.video_mobile | default: video_desktop %}
 {% assign image_mob = section_settings.image_mobile | default: image_desktop %}
 
-{%- capture styles -%}
+{%- capture variables -%}
     --desktop-min-height: {{- section_settings.desktop_banner_min_height -}}px;
     --mob-min-height: {{- section_settings.mobile_banner_min_height -}}px;
     --text-color: {{- section_settings.text_color -}};
@@ -17,9 +17,10 @@
     --button_bg: {{- section_settings.button_bg -}};
     --button_text_color_hover: {{- section_settings.button_text_color_hover -}};
     --button_bg_hover: {{- section_settings.button_bg_hover -}};
+    --overlay-bg: {{- section_settings.overlay -}};
 {%- endcapture -%}
 
-<section class="banner" style="{{- styles -}}" id="banner-{{- section.id -}}">
+<section class="banner" style="{{- variables -}}" id="banner-{{- section.id -}}">
 
   {%- if section_settings.media_type == "video" -%}
     {{- video_mob | video_tag: class: "banner__bg video mob", autoplay: true, loop: true -}}
@@ -38,11 +39,11 @@
     <div class="banner__wrapper">
 
       {%- if section_settings.heading -%}
-        <h1 class="banner__title" style="color: {{- section_settings.text_color -}};">{{- section_settings.heading -}}</h1>
+        <h1 class="banner__title">{{- section_settings.heading -}}</h1>
       {%- endif -%}
 
       {%- if section_settings.text != empty -%}
-        <div class="banner__subtext" style="color: {{- section_settings.text_color -}};">{{- section_settings.text -}}</div>
+        <div class="banner__subtext">{{- section_settings.text -}}</div>
       {%- endif -%}
 
       {%- if section_settings.button_link -%}
@@ -52,7 +53,7 @@
       {%- endif -%}
 
     </div>
-    <div class="banner__overlay" {%- if section_settings.overlay -%}style="background: {{- section_settings.overlay -}};" {%- endif -%}></div>
+    <div class="banner__overlay"></div>
 </section>
 
 {% schema %}
