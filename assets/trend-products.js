@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     spots.forEach(spot => {
                         spot.addEventListener('click', function () {
 
-                            const popup = this.closest('.trend-products__box-spot').querySelector('.trend-products__popup');
+                            const popup = this.closest('.trend-products__box-spot').querySelector('.js-popup');
 
                             if (this.classList.contains('spot-active')) {
                                 this.classList.remove('spot-active');
@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         const boxSpots = item.querySelectorAll('.trend-products__box-spot');
 
                         boxSpots.forEach((box) => {
-                            const spot = box.querySelector('.trend-products__btn-plus');
-                            const popup = box.querySelector('.trend-products__popup');
+                            const spot = box.querySelector('.js-btn-plus');
+                            const popup = box.querySelector('.js-popup');
                             const popupHeight = popup.clientHeight;
                             const spotTop = spot.offsetTop;
                             const spotLeft = spot.offsetLeft;
@@ -101,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 (index + 1) % 2 === 0 && window.innerWidth > 767.98 && window.innerWidth < 991.98) {
                                 popup.style.left = `${spotLeft - popup.clientWidth - 4}px`;
                             }
-
                         });
                     });
                 }
@@ -109,6 +108,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
             handlerPositionSpots();
             window.addEventListener('resize', handlerPositionSpots);
+
+            // We close the pop-up not only when clicking on the button.
+            document.addEventListener('click', function (e) {
+                const boxSpots = document.querySelectorAll(`.trend-products__box-spot`);
+
+                boxSpots.forEach(box => {
+                    if (box.contains(e.target) !== true) {
+                        const spot = box.querySelector('.js-btn-plus');
+                        const popup = box.querySelector('.js-popup');
+                        console.log(popup)
+                        spot.classList.remove('spot-active');
+
+                        popup.classList.remove('popup-active');
+                    }
+                });
+            });
         });
     }
 });

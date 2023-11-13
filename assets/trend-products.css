@@ -108,6 +108,7 @@
     visibility: visible;
 }
 .trend-products .trend-products__popup-box-img {
+    display: block;
     width: 64px;
     height: 64px;
     position: relative;
@@ -124,10 +125,15 @@
     object-fit: cover;
 }
 .trend-products .trend-products__popup-title {
+    display: inline-block;
     margin: 0 0 8px 0;
     font-style: normal;
     font-weight: 400;
     color: #535353;
+    text-decoration: none;
+}
+.trend-products .trend-products__popup-title:hover {
+    text-decoration: underline;
 }
 .trend-products .trend-products__popup-price {
     margin-bottom: 8px;
@@ -147,7 +153,7 @@
     transition: border 0.3s;
 }
 .trend-products .trend-products__popup-link:hover {
-    border-bottom: none;
+    border-bottom-color: transparent;
 }
 .trend-products .trend-products__swiper-pagination.swiper-pagination {
     display: none;
