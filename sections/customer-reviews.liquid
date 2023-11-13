@@ -4,9 +4,21 @@
 <script src="{{ 'swiper-bundle.min.js' | asset_url }}"></script>
 <script src="{{ 'customer-reviews.js' | asset_url }}"></script>
 
-<section class="customer-reviews" id="{{ section.id }}">
+{% assign vertical_alignment = section.settings.vertical_alignment %}
+
+{% if vertical_alignment == 'base' %}
+    {% assign lenghtSlide = 3 %}
+{% elsif vertical_alignment == 'small_product' %}
+    {% assign lenghtSlide = 3 %}
+{% elsif vertical_alignment == 'big_product' %}
+    {% assign lenghtSlide = 2 %}
+{% elsif vertical_alignment == 'big_image' %}
+    {% assign lenghtSlide = 1 %}
+{% endif %}
+
+<section class="customer-reviews" id="{{- section.id -}}">
     <div class="customer-reviews__container">
-        <div class="customer-reviews__content swiper js-customer-reviews-slider">
+        <div class="customer-reviews__content swiper js-customer-reviews-slider" data-length-slide="{{- lenghtSlide -}}">
             <div class="customer-reviews__wrapper swiper-wrapper">
 
                 {%- for block in section.blocks -%}
@@ -15,73 +27,101 @@
                     {% assign authorImage = block.settings.image_author %}
                     {% assign authorName = block.settings.name_author %}
                     {% assign authorRole = block.settings.role_author %}
+                    {% assign big_image = block.settings.big_image %}
 
+                        <div class="customer-reviews__item swiper-slide item--{{- vertical_alignment -}}">
+                            <div class="customer-reviews__item-wrap item-wrap--{{- vertical_alignment -}}">
 
-                        <div class="customer-reviews__item swiper-slide">
+                                {%- if product != empty and vertical_alignment != 'base' and vertical_alignment != 'big_image' -%}
+                                    <div class="customer-reviews__product product--{{ vertical_alignment }}">
+                                        <div class="customer-reviews__product-box-img product-box-img--{{ vertical_alignment }}">
+                                            <a href="{{ product.url }}" class="customer-reviews__product-img-link product-img-link--{{ vertical_alignment }}">
+                                                <picture>
 
-                        {% if product != empty %}
-                            <div class="customer-reviews__product">
-                                <div class="customer-reviews__product-box-img">
-                                    <a href="{{ product.url }}" class="customer-reviews__product-img-link">
-                                        <picture>
+                                                    {%- if vertical_alignment == 'small_product' -%}
+                                                        {%- if image -%}
+                                                            <source media="(max-width: 1279.98px)" srcset="{{- image | image_url: width: 909 -}} 1x, {{- image | image_url: width: 1818 -}} 2x">
+                                                            <source media="(max-width: 1279.98px)" srcset="{{- image | image_url: width: 380 -}} 1x, {{- image | image_url: width: 760 -}} 2x">
+                                                            <img src="{{- image | image_url: width: 375 -}}" srcset="{{- image | image_url: width: 375 -}} 1x, {{ image | image_url: width: 750 }} 2x" alt="{{- image.alt -}}" class="customer-reviews__product-img">
+                                                        {%- else -%}
+                                                            {{ 'image' | placeholder_svg_tag }}
+                                                        {%- endif -%}
+                                                    {% else %}
+                                                        {%- if image -%}
+                                                            <img src="{{ image | image_url: width: 80 }}" srcset="{{- image | image_url: width: 80 -}} 1x, {{- image | image_url: width: 160 -}} 2x" alt="{{- image.alt -}}" class="customer-reviews__product-img">
+                                                        {%- else -%}
+                                                            {{- 'image' | placeholder_svg_tag -}}
+                                                        {%- endif -%}
+                                                    {%- endif -%}
 
-                                            {%- if image -%}
-                                                <source media="(max-width: 1279.98px)" srcset="{{ image | image_url: width: 909 }} 1x, {{ image | image_url: width: 1818 }} 2x">
-                                                <source media="(max-width: 1279.98px)" srcset="{{ image | image_url: width: 380 }} 1x, {{ image | image_url: width: 760 }} 2x">
-                                                <img src="{{ image | image_url: width: 375 }}" srcset="{{ image | image_url: width: 375 }} 1x, {{ image | image_url: width: 750 }} 2x" alt="{{ image.alt }}" class="customer-reviews__product-img">
-                                            {%- else -%}
-                                                {{ 'image' | placeholder_svg_tag }}
-                                            {%- endif -%}
+                                                </picture>
+                                            </a>
 
-                                        </picture>
-                                    </a>
-                                    <div class="customer-reviews__product-description">
-                                        <a href="{{ product.url }}" class="customer-reviews__product-name">{{ product.title }}</a>
-                                        <div class="customer-reviews__product-prices">
-                                            <div class="customer-reviews__price">{{ product.price | money }}</div>
+                                            {%- if vertical_alignment != 'big_image' -%}
+                                                <div class="customer-reviews__product-description product-description--{{ vertical_alignment }}">
+                                                    <a href="{{- product.url -}}" class="customer-reviews__product-name">{{- product.title -}}</a>
+                                                    <div class="customer-reviews__product-prices">
+                                                        <div class="customer-reviews__price">{{ product.price | money }}</div>
 
-                                            {%- if product.compare_at_price -%}
-                                                <div class="customer-reviews__price-old">{{ product.compare_at_price | money }}</div>
+                                                        {%- if product.compare_at_price and vertical_alignment == 'big_product' -%}
+                                                            <div class="customer-reviews__price-old">{{- product.compare_at_price | money -}}</div>
+                                                        {%- endif -%}
+
+                                                    </div>
+                                                </div>
                                             {%- endif -%}
 
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        {% endif %}
-
-                            <div class="customer-reviews__box-info">
-                                <div class="customer-reviews__rating">
-                                    <img src="{{ 'rating.svg' | asset_url }}" alt="Icon rating" class="customer-reviews__icon-rating">
-                                </div>
-
-                                {%- if block.settings.paragraph -%}
-                                    <div class="customer-reviews__text">{{ block.settings.paragraph }}</div>
                                 {%- endif -%}
 
-                                <div class="customer-reviews__author">
+                                {%- if vertical_alignment == 'big_image' and big_image -%}
 
-                                    {%- if authorImage -%}
-                                        <div class="customer-reviews__author-box-img">
-                                            <img src="{{ authorImage | image_url: width: 48 }}" alt="{{ authorImage.alt }}" class="customer-reviews__author-img">
+                                    <div class="customer-reviews__product">
+                                        <div class="customer-reviews__product-box-img product-box-img--{{ vertical_alignment }}">
+                                            <picture>
+                                                <source media="(max-width: 1279.98px)" srcset="{{- big_image | image_url: width: 959 -}} 1x, {{- big_image | image_url: width: 1818 -}} 2x">
+                                                <img src="{{- big_image | image_url: width: 824 -}}" srcset="{{- big_image | image_url: width: 824 -}} 1x, {{- big_image | image_url: width: 1648 -}} 2x" alt="{{- big_image.alt -}}" class="customer-reviews__product-img">
+                                            </picture>
                                         </div>
-                                    {%- endif -%}
+                                    </div>
 
-                                    {%- if authorName or authorRole -%}
-                                        <div class="customer-reviews__author-info">
+                                {%- endif -%}
 
-                                            {%- if authorName -%}
-                                                <div class="customer-reviews__author-name">{{ authorName }}</div>
-                                            {%- endif -%}
-                                            {%- if authorRole -%}
-                                                <div class="customer-reviews__author-role">{{ authorRole }}</div>
-                                            {%- endif -%}
+                                <div class="customer-reviews__box-info reviews-box-info--{{- vertical_alignment -}}">
+                                    <div class="customer-reviews__author author--{{- vertical_alignment -}}">
 
-                                        </div>
+                                        {%- if authorImage -%}
+                                            <div class="customer-reviews__author-box-img">
+                                                <img src="{{ authorImage | image_url: width: 48 }}" alt="{{ authorImage.alt }}" class="customer-reviews__author-img">
+                                            </div>
+                                        {%- endif -%}
+
+                                        {%- if authorName or authorRole -%}
+                                            <div class="customer-reviews__author-info">
+
+                                                {%- if authorName -%}
+                                                    <div class="customer-reviews__author-name">{{- authorName -}}</div>
+                                                {%- endif -%}
+                                                {%- if authorRole -%}
+                                                    <div class="customer-reviews__author-role">{{- authorRole -}}</div>
+                                                {%- endif -%}
+
+                                            </div>
+                                        {%- endif -%}
+
+                                    </div>
+                                    <div class="customer-reviews__rating">
+                                        <img src="{{ 'rating.svg' | asset_url }}" alt="Icon rating" class="customer-reviews__icon-rating">
+                                    </div>
+
+                                    {%- if block.settings.paragraph -%}
+                                        <div class="customer-reviews__text">{{ block.settings.paragraph }}</div>
                                     {%- endif -%}
 
                                 </div>
                             </div>
+
                         </div>
 
                 {%- endfor -%}
@@ -95,7 +135,33 @@
 {% schema %}
   {
     "name": "Customer reviews",
-    "settings": [],
+    "settings": [
+      {
+        "type": "select",
+        "id": "vertical_alignment",
+        "label": "Reviews layout",
+        "options": [
+          {
+            "value": "base",
+            "label": "Base"
+          },
+          {
+            "value": "small_product",
+            "label": "Small product"
+          },
+          {
+            "value": "big_product",
+            "label": "Big product"
+          },
+          {
+            "value": "big_image",
+            "label": "Big image"
+          }
+        ],
+        "default": "base"
+      }
+
+    ],
     "blocks": [
       {
         "name": "Review",
@@ -105,6 +171,11 @@
             "type": "product",
             "id": "product",
             "label": "Product"
+          },
+          {
+            "type": "image_picker",
+            "id": "big_image",
+            "label": "Big image"
           },
           {
             "type": "richtext",
