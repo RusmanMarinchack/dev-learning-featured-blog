@@ -1,0 +1,12 @@
+{{ 'minicart.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'minicart.js' | asset_url }}" defer="defer"></script>
+
+<div class="minicart shadow">
+    <div class="minicart__content">
+        {% for item in cart.items %}
+            {{ item.product.title }}
+        {% endfor %}
+    </div>
+</div>
+

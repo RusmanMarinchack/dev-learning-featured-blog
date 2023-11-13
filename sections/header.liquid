@@ -3,6 +3,11 @@
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
+
+{% comment %}Minicart{% endcomment %}
+<link rel="stylesheet" href="{{ 'minicart.css' | asset_url }}" media="print" onload="this.media='all'">
+{% comment %}===={% endcomment %}
+
 {%- if settings.predictive_search_enabled -%}
   <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="{{ 'component-loading-overlay.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -318,6 +323,10 @@
             {% render block %}
         {%- endcase -%}
       {%- endfor -%}
+
+      <button class="minicart-btn">
+        <img class="minicart-btn-icon" src="{{ 'cart-shop.svg' | asset_url }}" alt="Cart Btn">
+      </button>
 
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
         {%- liquid
