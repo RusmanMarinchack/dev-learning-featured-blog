@@ -66,6 +66,7 @@
     padding-bottom: 0;
 }
 .customer-reviews .customer-reviews__product-box-img.product-box-img--big_image {
+    height: 100%;
     border-radius: 0;
     padding-bottom: 62%;
 }
@@ -268,6 +269,9 @@
 }
 
 @media screen and (max-width: 991.98px) {
+    .customer-reviews .customer-reviews__item.item--base {
+        padding: 24px;
+    }
     .customer-reviews .customer-reviews__item-wrap {
         grid-template-columns: repeat(1, 1fr);
         align-items: center;
