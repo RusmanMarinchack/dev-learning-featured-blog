@@ -44,13 +44,13 @@
                                                             <source media="(max-width: 1279.98px)" srcset="{{- image | image_url: width: 380 -}} 1x, {{- image | image_url: width: 760 -}} 2x">
                                                             <img src="{{- image | image_url: width: 375 -}}" srcset="{{- image | image_url: width: 375 -}} 1x, {{ image | image_url: width: 750 }} 2x" alt="{{- image.alt -}}" class="customer-reviews__product-img">
                                                         {%- else -%}
-                                                            {{ 'image' | placeholder_svg_tag }}
+                                                            {{ 'image' | placeholder_svg_tag: 'customer-reviews__product-img' }}
                                                         {%- endif -%}
                                                     {% else %}
                                                         {%- if image -%}
                                                             <img src="{{ image | image_url: width: 80 }}" srcset="{{- image | image_url: width: 80 -}} 1x, {{- image | image_url: width: 160 -}} 2x" alt="{{- image.alt -}}" class="customer-reviews__product-img">
                                                         {%- else -%}
-                                                            {{- 'image' | placeholder_svg_tag -}}
+                                                            {{- 'image' | placeholder_svg_tag: 'customer-reviews__product-img' -}}
                                                         {%- endif -%}
                                                     {%- endif -%}
 
