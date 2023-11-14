@@ -4,8 +4,11 @@
 
 <div class="minicart shadow">
     <div class="minicart__content">
+        <div class="minicart__header">
+            <div class="minicart__header-title">Your cart ({{ cart.item_count }})</div>
+        </div>
         {% for item in cart.items %}
-            {{ item.product.title }}
+            <div>{{ item.product.title }}</div>
         {% endfor %}
     </div>
 </div>

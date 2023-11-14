@@ -1,11 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const btnCard = document.querySelector('.minicart-btn');
+    const minicart = document.querySelector('.minicart');
 
-    if (btnCard) {
-        const minicart = document.querySelector('.minicart');
-        console.log(btnCard)
+    if (minicart) {
+        const btnCard = document.querySelector('.minicart-btn');
+        const cartContent = minicart.querySelector('.minicart__content');
+
         btnCard.addEventListener('click', function() {
-            console.log(1)
+            minicart.classList.add('active-minicart');
+            cartContent.classList.add('active-minicart');
+        });
+
+        minicart.addEventListener('click', function() {
+            minicart.classList.remove('active-minicart');
+            cartContent.classList.remove('active-minicart');
         });
     }
 });
