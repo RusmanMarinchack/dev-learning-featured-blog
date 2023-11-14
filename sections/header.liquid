@@ -325,6 +325,9 @@
       {%- endfor -%}
 
       <button class="minicart-btn">
+        {%- if cart.item_count < 100 -%}
+          <span class="minicart-btn-count">{{ cart.item_count }}</span>
+        {%- endif -%}
         <img class="minicart-btn-icon" src="{{ 'cart-shop.svg' | asset_url }}" alt="Cart Btn">
       </button>
 
@@ -346,6 +349,7 @@
           </div>
         {%- endif -%}
       </a>
+
     </div>
   </header>
 </{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>

@@ -10,6 +10,10 @@
     border: none;
     background-color: transparent;
     margin: 0 10px;
+    cursor: pointer;
+}
+.minicart-btn:hover {
+    transform: scale(1.1);
 }
 .minicart-btn .minicart-btn-icon {
     position: absolute;
@@ -17,6 +21,21 @@
     left: 0;
     width: 100%;
     height: 100%;
+}
+.minicart-btn-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 8px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    z-index: 1;
 }
 .minicart.shadow {
     position: fixed;
@@ -35,15 +54,86 @@
     visibility: visible;
 }
 .minicart .minicart__content {
+    max-width: 480px;
+    width: 100%;
+    height: calc(100% - 32px);
     position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
+    right: 16px;
+    top: 16px;
     display: inline-block;
     background-color: #fff;
-    transform: translateX(100%);
+    transform: translateX(calc(100% + 16pc));
+    border-radius: 16px;
+    overflow: auto;
     transition: all 0.3s;
 }
 .minicart .minicart__content.active-minicart {
     transform: translateX(0);
+}
+.minicart .minicart__header {
+    padding: 16px 24px;
+}
+.minicart .minicart__products {
+    padding: 24px;
+}
+.minicart .minicart__item {
+    display: flex;
+}
+.minicart .minicart__item-image-box {
+    position: relative;
+    width: 100px;
+    margin-right: 24px;
+}
+.minicart .minicart__item-image-wrap {
+    padding-bottom: 100%;
+}
+.minicart .minicart__item-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.minicart .minicart__item-title {
+    color: #535353;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    text-decoration: none;
+}
+.minicart .minicart__item-title:hover {
+    text-decoration: underline;
+}
+.minicart .minicart__item-bottom {
+    margin-top: 20px;
+}
+.minicart .minicart__item-count-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px;
+    border-radius: 68px;
+    background-color: #F6F6F6;
+}
+.minicart .minicart__item-minus,
+.minicart .minicart__item-plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid #E9E9E9;
+    background: #FFF;
+}
+.minicart__item-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
 }

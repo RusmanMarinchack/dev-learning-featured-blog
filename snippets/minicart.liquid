@@ -7,9 +7,35 @@
         <div class="minicart__header">
             <div class="minicart__header-title">Your cart ({{ cart.item_count }})</div>
         </div>
-        {% for item in cart.items %}
-            <div>{{ item.product.title }}</div>
-        {% endfor %}
+        <div class="minicart__products">
+
+            {%- for item in cart.items -%}
+                <div class="minicart__item" data-product-id="{{ item.id }}">
+                    <div class="minicart__item-image-box">
+                        <a href="{{ item.url }}" class="minicart__item-image-wrap">
+                            <img src="{{ item.image | image_url: width: 100 }}" alt="" class="minicart__item-image">
+                        </a>
+                    </div>
+                    <div class="minicart__item-description">
+                        <a href="{{ item.url }}" class="minicart__item-title">{{ item.title }}</a>
+                        <div class="minicart__item-color">{{ item.variant.options[product.options_index['Color']] }}</div>
+
+                        <div class="minicart__item-bottom">
+                            <div class="minicart__item-count-box">
+                                <button class="minicart__item-minus">
+                                    <img src="{{ 'minus.svg' | asset_url }}" alt="Minus">
+                                </button>
+                                <span class="minicart__item-count">{{ item.quantity }}</span>
+                                <button class="minicart__item-plus">
+                                    <img src="{{ 'plus.svg' | asset_url }}" alt="Plus">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {%- endfor -%}
+
+        </div>
     </div>
 </div>
 
