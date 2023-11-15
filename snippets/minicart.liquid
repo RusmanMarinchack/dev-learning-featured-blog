@@ -2,39 +2,73 @@
 
 <script src="{{ 'minicart.js' | asset_url }}" defer="defer"></script>
 
-<div class="minicart shadow">
+<div class="minicart shadow js-close" id="minicart">
     <div class="minicart__content">
         <div class="minicart__header">
-            <div class="minicart__header-title">Your cart ({{ cart.item_count }})</div>
+            <div class="minicart__header-title">Your cart (<span class="minicart__header-count">{{- cart.item_count -}}</span>)</div>
+            <button class="minicart__header-close js-close">
+                <img class="minicart__header-close-icon" src="{{ 'x.svg' | asset_url }}" alt="X">
+            </button>
         </div>
         <div class="minicart__products">
 
-            {%- for item in cart.items -%}
-                <div class="minicart__item" data-product-id="{{ item.id }}">
-                    <div class="minicart__item-image-box">
-                        <a href="{{ item.url }}" class="minicart__item-image-wrap">
-                            <img src="{{ item.image | image_url: width: 100 }}" alt="" class="minicart__item-image">
-                        </a>
-                    </div>
-                    <div class="minicart__item-description">
-                        <a href="{{ item.url }}" class="minicart__item-title">{{ item.title }}</a>
-                        <div class="minicart__item-color">{{ item.variant.options[product.options_index['Color']] }}</div>
+            {% if cart.items.size > 0 %}
+                {%- for item in cart.items -%}
+                    <div class="minicart__item" data-product-id="{{ item.id }}">
+                        <button class="minicart__item-remove">
+                            <img src="{{ 'trash.svg' | asset_url }}" alt="Icon Delite">
+                        </button>
+                        <div class="minicart__item-image-box">
+                            <a href="{{ item.url }}" class="minicart__item-image-wrap">
+                                <img src="{{ item.image | image_url: width: 100 }}" alt="" class="minicart__item-image">
+                            </a>
+                        </div>
+                        <div class="minicart__item-description">
+                            <a href="{{ item.url }}" class="minicart__item-title">{{ item.title }}</a>
+                            <div class="minicart__item-color">{{ item.variant.options[product.options_index['Color']] }}</div>
 
-                        <div class="minicart__item-bottom">
-                            <div class="minicart__item-count-box">
-                                <button class="minicart__item-minus">
-                                    <img src="{{ 'minus.svg' | asset_url }}" alt="Minus">
-                                </button>
-                                <span class="minicart__item-count">{{ item.quantity }}</span>
-                                <button class="minicart__item-plus">
-                                    <img src="{{ 'plus.svg' | asset_url }}" alt="Plus">
-                                </button>
+                            <div class="minicart__item-bottom">
+                                <div class="minicart__item-count-box">
+                                    <button class="minicart__item-minus">
+                                        <img src="{{ 'minus.svg' | asset_url }}" alt="Minus">
+                                    </button>
+                                    <span class="minicart__item-count">{{ item.quantity }}</span>
+                                    <button class="minicart__item-plus">
+                                        <img src="{{ 'plus.svg' | asset_url }}" alt="Plus">
+                                    </button>
+                                </div>
+                                <div class="minicart__item-prices">
+                                    <div class="minicart__item-price">{{ item.final_line_price | money }}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {%- endfor -%}
+                {%- endfor -%}
+            {% else %}
+                <div class="minicart__item-empty">Your cart is empty</div>
+            {% endif %}
 
+        </div>
+        <div class="minicart__notes-box">
+            <div class="minicart__notes-header">
+                <button class="minicart__motes-btn"><span class="ninicart__motes-plus"></span> Add a note to your order</button>
+            </div>
+            <div class="minicart__notes-body">
+                <div class="minicart__notes-text"></div>
+                <div class="minicart__notes-input-box">
+                    <textarea class="minicart__notes-input" placeholder="Leave a note for seller"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="minicart__bottom">
+            <div class="minicart__bottom-price">
+                <div class="minicart__bottom-price-label">Subtotal:</div>
+                <div class="minicart__bottom-price-value">{{ cart.items_subtotal_price }}</div>
+            </div>
+            <div class="minicart__bottom-label">Tax included and shipping calculated at checkout</div>
+            <div class="minicart__bottom-btn-box">
+                <a href="/cart" class="minicart__bottom-btn">Check out</a>
+            </div>
         </div>
     </div>
 </div>
