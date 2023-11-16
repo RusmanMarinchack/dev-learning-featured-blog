@@ -37,7 +37,8 @@
                                     <button class="minicart__item-minus">
                                         <img src="{{ 'minus.svg' | asset_url }}" alt="Minus">
                                     </button>
-                                    <span class="minicart__item-count">{{ item.quantity }}</span>
+                                    <input type="text" class="minicart__item-count" value="{{ item.quantity }}">
+                                    {% comment %}<span class="minicart__item-count">{{ item.quantity }}</span>{% endcomment %}
                                     <button class="minicart__item-plus">
                                         <img src="{{ 'plus.svg' | asset_url }}" alt="Plus">
                                     </button>
@@ -47,6 +48,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="minicart__item-message"></div>
                     </div>
                 {%- endfor -%}
             {%- else -%}

@@ -208,10 +208,10 @@
     box-shadow: 1px 3px 7px #767676 inset;
 }
 .minicart .minicart__item-count {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 32px;
+    background: transparent;
+    border: none;
+    text-align: center;
     font-style: normal;
     font-weight: 500;
     line-height: 150%;
@@ -222,6 +222,16 @@
     font-style: normal;
     font-weight: 600;
     line-height: 150%;
+}
+.minicart .minicart__item-message {
+    display: none;
+    margin-top: 10px;
+    color: #E41616;
+    font-size: 14px;
+    line-height: 150%;
+}
+.minicart .minicart__item-message.error {
+    display: block;
 }
 .minicart .minicart__notes-box {
     padding: 16px 24px;

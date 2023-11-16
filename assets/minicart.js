@@ -79,9 +79,23 @@ function createFunctionalMinicart() {
                 const plus = element.querySelector('.minicart__item-plus');
                 const minus = element.querySelector('.minicart__item-minus');
                 const btnRemove = element.querySelector('.minicart__item-remove');
+                const inputCount = element.querySelector('.minicart__item-count');
                 const preloader = element.querySelector('.minicart__item-preloader');
+                const message = element.querySelector('.minicart__item-message');
 
-                if (plus && minus) {
+                if (plus && minus && inputCount) {
+                    inputCount.addEventListener('change',  async function () {
+
+                        preloader.classList.add('hidden');
+                        const dataCart = await handlerGetFetch();
+
+                        dataCart.items.forEach(item => {
+                            if (item.id === Number(productId)) {
+                                handlerbtns(productId, this.value, message);
+                            }
+                        });
+                    });
+
                     // // We add the product.
                     plus.addEventListener('click', async function () {
                         preloader.classList.add('hidden');
@@ -89,7 +103,7 @@ function createFunctionalMinicart() {
 
                         dataCart.items.forEach(item => {
                             if (item.id === Number(productId)) {
-                                handlerbtns(productId, (item.quantity + 1));
+                                handlerbtns(productId, (item.quantity + 1), message);
                             }
                         });
                     });
@@ -102,7 +116,7 @@ function createFunctionalMinicart() {
                         // We take away the goods
                         dataCart.items.forEach(item => {
                             if (item.id === Number(productId)) {
-                                handlerbtns(productId, (item.quantity - 1));
+                                handlerbtns(productId, (item.quantity - 1), message);
                             }
                         });
                     });
@@ -116,7 +130,7 @@ function createFunctionalMinicart() {
 
                         dataCart.items.forEach(item => {
                             if (item.id === Number(productId)) {
-                                handlerbtns(productId, 0);
+                                handlerbtns(productId, 0, message);
                             }
                         });
                     });
@@ -124,7 +138,8 @@ function createFunctionalMinicart() {
 
 
                 // Product subtraction and addition function.
-                async function handlerbtns(id, number) {
+                async function handlerbtns(id, number, message) {
+                    let errorMessage;
                     let dataCart;
 
                     await fetch(window.Shopify.routes.root + 'cart/change.js', {
@@ -139,16 +154,28 @@ function createFunctionalMinicart() {
                             }
                         ),
                     })
-                        .then(response => response.json())
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json()
+                            }
+                        })
                         .then(data => {
                             dataCart = data;
                             getSectionMinicart();
-                            spanCount.innerText = dataCart.item_count
+                            spanCount.innerText = dataCart.item_count;
                             preloader.classList.remove('hidden');
+
+                            setInterval(() => {
+                                message.classList.add('error');
+                                message.innerText = "Виберіть меншу кількість продуктів!";
+                            }, 4000)
+
                         })
                         .catch(error => {
                             console.error('Помилка з\'єднання:', error);
                         });
+
+                    console.log(dataCart)
                 }
             });
         }
