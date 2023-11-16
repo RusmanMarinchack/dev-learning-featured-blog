@@ -98,12 +98,31 @@
 .minicart .minicart__products {
     padding: 16px 24px;
 }
+.minicart .minicart__item-empty {
+    font-size: 18px;
+    line-height: 150%;
+    font-weight: 600;
+}
 .minicart .minicart__item {
     display: flex;
     position: relative;
 }
 .minicart .minicart__item:not(:last-child) {
     margin-bottom: 24px;
+}
+.minicart .minicart__item-preloader {
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    display: none;
+    width: 24px;
+    height: 24px;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+/*Theme styles interrupt, that's why I used it '!important'.*/
+.minicart .minicart__item-preloader.hidden {
+    display: block !important;
 }
 .minicart .minicart__item-remove {
     width: 16px;
@@ -152,6 +171,13 @@
 .minicart .minicart__item-title:hover {
     text-decoration: underline;
 }
+.minicart .minicart__item-subtitle {
+    color: #9D9D9D;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 128.571%;
+}
 .minicart .minicart__item-bottom {
     display: flex;
     justify-content: space-between;
@@ -190,13 +216,21 @@
     font-weight: 500;
     line-height: 150%;
 }
-.minicart__notes-box {
+.minicart .minicart__item-price {
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+}
+.minicart .minicart__notes-box {
     padding: 16px 24px;
     border-top: 1px solid #E9E9E9;
     border-bottom: 1px solid #E9E9E9;
 }
-.minicart .minicart__motes-btn {
-    display: block;
+.minicart .minicart__notes-btn {
+    display: flex;
+    align-items: center;
     width: 100%;
     text-align: start;
     color: #000;
@@ -204,11 +238,37 @@
     background: transparent;
     font-size: 16px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 150%;
 }
+.minicart .ninicart__notes-plus {
+    position: relative;
+    display: block;
+    width: 8px;
+    height: 1px;
+    margin-right: 10px;
+    border-radius: 2px;
+    background: #000;
+}
+.minicart .ninicart__notes-plus::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    transform: rotate(90deg);
+    transition: transform 0.3s;
+}
+.minicart .ninicart__notes-plus.active::before {
+    transform: rotate(0);
+}
+.minicart .minicart__notes-body {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s;
+}
 .minicart .minicart__notes-input-box {
-    padding-top: 16px;
+    padding: 16px 5px 5px 5px;
 }
 .minicart .minicart__notes-input {
     display: block;
@@ -226,6 +286,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 17px;
 }
 .minicart .minicart__bottom-price-value,
 .minicart .minicart__bottom-price-label {
@@ -238,12 +299,21 @@
 .minicart .minicart__bottom-price-value {
     font-size: 22px;
 }
+.minicart .minicart__bottom-label {
+    color: #535353;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 116.667%;
+    margin-bottom: 16px;
+}
 .minicart .minicart__bottom-btn {
     display: block;
     width: 100%;
     background: #000;
     text-align: center;
     padding: 16px 32px;
+    border: 1px solid #000;
     color: #FFF;
     font-size: 16px;
     font-style: normal;
@@ -251,4 +321,9 @@
     line-height: 137.5%;
     text-decoration: none;
     border-radius: 32px;
+    transition: all 0.3s;
+}
+.minicart .minicart__bottom-btn:hover {
+    background: #fff;
+    color: #000;
 }
