@@ -147,8 +147,10 @@
     font-style: normal;
     font-weight: 500;
     padding: 4px 0;
+    border: none;
     border-bottom: 1px solid #000;
     color: #000;
+    background: transparent;
     text-decoration: none;
     transition: border 0.3s;
 }

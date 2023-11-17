@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (box.contains(e.target) !== true) {
                         const spot = box.querySelector('.js-btn-plus');
                         const popup = box.querySelector('.js-popup');
-                        console.log(popup)
+
                         spot.classList.remove('spot-active');
 
                         popup.classList.remove('popup-active');

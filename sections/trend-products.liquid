@@ -1,8 +1,10 @@
-{{ 'trend-products.css' | asset_url | stylesheet_tag }}
 {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+{{ 'trend-products.css' | asset_url | stylesheet_tag }}
+{{ 'product.quick-view.css' | asset_url | stylesheet_tag }}
 
 <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'trend-products.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product.quick-view.js' | asset_url }}" defer="defer"></script>
 
 <section class="trend-products" id="{{ section.id }}">
     <div class="trend-products__container">
@@ -34,7 +36,7 @@
                       <div class="trend-products__popup-description">
                         <a href="{{ product.url }}" class="trend-products__popup-title">{{ product.title }}</a>
                         <div class="trend-products__popup-price">{{ product.price }}</div>
-                        <a class="trend-products__popup-link" href="{{ product.url }}">Add to cart</a>
+                        <button class="trend-products__popup-link" data-handle="{{ product.handle }}">Add to cart</button>
                       </div>
                     </div>
                   </div>
@@ -60,7 +62,7 @@
                       <div class="trend-products__popup-description">
                         <a class="trend-products__popup-title" href="{{ product.url }}">{{ product.title }}</a>
                         <div class="trend-products__popup-price">{{ product.price }}</div>
-                        <a class="trend-products__popup-link" href="{{ product.url }}">Add to cart</a>
+                        <button class="trend-products__popup-link" data-handle="{{ product.handle }}">Add to cart</button>
                       </div>
                     </div>
                   </div>
@@ -86,7 +88,7 @@
                       <div class="trend-products__popup-description">
                         <a class="trend-products__popup-title" href="{{ product.url }}">{{ product.title }}</a>
                         <div class="trend-products__popup-price">{{ product.price }}</div>
-                        <a class="trend-products__popup-link" href="{{ product.url }}">Add to cart</a>
+                        <button class="trend-products__popup-link" data-handle="{{ product.handle }}">Add to cart</button>
                       </div>
                     </div>
                   </div>
@@ -112,7 +114,7 @@
                       <div class="trend-products__popup-description">
                         <a class="trend-products__popup-title" href="{{ product.url }}">{{ product.title }}</a>
                         <div class="trend-products__popup-price">{{ product.price }}</div>
-                        <a class="trend-products__popup-link" href="{{ product.url }}">Add to cart</a>
+                        <button class="trend-products__popup-link" data-handle="{{ product.handle }}">Add to cart</button>
                       </div>
                     </div>
                   </div>
