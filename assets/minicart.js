@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', createFunctionalMinicart);
+
+const widthScroll = window.innerWidth - document.documentElement.offsetWidth
 function createFunctionalMinicart() {
     const minicart = document.querySelector('.minicart');
     const btnsClose = document.querySelectorAll('.js-close');
@@ -14,6 +16,8 @@ function createFunctionalMinicart() {
         btnCard.addEventListener('click', function() {
             minicart.classList.add('active-minicart');
             cartConten.classList.add('active-minicart');
+            document.body.classList.add('look');
+            document.body.style.paddingRight = `${widthScroll}px`;
         });
 
         // When clicking on a shadow or a cross, we delete the classes and close the popup.
@@ -21,6 +25,8 @@ function createFunctionalMinicart() {
             btn.addEventListener('click', function() {
                 minicart.classList.remove('active-minicart');
                 cartConten.classList.remove('active-minicart');
+                document.body.classList.remove('look');
+                document.body.style.paddingRight = `0px`;
             });
         })
 
@@ -74,14 +80,13 @@ function createFunctionalMinicart() {
         });
 
         if (miniCartItem.length >= 1) {
-            miniCartItem.forEach(element => {
+            miniCartItem.forEach((element, index) => {
                 const productId = element.dataset.productId;
                 const plus = element.querySelector('.minicart__item-plus');
                 const minus = element.querySelector('.minicart__item-minus');
                 const btnRemove = element.querySelector('.minicart__item-remove');
                 const inputCount = element.querySelector('.minicart__item-count');
                 const preloader = element.querySelector('.minicart__item-preloader');
-                const message = element.querySelector('.minicart__item-message');
 
                 if (plus && minus && inputCount) {
                     inputCount.addEventListener('change',  async function () {
@@ -91,7 +96,7 @@ function createFunctionalMinicart() {
 
                         dataCart.items.forEach(item => {
                             if (item.id === Number(productId)) {
-                                handlerbtns(productId, this.value, message);
+                                handlerbtns(productId, this.value, index);
                             }
                         });
                     });
@@ -103,7 +108,7 @@ function createFunctionalMinicart() {
 
                         dataCart.items.forEach(item => {
                             if (item.id === Number(productId)) {
-                                handlerbtns(productId, (item.quantity + 1), message);
+                                handlerbtns(productId, (item.quantity + 1), index);
                             }
                         });
                     });
@@ -116,7 +121,7 @@ function createFunctionalMinicart() {
                         // We take away the goods
                         dataCart.items.forEach(item => {
                             if (item.id === Number(productId)) {
-                                handlerbtns(productId, (item.quantity - 1), message);
+                                handlerbtns(productId, (item.quantity - 1), index);
                             }
                         });
                     });
@@ -130,7 +135,7 @@ function createFunctionalMinicart() {
 
                         dataCart.items.forEach(item => {
                             if (item.id === Number(productId)) {
-                                handlerbtns(productId, 0, message);
+                                handlerbtns(productId, 0, index);
                             }
                         });
                     });
@@ -138,8 +143,7 @@ function createFunctionalMinicart() {
 
 
                 // Product subtraction and addition function.
-                async function handlerbtns(id, number, message) {
-                    let errorMessage;
+                async function handlerbtns(id, number, i) {
                     let dataCart;
 
                     await fetch(window.Shopify.routes.root + 'cart/change.js', {
@@ -161,15 +165,16 @@ function createFunctionalMinicart() {
                         })
                         .then(data => {
                             dataCart = data;
-                            getSectionMinicart();
+
+                            if (dataCart === undefined) {
+                                getSectionMinicart(i);
+
+                            } else {
+                                getSectionMinicart();
+                            }
+
                             spanCount.innerText = dataCart.item_count;
                             preloader.classList.remove('hidden');
-
-                            setInterval(() => {
-                                message.classList.add('error');
-                                message.innerText = "Виберіть меншу кількість продуктів!";
-                            }, 4000)
-
                         })
                         .catch(error => {
                             console.error('Помилка з\'єднання:', error);
@@ -182,7 +187,7 @@ function createFunctionalMinicart() {
 
 
         // We get an updated layout of the section.
-        async function getSectionMinicart() {
+        async function getSectionMinicart(i = null) {
             let section;
 
             await fetch('/?sections=minicart')
@@ -208,6 +213,13 @@ function createFunctionalMinicart() {
 
             // We update the content on a regular basis.
             content.innerHTML = newMinicart.innerHTML;
+
+            // We derive an error for the product that there are no such quantities of products.
+            if (i !== null) {
+                const blockMessage = document.querySelectorAll('.minicart__item-message')[i];
+                blockMessage.classList.add('error');
+                blockMessage.innerText = 'Enter no more products than indicated above in the field.';
+            }
 
             // We call the function so that the functionality works
             createFunctionalMinicart();
