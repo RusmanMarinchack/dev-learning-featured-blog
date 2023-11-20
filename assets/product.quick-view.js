@@ -37,16 +37,15 @@ function handlerQuickView() {
             const plus = document.querySelector('.quick-view__item-plus');
             const minus = document.querySelector('.quick-view__item-minus');
             const count = document.querySelector('.quick-view__item-count');
-            const valueNumber = Number(count.value);
 
             count.addEventListener('change', function () {
-                if (valueNumber !== 1) {
+                if (Number(count.value) !== 1) {
                     minus.classList.remove('disabled');
                 } else {
                     minus.classList.add('disabled');
                 }
 
-                if (valueNumber < 1) {
+                if (Number(count.value) < 1) {
                     count.value = 1;
                     minus.classList.add('disabled');
                 }
@@ -55,7 +54,7 @@ function handlerQuickView() {
             plus.addEventListener('click', function () {
                 count.value++;
 
-                if (valueNumber !== 1) {
+                if (Number(count.value) !== 1) {
                     minus.classList.remove('disabled');
                 }
             });
@@ -63,12 +62,12 @@ function handlerQuickView() {
             minus.addEventListener('click', function () {
                 count.value--;
 
-                if (valueNumber === 1) {
+                if (Number(count.value) === 1) {
                     this.classList.add('disabled')
                 }
             });
 
-            if (valueNumber === 1) {
+            if (Number(count.value) === 1) {
                 minus.classList.add('disabled');
             } else {
                 minus.classList.remove('disabled');
