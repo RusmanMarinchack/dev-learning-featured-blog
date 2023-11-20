@@ -152,6 +152,7 @@
     color: #000;
     background: transparent;
     text-decoration: none;
+    cursor: pointer;
     transition: border 0.3s;
 }
 .trend-products .trend-products__popup-link:hover {

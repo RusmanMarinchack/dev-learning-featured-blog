@@ -82,6 +82,8 @@ function handlerQuickView() {
 async function handlerClickBtn() {
     const section = document.querySelector('.trend-products');
     const dataHandle = this.dataset.handle;
+    const btnsSpots = document.querySelectorAll('.js-btn-plus');
+    const spotsPopup = document.querySelectorAll('.js-popup');
     const mql = window.matchMedia("(max-width: 991.98px)");
 
 
@@ -125,6 +127,14 @@ async function handlerClickBtn() {
                     setTimeout(() => {
                         section.remove();
                     }, 1000);
+
+                    btnsSpots.forEach(spot => {
+                        spot.classList.remove('spot-active');
+                    });
+
+                    spotsPopup.forEach(spot => {
+                        spot.classList.remove('popup-active');
+                    });
                 }
             });
         });

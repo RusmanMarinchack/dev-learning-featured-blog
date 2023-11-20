@@ -1,103 +1,114 @@
 {% layout none %}
 
-<div class="quick-view shadow js-close">
-    <div class="quick-view__content">
-        <div class="quick-view__top">
-            <button class="quick-view__top-close js-close">
-                <img src="{{- 'X.svg' | asset_url -}}" alt="Close">
-            </button>
-        </div>
-        <div class="quick-view__inner">
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+    <title>Quick view</title>
+</head>
+<body>
+    <div class="quick-view shadow js-close">
+        <div class="quick-view__content">
+            <div class="quick-view__top">
+                <button class="quick-view__top-close js-close">
+                    <img src="{{- 'X.svg' | asset_url -}}" alt="Close">
+                </button>
+            </div>
+            <div class="quick-view__inner">
 
-            {% if product.images != empty %}
-                <div class="quick-view__slider-box">
-                    <div class="quick-view__swiper swiper">
-                        <div class="quick-view__swiper-wrapper swiper-wrapper">
+                {% if product.images != empty %}
+                    <div class="quick-view__slider-box">
+                        <div class="quick-view__swiper swiper">
+                            <div class="quick-view__swiper-wrapper swiper-wrapper">
 
-                            {%- for image in product.images -%}
-                                <div class="quick-view__swiper-slide swiper-slide">
-                                    <picture>
-                                        <source media="(max-width: 767.98px)" srcset="{{- image | image_url: width: 687 -}} 1x, {{- image | image_url: width: 1374 -}} 2x">
-                                        <source media="(max-width: 991.98px)" srcset="{{- image | image_url: width: 638 -}} 1x, {{- image | image_url: width: 1276 -}} 2x">
-                                        <img class="quick-view__slider-image" src="{{- image | image_url: width: 831 -}}" srcset="{{- image | image_url: width: 831 -}} 1x, {{- image | image_url: width: 1662 -}} 2x" alt="{{- image.alt -}}">
-                                    </picture>
-                                </div>
-                            {%- endfor -%}
-
-                        </div>
-                        <div class="quick-view__swiper-button-prev swiper-button-prev">
-                            <img class="quick-view__swiper-button-icon" src="{{- "arrow-left.svg" | asset_url -}}" alt="Arrow">
-                        </div>
-                        <div class="quick-view__swiper-button-next swiper-button-next">
-                            <img class="quick-view__swiper-button-icon" src="{{- "arrow-right.svg" | asset_url -}}" alt="Arrow">
-                        </div>
-                    </div>
-                    <div class="quick-view__mini-swiper swiper">
-                        <div class="quick-view__mini-swiper-wrapper swiper-wrapper">
-
-                            {%- for image in product.images -%}
-                                <div class="quick-view__mini-swiper-slide swiper-slide">
-                                    <div class="quick-view__mini-swiper-slide-wrap">
-                                        <img class="quick-view__mini-slider-image" src="{{- image | image_url: width: 132 -}}" srcset="{{- image | image_url: width: 132 -}} 1x, {{- image | image_url: width: 264 -}} 2x" alt="{{- image.alt -}}">
+                                {%- for image in product.images -%}
+                                    <div class="quick-view__swiper-slide swiper-slide">
+                                        <picture>
+                                            <source media="(max-width: 767.98px)" srcset="{{- image | image_url: width: 687 -}} 1x, {{- image | image_url: width: 1374 -}} 2x">
+                                            <source media="(max-width: 991.98px)" srcset="{{- image | image_url: width: 638 -}} 1x, {{- image | image_url: width: 1276 -}} 2x">
+                                            <img class="quick-view__slider-image" src="{{- image | image_url: width: 831 -}}" srcset="{{- image | image_url: width: 831 -}} 1x, {{- image | image_url: width: 1662 -}} 2x" alt="{{- image.alt -}}">
+                                        </picture>
                                     </div>
-                                </div>
-                            {%- endfor -%}
+                                {%- endfor -%}
 
+                            </div>
+                            <div class="quick-view__swiper-button-prev swiper-button-prev">
+                                <img class="quick-view__swiper-button-icon" src="{{- "arrow-left.svg" | asset_url -}}" alt="Arrow">
+                            </div>
+                            <div class="quick-view__swiper-button-next swiper-button-next">
+                                <img class="quick-view__swiper-button-icon" src="{{- "arrow-right.svg" | asset_url -}}" alt="Arrow">
+                            </div>
                         </div>
-                    </div>
-                </div>
-            {% endif %}
+                        <div class="quick-view__mini-swiper swiper">
+                            <div class="quick-view__mini-swiper-wrapper swiper-wrapper">
 
-            <div class="quick-view__info-box">
-                {%- assign old_price = product.compare_at_price -%}
-
-                <div class="quick-view__info-title-box">
-                    <h2 class="quick-view__info-title">{{- product.title -}}</h2>
-                    <div class="quick-view__info-price-box">
-                        <div class="quick-view__info-price {% if old_price %}new{% endif %}">{{- product.price | money -}}</div>
-
-                        {%- if old_price -%}
-                            <div class="quick-view__info-price old">{{- old_price | money }}</div>
-                        {%- endif -%}
-
-                    </div>
-                </div>
-                <div class="quick-view__info-variant-box">
-
-                    {%- for option in product.options_with_values -%}
-                        <div class="quick-view__info-variant-inner">
-                            <h5 class="quick-view__info-variant-name">{{- option.name -}}</h5>
-                            <div class="quick-view__info-variant-wrap">
-
-                                {%- for value in option.values -%}
-                                    <div class="quick-view__info-variant-item">
-                                        <input id="{{ option.name }}-{{ forloop.index }}" class="quick-view__info-variant-input" name="{{- option.name -}}" type="radio" value="{{- value -}}">
-                                        <label for="{{ option.name }}-{{ forloop.index }}" class="quick-view__info-variant-label">{{- value -}}</label>
+                                {%- for image in product.images -%}
+                                    <div class="quick-view__mini-swiper-slide swiper-slide">
+                                        <div class="quick-view__mini-swiper-slide-wrap">
+                                            <img class="quick-view__mini-slider-image" src="{{- image | image_url: width: 132 -}}" srcset="{{- image | image_url: width: 132 -}} 1x, {{- image | image_url: width: 264 -}} 2x" alt="{{- image.alt -}}">
+                                        </div>
                                     </div>
                                 {%- endfor -%}
 
                             </div>
                         </div>
-                    {%- endfor -%}
+                    </div>
+                {% endif %}
 
-                </div>
-                <div class="quick-view__item-count-box">
-                    <button class="quick-view__item-minus">
-                        <img src="{{ 'minus.svg' | asset_url }}" alt="Minus">
-                    </button>
-                    <input type="number" class="quick-view__item-count" value="1">
-                    <button class="quick-view__item-plus">
-                        <img src="{{ 'plus.svg' | asset_url }}" alt="Plus">
-                    </button>
-                </div>
-                <div class="quick-view__bottom-box">
-                    <button class="quick-view__bottom-btn">Add To Cart</button>
-                    <a class="quick-view__bottom-link-product" href="{{ product.url }}">
-                        <span class="quick-view__bottom-link-label">Visit Product Page</span>
-                        <img class="quick-view__bottom-link-icon" src="{{ 'arrow-right.svg' | asset_url }}" alt="Arrow">
-                    </a>
+                <div class="quick-view__info-box">
+                    {%- assign old_price = product.compare_at_price -%}
+
+                    <div class="quick-view__info-title-box">
+                        <h2 class="quick-view__info-title">{{- product.title -}}</h2>
+                        <div class="quick-view__info-price-box">
+                            <div class="quick-view__info-price {% if old_price %}new{% endif %}">{{- product.price | money -}}</div>
+
+                            {%- if old_price -%}
+                                <div class="quick-view__info-price old">{{- old_price | money }}</div>
+                            {%- endif -%}
+
+                        </div>
+                    </div>
+                    <div class="quick-view__info-variant-box">
+
+                        {%- for option in product.options_with_values -%}
+                            <div class="quick-view__info-variant-inner">
+                                <h5 class="quick-view__info-variant-name">{{- option.name -}}</h5>
+                                <div class="quick-view__info-variant-wrap">
+
+                                    {%- for value in option.values -%}
+                                        <div class="quick-view__info-variant-item">
+                                            <input id="{{ option.name }}-{{ forloop.index }}" class="quick-view__info-variant-input" name="{{- option.name -}}" type="radio" value="{{- value -}}">
+                                            <label for="{{ option.name }}-{{ forloop.index }}" class="quick-view__info-variant-label">{{- value -}}</label>
+                                        </div>
+                                    {%- endfor -%}
+
+                                </div>
+                            </div>
+                        {%- endfor -%}
+
+                    </div>
+                    <div class="quick-view__item-count-box">
+                        <button class="quick-view__item-minus">
+                            <img src="{{ 'minus.svg' | asset_url }}" alt="Minus">
+                        </button>
+                        <input type="number" class="quick-view__item-count" value="1">
+                        <button class="quick-view__item-plus">
+                            <img src="{{ 'plus.svg' | asset_url }}" alt="Plus">
+                        </button>
+                    </div>
+                    <div class="quick-view__bottom-box">
+                        <button class="quick-view__bottom-btn">Add To Cart</button>
+                        <a class="quick-view__bottom-link-product" href="{{ product.url }}">
+                            <span class="quick-view__bottom-link-label">Visit Product Page</span>
+                            <img class="quick-view__bottom-link-icon" src="{{ 'arrow-right.svg' | asset_url }}" alt="Arrow">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'product.quick-view.js' | asset_url }}" defer="defer"></script>
+</body>
+</html>
