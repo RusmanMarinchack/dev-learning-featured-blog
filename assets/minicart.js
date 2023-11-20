@@ -41,14 +41,12 @@ function createFunctionalMinicart() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    'items': [{
-                        'id': id,
-                        'quantity': 1
-                    }]
+                    'id': id,
+                    'quantity': 1
                 })
             })
                 .then(response => response.json())
-
+                .then(data => console.log(data))
                 .catch((error) => {
                     console.error('Error:', error);
                 });
@@ -149,27 +147,20 @@ function createFunctionalMinicart() {
                     await fetch(window.Shopify.routes.root + 'cart/change.js', {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json',
+                            'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify(
-                            {
-                                id: id,
-                                quantity: number,
-                            }
-                        ),
-                    })
-                        .then(response => {
-                            if (response.ok) {
-                                return response.json()
-                            }
+                        body: JSON.stringify({
+                            'id': id,
+                            'quantity': number
                         })
+                    })
+                        .then(response => response.json())
                         .then(data => {
-                            dataCart = data;
-
-                            if (dataCart === undefined) {
-                                getSectionMinicart(i);
+                            if (data.message) {
+                                getSectionMinicart(i, data.message);
 
                             } else {
+                                dataCart = data;
                                 getSectionMinicart();
                             }
 
@@ -177,17 +168,15 @@ function createFunctionalMinicart() {
                             preloader.classList.remove('hidden');
                         })
                         .catch(error => {
-                            console.error('Помилка з\'єднання:', error);
+                            console.log('Помилка з\'єднання:', error.message);
                         });
-
-                    console.log(dataCart)
                 }
             });
         }
 
 
         // We get an updated layout of the section.
-        async function getSectionMinicart(i = null) {
+        async function getSectionMinicart(i = null, message = '') {
             let section;
 
             await fetch('/?sections=minicart')
@@ -218,7 +207,7 @@ function createFunctionalMinicart() {
             if (i !== null) {
                 const blockMessage = document.querySelectorAll('.minicart__item-message')[i];
                 blockMessage.classList.add('error');
-                blockMessage.innerText = 'Enter no more products than indicated above in the field.';
+                blockMessage.innerText = message;
             }
 
             // We call the function so that the functionality works
