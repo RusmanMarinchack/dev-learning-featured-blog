@@ -1,6 +1,8 @@
-document.addEventListener('DOMContentLoaded', handelrQuickView);
-
-function handelrQuickView() {
+document.addEventListener('DOMContentLoaded', handlerQuickView);
+// We cut out the width of the scroll in order to add it for the body and there were no snags when revealing the popup.
+const widthScroll = window.innerWidth - document.documentElement.offsetWidth;
+function handlerQuickView() {
+    // Slider swiper.
     const quickViewSlider = new Swiper('.quick-view__swiper', {
         slidesPerView: 1,
         spaceBetween: 10,
@@ -17,19 +19,70 @@ function handelrQuickView() {
         }
     })
 
+    // When you click on the button, we call a function that opens a pop-up with the product.
     let btnsOpenQuickView = document.querySelectorAll('.trend-products__popup-link');
 
     btnsOpenQuickView.forEach(btn => {
+        // We delete the event so that no more than one pop-up is added during subsequent clicks
         btn.removeEventListener('click', handlerClickBtn);
+        // ==
         btn.addEventListener('click', handlerClickBtn);
     });
 
-    // handlerClickBtn()
+    // When clicking, plus minus changes the input value, and if necessary, we add a class for the minus button.
+    function handlerCount() {
+        const countBox = document.querySelector('.quick-view__item-count-box');
+
+        if (countBox) {
+            const plus = document.querySelector('.quick-view__item-plus');
+            const minus = document.querySelector('.quick-view__item-minus');
+            const count = document.querySelector('.quick-view__item-count');
+            const valueNumber = Number(count.value);
+
+            count.addEventListener('change', function () {
+                if (valueNumber !== 1) {
+                    minus.classList.remove('disabled');
+                } else {
+                    minus.classList.add('disabled');
+                }
+
+                if (valueNumber < 1) {
+                    count.value = 1;
+                    minus.classList.add('disabled');
+                }
+            });
+
+            plus.addEventListener('click', function () {
+                count.value++;
+
+                if (valueNumber !== 1) {
+                    minus.classList.remove('disabled');
+                }
+            });
+
+            minus.addEventListener('click', function () {
+                count.value--;
+
+                if (valueNumber === 1) {
+                    this.classList.add('disabled')
+                }
+            });
+
+            if (valueNumber === 1) {
+                minus.classList.add('disabled');
+            } else {
+                minus.classList.remove('disabled');
+            }
+        }
+    }
+    handlerCount();
 }
 
+// A function that opens a popup.
 async function handlerClickBtn() {
     const section = document.querySelector('.trend-products');
     const dataHandle = this.dataset.handle;
+    const mql = window.matchMedia("(max-width: 991.98px)");
 
 
     await fetch(`/products/${dataHandle}?view=quick-view`)
@@ -49,13 +102,15 @@ async function handlerClickBtn() {
 
             setTimeout(() => {
                 section1.classList.add('active-popup');
+                document.body.classList.add('look');
+                document.body.style.paddingRight = `${widthScroll}px`;
             }, 30)
 
-            handelrQuickView();
+            handlerQuickView();
         });
 
+    // When clicking on these classes, close the pop-up and remove them from the layout.
     const closePopup = document.querySelectorAll('.js-close');
-    const contentPopup = document.querySelector('.quick-view__content');
 
     if (closePopup.length >= 1) {
         closePopup.forEach(close => {
@@ -64,6 +119,9 @@ async function handlerClickBtn() {
 
                 if (section.classList.contains('active-popup')) {
                     section.classList.remove('active-popup');
+                    document.body.classList.remove('look');
+                    document.body.style.paddingRight = `0px`;
+
                     setTimeout(() => {
                         section.remove();
                     }, 1000);
@@ -72,5 +130,26 @@ async function handlerClickBtn() {
         });
     }
 
+    // When clicking on the content so that the popup does not close.
+    const contentPopup = document.querySelector('.quick-view__content');
     contentPopup.addEventListener('click', (e) => e.stopPropagation());
+
+    // When adapting, we move the blocks so that it is as per the design.
+    function handlerFlipBlocksOver(media) {
+        const innerContent = document.querySelector('.quick-view__inner');
+
+        if (innerContent) {
+            const boxInfo = innerContent.querySelector('.quick-view__info-box');
+            const boxTitle = innerContent.querySelector('.quick-view__info-title-box');
+
+            if (media.matches) {
+                innerContent.insertBefore(boxTitle, innerContent.firstChild);
+            } else {
+                boxInfo.insertBefore(boxTitle, boxInfo.firstChild);
+            }
+        }
+
+    }
+    handlerFlipBlocksOver(mql);
+    mql.addEventListener("change", handlerFlipBlocksOver);
 }
