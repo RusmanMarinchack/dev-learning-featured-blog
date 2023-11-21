@@ -2,6 +2,16 @@ document.addEventListener('DOMContentLoaded', handlerQuickView);
 // We cut out the width of the scroll in order to add it for the body and there were no snags when revealing the popup.
 const widthScroll = window.innerWidth - document.documentElement.offsetWidth;
 function handlerQuickView() {
+    // Function for formatting the currency into the desired format.
+    function formatCurrency(price) {
+
+        const result = new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }).format(price / 100);
+
+        return result;
+    }
     // Slider swiper.
     const quickViewSlider = new Swiper('.quick-view__swiper', {
         slidesPerView: 1,
@@ -17,7 +27,7 @@ function handlerQuickView() {
                 spaceBetween: 8
             }
         }
-    })
+    });
 
     // When you click on the button, we call a function that opens a pop-up with the product.
     let btnsOpenQuickView = document.querySelectorAll('.trend-products__popup-link');
@@ -75,10 +85,74 @@ function handlerQuickView() {
         }
     }
     handlerCount();
+
+
+    // We get json of the product.
+    function handlerJsonProduct() {
+        const productJson = document.getElementById('product-json');
+
+        if (productJson) {
+            const productsObject = JSON.parse(productJson.innerHTML);
+            const variantsItem = document.querySelectorAll('.quick-view__info-variant-item');
+            const price = document.querySelector('.quick-view__info-price');
+            const variantsObject = productsObject.variants;
+
+            variantsItem.forEach(item => {
+                const btnRadio = item.querySelector('.quick-view__info-variant-input');
+
+                btnRadio.addEventListener('change', handlerRadioBtn);
+            });
+
+            // A function to process product options and change content depending on the selected options.
+            function handlerRadioBtn() {
+                let listOption = [];
+                let option;
+
+                variantsItem.forEach(radio => {
+                    const btnRadio = radio.querySelector('.quick-view__info-variant-input');
+
+                    if (btnRadio.checked) {
+                        listOption.push(btnRadio.value);
+
+                        option = listOption.join(' / ');
+
+                        for (let i = 0; i < variantsObject.length; i++) {
+                            if (variantsObject[i].option1 === btnRadio.value || variantsObject[i].option2 === btnRadio.value && listOption.length < 2) {
+                                price.innerHTML = `₴${formatCurrency(variantsObject[i].price)}`;
+                                activeBtnAddCart(variantsObject[i].available);
+                                break;
+                            } else if (variantsObject[i].public_title === option) {
+                                price.innerHTML = `₴${formatCurrency(variantsObject[i].price)}`;
+                                activeBtnAddCart(variantsObject[i].available);
+                            }
+                        }
+                    }
+                });
+            }
+
+            // The function to check whether the product is active and dependencies from this, we make an active button.
+            function activeBtnAddCart(available) {
+                const btnAddCart = document.querySelector('.quick-view__bottom-btn');
+                const btnActive = btnAddCart.dataset.activeLabel;
+                const btnNotActive = btnAddCart.dataset.notactiveLabel;
+
+                if (available) {
+                    btnAddCart.innerHTML = btnActive;
+                    btnAddCart.classList.remove('not-available');
+                } else {
+                    btnAddCart.innerHTML = btnNotActive;
+                    btnAddCart.classList.add('not-available');
+                }
+
+            }
+        }
+    }
+    handlerJsonProduct();
 }
 
 // A function that opens a popup.
 async function handlerClickBtn() {
+    const parser = new DOMParser();
     const section = document.querySelector('.trend-products');
     const dataHandle = this.dataset.handle;
     const btnsSpots = document.querySelectorAll('.js-btn-plus');
@@ -93,16 +167,17 @@ async function handlerClickBtn() {
             }
         })
         .then(data => {
-            const parser = new DOMParser();
             const doc = parser.parseFromString(data, 'text/html');
             const newPopupContent = doc.querySelector('.quick-view');
 
-            section.append(newPopupContent);
+            document.body.append(newPopupContent);
 
-            const section1 = document.querySelector('.quick-view');
+            const newSection = document.querySelector('.quick-view');
+            const newSectionPopupContent = newSection.querySelector('.quick-view__content');
 
             setTimeout(() => {
-                section1.classList.add('active-popup');
+                newSection.classList.add('active-popup');
+                newSectionPopupContent.classList.add('active-popup');
                 document.body.classList.add('look');
                 document.body.style.paddingRight = `${widthScroll}px`;
             }, 30)
@@ -116,15 +191,17 @@ async function handlerClickBtn() {
     if (closePopup.length >= 1) {
         closePopup.forEach(close => {
             close.addEventListener('click', function () {
-                let section = document.querySelector('.quick-view');
+                const sectionPopup = document.querySelector('.quick-view');
+                const newSectionPopupContent = sectionPopup.querySelector('.quick-view__content');
 
-                if (section.classList.contains('active-popup')) {
-                    section.classList.remove('active-popup');
+                if (sectionPopup.classList.contains('active-popup')) {
+                    sectionPopup.classList.remove('active-popup');
+                    newSectionPopupContent.classList.remove('active-popup');
                     document.body.classList.remove('look');
                     document.body.style.paddingRight = `0px`;
 
                     setTimeout(() => {
-                        section.remove();
+                        sectionPopup.remove();
                     }, 1000);
 
                     btnsSpots.forEach(spot => {
