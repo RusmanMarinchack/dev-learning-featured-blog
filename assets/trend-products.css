@@ -109,6 +109,7 @@
 }
 .trend-products .trend-products__popup-box-img {
     display: block;
+    min-width: 64px;
     width: 64px;
     height: 64px;
     position: relative;

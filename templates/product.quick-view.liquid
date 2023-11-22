@@ -69,14 +69,35 @@
                 <div class="quick-view__info-variant-box">
 
                     {%- for option in product.options_with_values -%}
+
                         <div class="quick-view__info-variant-inner">
                             <h5 class="quick-view__info-variant-name">{{- option.name -}}</h5>
                             <div class="quick-view__info-variant-wrap">
 
+                                {% comment %}We go through the options and, depending on whether the options are active, we add them to the change and display the class for the options.{% endcomment %}
                                 {%- for value in option.values -%}
+                                    {% assign option_disabled = true %}
+
+                                    {% for variant in product.variants %}
+                                        {% for option in variant.options %}
+                                                {% if option == value and variant.available %}
+                                                    {% assign option_disabled = false %}
+                                                {% endif %}
+                                            {% endfor %}
+                                    {% endfor %}
+
                                     <div class="quick-view__info-variant-item">
-                                        <input id="{{ option.name }}-{{ forloop.index }}" class="quick-view__info-variant-input" name="{{- option.name -}}" type="radio" value="{{- value -}}">
-                                        <label for="{{ option.name }}-{{ forloop.index }}" class="quick-view__info-variant-label">{{- value -}}</label>
+                                        <input
+                                                id="{{ option.name }}-{{ forloop.index }}"
+                                                class="quick-view__info-variant-input{% if option_disabled %} disabled{% endif %}"
+                                                name="{{- option.name -}}"
+                                                type="radio"
+                                                value="{{- value -}}"
+                                                {% if option.selected_value == value %}
+                                                    checked
+                                                {% endif %}
+                                        >
+                                        <label for="{{ option.name }}-{{ forloop.index }}" class="quick-view__info-variant-label {% if option_disabled %}disabled{% endif %}">{{- value -}}</label>
                                     </div>
                                 {%- endfor -%}
 

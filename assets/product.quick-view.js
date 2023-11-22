@@ -100,11 +100,12 @@ function handlerQuickView() {
             variantsItem.forEach(item => {
                 const btnRadio = item.querySelector('.quick-view__info-variant-input');
 
-                btnRadio.addEventListener('change', handlerRadioBtn);
+                 btnRadio.addEventListener('change', handlerRadioBtn);
             });
 
             // A function to process product options and change content depending on the selected options.
             function handlerRadioBtn() {
+                const radioValue = this.value;
                 let listOption = [];
                 let option;
 
@@ -112,23 +113,33 @@ function handlerQuickView() {
                     const btnRadio = radio.querySelector('.quick-view__info-variant-input');
 
                     if (btnRadio.checked) {
+                        handlerOption()
                         listOption.push(btnRadio.value);
 
                         option = listOption.join(' / ');
 
-                        for (let i = 0; i < variantsObject.length; i++) {
-                            if (variantsObject[i].option1 === btnRadio.value || variantsObject[i].option2 === btnRadio.value && listOption.length < 2) {
-                                price.innerHTML = `₴${formatCurrency(variantsObject[i].price)}`;
-                                activeBtnAddCart(variantsObject[i].available);
-                                break;
-                            } else if (variantsObject[i].public_title === option) {
-                                price.innerHTML = `₴${formatCurrency(variantsObject[i].price)}`;
-                                activeBtnAddCart(variantsObject[i].available);
+                        variantsObject.forEach(variant => {
+                            if (radioValue === variant.option1) {
+                                if (btnRadio.value === variant.option2) {
+                                    btnRadio.checked = true;
+                                }
                             }
-                        }
+
+                            if (variant.public_title === option) {
+                                price.innerHTML = `₴${formatCurrency(variant.price)}`;
+                                activeBtnAddCart(variant.available);
+
+                                // If there is an image, the slider slides to the image.
+                                if (variant.featured_image !== null) {
+                                    const positionImageSlider = variant.featured_image.position - 1;
+                                    quickViewSlider.slideTo(positionImageSlider);
+                                }
+                            }
+                        });
                     }
                 });
             }
+            handlerRadioBtn();
 
             // The function to check whether the product is active and dependencies from this, we make an active button.
             function activeBtnAddCart(available) {

@@ -198,6 +198,11 @@ body.look {
     cursor: pointer;
     transition: border 0.3s;
 }
+.quick-view .quick-view__info-variant-label.disabled {
+    text-decoration: line-through;
+    color: #aaaaaa;
+    border-color: #aaaaaa;
+}
 .quick-view .quick-view__item-count-box {
     display: inline-flex;
     align-items: center;
