@@ -1,0 +1,110 @@
+{{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+{{ 'product-banner.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'product-banner.js' | asset_url }}" defer="defer"></script>
+
+<section class="product-banner">
+    <div class="product-banner__container">
+      <div class="product-banner-bg-swiper swiper js-bg-swiper">
+        <!-- Additional required wrapper -->
+        <div class="product-banner-bg-swiper-wrapper swiper-wrapper">
+          <!-- Slides -->
+          <div class="product-banner-bg-swiper-slide swiper-slide">Slide 1</div>
+          <div class="product-banner-bg-swiper-slide swiper-slide">Slide 2</div>
+          <div class="product-banner-bg-swiper-slide swiper-slide">Slide 3</div>
+        </div>
+      </div>
+      <div class="product-banner__wrapper">
+        product-banner
+      </div>
+    </div>
+</section>
+
+{% schema %}
+    {
+      "name": "Product banner",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "All Sales Are Final."
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Bar Necklaces"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Keep your mantra close to your heart as your daily reminder, affirmation, and inspiration with necklaces from MantraBand. Sterling silver and 18K gold dipped."
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "label_color",
+          "label": "Label color",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "color_heading",
+          "label": "Color heading",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "color_text",
+          "label": "Color text",
+          "default": "#000000"
+        },
+        {
+          "type": "color_background",
+          "id": "overlay",
+          "label": "Overlay",
+          "default": "linear-gradient(#ffffff, #000000)"
+        }
+
+      ],
+      "blocks": [
+          {
+            "type": "product",
+            "name": "Product",
+            "settings": [
+              {
+                "type": "product",
+                "id": "product",
+                "label": "Product"
+              },
+              {
+                "type": "video",
+                "id": "video",
+                "label": "HTML video"
+              },
+              {
+                "type": "image_picker",
+                "id": "image_desktop",
+                "label": "Image desktop"
+              },
+              {
+                "type": "image_picker",
+                "id": "image_mobile",
+                "label": "Image mobile"
+              }
+            ]
+          }
+      ],
+      "presets": [
+        {
+          "name": "Product banner"
+        }
+      ]
+    }
+{% endschema %}
