@@ -113,7 +113,6 @@ function handlerQuickView() {
                     const btnRadio = radio.querySelector('.quick-view__info-variant-input');
 
                     if (btnRadio.checked) {
-                        handlerOption()
                         listOption.push(btnRadio.value);
 
                         option = listOption.join(' / ');
