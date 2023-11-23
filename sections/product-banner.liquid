@@ -4,20 +4,88 @@
 <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'product-banner.js' | asset_url }}" defer="defer"></script>
 
+{% assign section_settings = section.settings %}
+
 <section class="product-banner">
     <div class="product-banner__container">
-      <div class="product-banner-bg-swiper swiper js-bg-swiper">
-        <!-- Additional required wrapper -->
-        <div class="product-banner-bg-swiper-wrapper swiper-wrapper">
-          <!-- Slides -->
-          <div class="product-banner-bg-swiper-slide swiper-slide">Slide 1</div>
-          <div class="product-banner-bg-swiper-slide swiper-slide">Slide 2</div>
-          <div class="product-banner-bg-swiper-slide swiper-slide">Slide 3</div>
+      <div class="product-banner__bg-swiper swiper js-bg-swiper">
+        <div class="product-banner__bg-swiper-wrapper swiper-wrapper">
+
+          {%- for block in section.blocks -%}
+            {% assign block_settings = block.settings %}
+            {% assign image_desktop = block_settings.image_desktop %}
+            {% assign image_mobile = block_settings.image_mobile | default: image_desktop %}
+
+            <div class="product-banner__bg-swiper-slide swiper-slide">
+
+              {%- if block_settings.video -%}
+                {{ block_settings.video | video_tag: class: "product-banner__bg-video", loop: true, muted: true }}
+              {%- elsif block_settings.image_desktop -%}
+                <picture>
+                  <source media="(max-width: 991.98px)" srcset="{{- image_mobile | image_url: width: 959 -}} 1x, {{- image_mobile | image_url: width: 1918 -}} 2x">
+                  <img class="product-banner__bg-image" src="{{- image_desktop | image_url: width: 1648 -}}" srcset="{{- image_desktop | image_url: width: 1648 -}} 1x, {{- image_desktop | image_url: width: 3296 -}} 2x" alt="{{- image_desktop.alt -}}">
+                </picture>
+              {% else %}
+                {{ 'image' | placeholder_svg_tag: 'product-banner__bg-image' }}
+              {%- endif -%}
+
+            </div>
+          {%- endfor -%}
+
         </div>
       </div>
       <div class="product-banner__wrapper">
-        product-banner
+        <div class="product-banner__text-box">
+          <div class="product-banner__text-label" style="color: {{ section_settings.label_color }};">{{ section_settings.label }}</div>
+          <h1 class="product-banner__text-title" style="color: {{ section_settings.heading_color }};">{{ section_settings.heading }}</h1>
+          <div class="product-banner__subtext" style="color: {{ section_settings.text_color }};">{{ section_settings.text }}</div>
+        </div>
+        <div class="product-banner__product-slider-box">
+          <div class="product-banner__product-swiper swiper js-product-swiper">
+            <div class="product-banner__product-swiper-wrapper swiper-wrapper">
+
+              {% for block in section.blocks %}
+                {% assign block_settings = block.settings %}
+                {% assign block_product = block_settings.product %}
+
+                <div class="product-banner__product-swiper-slide swiper-slide">
+                  <div class="product-banner__product-box-image">
+                    <a href="{{ block_product.url }}" class="product-banner__product-image-link">
+
+                      {%- if block_product.featured_image -%}
+                        <picture>
+                          <img class="product-banner__product-image" src="{{ block_product.featured_image | image_url }}" alt="{{ block_product.featured_image.alt }}">
+                        </picture>
+                      {%- else -%}
+                        {{ 'image' | placeholder_svg_tag: 'product-banner__product-image' }}
+                      {%- endif -%}
+
+                    </a>
+                  </div>
+                  <div class="product-banner__product-description">
+                    <h4 class="product-banner__product-title">
+                      <a href="{{- block_product.url -}}" class="product-banner__product-title-link">{{- block_product.title -}}</a>
+                    </h4>
+                    <div class="product-banner__product-prices-box">
+                      <div class="product-banner__product-price{% if block_product.compare_at_price %} new{% endif %}">{{- block_product.price | money -}}</div>
+                      <div class="product-banner__product-price-old">{{- block_product.compare_at_price | money -}}</div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+
+            </div>
+            <div class="product-banner__product-pagination swiper-pagination"></div>
+          </div>
+          <div class="product-banner__product-button-prev swiper-button-prev">
+            <img class="product-banner__product-button-icon" src="{{ 'arrow-left.svg' | asset_url }}" alt="Arrow">
+          </div>
+          <div class="product-banner__product-button-next swiper-button-next">
+            <img class="product-banner__product-button-icon" src="{{ 'arrow-right.svg' | asset_url }}" alt="Arrow">
+          </div>
+        </div>
       </div>
+      <div class="product-banner__overlay" style="background: {{ section_settings.overlay }};"></div>
     </div>
 </section>
 
@@ -51,25 +119,25 @@
           "type": "color",
           "id": "label_color",
           "label": "Label color",
-          "default": "#000000"
+          "default": "#ffffff"
         },
         {
           "type": "color",
-          "id": "color_heading",
+          "id": "heading_color",
           "label": "Color heading",
-          "default": "#000000"
+          "default": "#ffffff"
         },
         {
           "type": "color",
-          "id": "color_text",
+          "id": "text_color",
           "label": "Color text",
-          "default": "#000000"
+          "default": "#ffffff"
         },
         {
           "type": "color_background",
           "id": "overlay",
           "label": "Overlay",
-          "default": "linear-gradient(#ffffff, #000000)"
+          "default": "linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(0, 0, 0, 1) 100%)"
         }
 
       ],
