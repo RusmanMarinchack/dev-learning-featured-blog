@@ -54,7 +54,7 @@
 
                       {%- if block_product.featured_image -%}
                         <picture>
-                          <img class="product-banner__product-image" src="{{ block_product.featured_image | image_url }}" alt="{{ block_product.featured_image.alt }}">
+                          <img class="product-banner__product-image" src="{{ block_product.featured_image | image_url: width: 398 }}" srcset="{{ block_product.featured_image | image_url: width: 398 }} 1x, {{ block_product.featured_image | image_url: width: 796 }} 2x" alt="{{ block_product.featured_image.alt }}">
                         </picture>
                       {%- else -%}
                         {{ 'image' | placeholder_svg_tag: 'product-banner__product-image' }}
