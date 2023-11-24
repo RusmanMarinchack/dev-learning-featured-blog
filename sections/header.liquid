@@ -12,6 +12,10 @@
   <noscript>{{ 'component-mega-menu.css' | asset_url | stylesheet_tag }}</noscript>
 {%- endif -%}
 
+
+<link rel="stylesheet" href="{{ 'predictive-search-1.css' | asset_url }}" media="print" onload="this.media='all'">
+
+
 {%- if settings.cart_type == "drawer" -%}
   {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
   {{ 'component-cart.css' | asset_url | stylesheet_tag }}
@@ -295,6 +299,11 @@
           </localization-form>
         {%- endif -%}
       </div>
+
+      <button class="predictive-search__btn">
+        <img class="predictive-search__btn-icon" src="{{ 'search.svg' | asset_url }}" alt="Icon Search">
+      </button>
+
       {% render 'header-search', input_id: 'Search-In-Modal' %}
 
       {%- if shop.customer_accounts_enabled -%}
