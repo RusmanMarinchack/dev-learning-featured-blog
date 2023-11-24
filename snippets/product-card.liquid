@@ -1,17 +1,32 @@
 {{ 'product-card.css' | asset_url | stylesheet_tag }}
 
-<div class="product-card">
-        {{ card-image }}
-        {%- if card-image -%}
-                <picture>
-                        <source media="(max-width: 991.98px)" srcset="{{ card-image | image_url: width: 959 }} 1x, {{ card-image | image_url: width: 1918 }} 2x">
-                        <img class="product-card__img" src="{{ card-image | image_url: width: 832  }}" alt="{%- if card-image -%}{{ card-image.alt }}{%- else -%}image{%- endif -%}">
-                </picture>
-        {%- else -%}
-                <picture>
-                        <source media="(max-width: 991.98px)" srcset="{{ 'def.png' | asset_img_url: '959x' }} 1x, {{ 'def.png' | asset_img_url: '1918x' }} 2x">
-                        <img class="product-card__img" src="{{ 'def.png' | asset_img_url: '832x' }}" alt="Image">
-                </picture>
-        {%- endif -%}
+<div class="product-card__slider-item swiper-slide">
+        <div class="product-card__slide-box-img">
+                <a href="{{ block_product.url }}" class="product-card__slide-link">
 
+                        {%- if block_product.featured_image -%}
+                                <picture>
+                                        <source media="(max-width: 991.98px)" srcset="{{ block_product.featured_image | image_url: width: 398 }} 1x, {{ block_product.featured_image | image_url: width: 796 }} 2x">
+                                        <img class="product-card__slide-img" src="{{ block_product.featured_image | image_url: width: 396 }}" alt="{%- if block_product.featured_image.alt -%}{{ block_product.featured_image.alt }}{%- else -%}Image{%- endif -%}">
+                                </picture>
+                        {%- else -%}
+                                <picture>
+                                        <source media="(max-width: 991.98px)" srcset="{{ 'def.png' | asset_img_url: width: 398 }} 1x, {{ 'def.png' | asset_img_url: width: 796 }} 2x">
+                                        <img class="product-card__slide-img" src="{{ 'def.png' | asset_img_url: width: 396 }}" alt="Image">
+                                </picture>
+                        {%- endif -%}
+
+                </a>
+        </div>
+        <div class="product-card__slide-description">
+                <a class="product-card__slide-name" href="{{ block_product.url }}">{{ block_product.title }}</a>
+                <div class="product-card__slide-prices">
+                        <div class="product-card__price-new">{{ block_product.price | money }}</div>
+
+                        {%- if block_product.compare_at_price -%}
+                                <div class="product-card__price-old">{{ block_product.compare_at_price | money }}</div>
+                        {%- endif -%}
+
+                </div>
+        </div>
 </div>

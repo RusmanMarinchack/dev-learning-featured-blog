@@ -4,60 +4,48 @@
 <script src="{{ 'swiper-bundle.min.js' | asset_url }}"></script>
 <script src="{{ 'shop-the-look.js' | asset_url }}"></script>
 
-{% assign indexSlide = 0 %}
+{% assign section_images = section.settings.image %}
 
 <section class="shop-look" id="{{ section.id }}">
     <div class="shop-look__container">
         <div class="shop-look__wrapper">
             <div class="shop-look__box-image">
+
                 {%- for block in section.blocks -%}
-                    <button class="shop-look__spot" data-slide-index="{{ indexSlide }}" style="top: {{ block.settings.spot_vertical_position }}%; left: {{ block.settings.spot_horyzontal_position }}%;">
+                    <button class="shop-look__spot" data-slide-index="{{ forloop.index0 }}" style="top: {{ block.settings.spot_vertical_position }}%; left: {{ block.settings.spot_horyzontal_position }}%;">
                         <img src="{{ "plus.svg" | asset_url }}" alt="Plus" class="shop-look__spot-img">
                     </button>
-
-                    {% assign indexSlide = indexSlide | plus: 1 %}
                 {% endfor %}
 
-                {%- render 'product-card', card-image: section.settings.image -%}
+                <div class="shop-look__image-wrap">
+                    {%- if section_images -%}
+                        <picture>
+                            <source media="(max-width: 991.98px)" srcset="{{ section_images | image_url: width: 959 }} 1x, {{ section_images | image_url: width: 1918 }} 2x">
+                            <img class="shop-look__image" src="{{ section_images | image_url: width: 832  }}" alt="{{ section_images.alt }}">
+                        </picture>
+                    {%- else -%}
+                        <picture>
+                            <source media="(max-width: 991.98px)" srcset="{{ 'def.png' | asset_img_url: '959x' }} 1x, {{ 'def.png' | asset_img_url: '1918x' }} 2x">
+                            <img class="shop-look__image" src="{{ 'def.png' | asset_img_url: '832x' }}" alt="Image">
+                        </picture>
+                    {%- endif -%}
+
+                </div>
+
             </div>
             <div class="shop-look__box-slider">
+
                 {%- if section.settings.heading -%}
                     <h3 class="shop-look__title">{{ section.settings.heading }}</h3>
                 {%- endif -%}
+
                 <div class="shop-look__slider swiper js-shop-look-slider">
                     <div class="shop-look__slider-wrapper swiper-wrapper">
-                        {%- for block in section.blocks -%}
-                            {%- assign block_product = block.settings.product -%}
 
-                            <div class="shop-look__slider-item swiper-slide">
-                                <div class="shop-look__slide-box-img">
-                                    <a href="{{ block_product.url }}" class="shop-look__slide-link">
-                                        {%- if block_product.featured_image -%}
-                                            <picture>
-                                                <source media="(max-width: 991.98px)" srcset="{{ block_product.featured_image | image_url: width: 398 }} 1x, {{ block_product.featured_image | image_url: width: 796 }} 2x">
-                                                <img class="shop-look__slide-img" src="{{ block_product.featured_image | image_url: width: 396 }}" alt="{%- if block_product.featured_image.alt -%}{{ block_product.featured_image.alt }}{%- else -%}Image{%- endif -%}">
-                                            </picture>
-                                        {%- else -%}
-                                            <picture>
-                                                <source media="(max-width: 991.98px)" srcset="{{ 'def.png' | asset_img_url: width: 398 }} 1x, {{ 'def.png' | asset_img_url: width: 796 }} 2x">
-                                                <img class="shop-look__slide-img" src="{{ 'def.png' | asset_img_url: width: 396 }}" alt="Image">
-                                            </picture>
-                                        {%- endif -%}
-                                    </a>
-                                </div>
-                                <div class="shop-look__slide-description">
-                                    <a class="shop-look__slide-name" href="{{ block_product.url }}">{{ block_product.title }}</a>
-                                    <div class="shop-look__slide-prices">
-                                        {%- if block_product.price -%}
-                                            <div class="shop-look__price-new">{{ block_product.price | money }}</div>
-                                        {%- endif -%}
-                                        {%- if block_product.compare_at_price -%}
-                                            <div class="shop-look__price-old">{{ block_product.compare_at_price | money }}</div>
-                                        {%- endif -%}
-                                    </div>
-                                </div>
-                            </div>
+                        {%- for block in section.blocks -%}
+                            {%- render 'product-card', block_product: block.settings.product -%}
                         {%- endfor -%}
+
                     </div>
                 </div>
                 <div class="shop-look__swiper-pagination swiper-pagination"></div>
