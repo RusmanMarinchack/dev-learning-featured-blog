@@ -38,40 +38,18 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
 
                             shopLookSlider.slideTo(slideIndex);
-                        })
-                    })
+                        });
+                    });
 
                     // remove the class '.spot-active' from all elements in '.shop-look__spot'.
                     function removeActiveClass() {
                         spots.forEach(spot => {
-                            spot.classList.remove('spot-active')
-                        })
+                            spot.classList.remove('spot-active');
+                        });
                     }
                 }
             }
-            handlerSpotActiveSlide()
-
-            // We transfer the element to the desired block when adaptive.
-            const mql = window.matchMedia("(max-width: 991.98px)")
-            function processedForTransferAnotherSection(media) {
-                const shopLookContainer = document.querySelector(`#${sectionId} .shop-look__container`)
-
-                if (shopLookContainer) {
-                    const shopLookBoxSlider = shopLookContainer.querySelector('.shop-look__box-slider')
-                    const title = shopLookContainer.querySelector('.shop-look__title')
-                    const shopLookWrapper = shopLookContainer.querySelector('.shop-look__wrapper')
-                    const shopLookSlider = shopLookContainer.querySelector('.shop-look__slider')
-
-                    if (media.matches) {
-                        shopLookContainer.insertBefore(title, shopLookWrapper)
-                    } else {
-                        shopLookBoxSlider.insertBefore(title, shopLookSlider)
-                    }
-                }
-            }
-
-            processedForTransferAnotherSection(mql)
-            mql.addEventListener('change', processedForTransferAnotherSection)
-        })
+            handlerSpotActiveSlide();
+        });
     }
-})
+});

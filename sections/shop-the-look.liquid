@@ -9,6 +9,11 @@
 <section class="shop-look" id="{{ section.id }}">
     <div class="shop-look__container">
         <div class="shop-look__wrapper">
+
+            {%- if section.settings.heading -%}
+                <h3 class="shop-look__title mob">{{ section.settings.heading }}</h3>
+            {%- endif -%}
+
             <div class="shop-look__box-image">
 
                 {%- for block in section.blocks -%}

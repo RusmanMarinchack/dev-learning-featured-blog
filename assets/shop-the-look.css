@@ -16,6 +16,9 @@
     font-weight: 500;
     line-height: 121%;
 }
+.shop-look .shop-look__title.mob {
+    display: none;
+}
 .shop-look .shop-look__box-image {
     position: relative;
     width: calc(50% - 8px);
@@ -145,8 +148,12 @@
         flex-direction: column;
     }
     .shop-look .shop-look__title {
+        display: none;
         font-size: 28px;
         margin-bottom: 24px;
+    }
+    .shop-look .shop-look__title.mob {
+        display: block;
     }
     .shop-look .shop-look__box-image {
         width: 100%;
@@ -165,6 +172,7 @@
         display: none;
     }
     .shop-look .shop-look__box-slider {
+        max-width: 600px;
         width: 100%;
     }
     .shop-look .shop-look__slide-prices {
