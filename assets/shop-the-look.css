@@ -164,6 +164,9 @@
     .shop-look .shop-look__swiper-button-prev {
         display: none;
     }
+    .shop-look .shop-look__box-slider {
+        width: 100%;
+    }
     .shop-look .shop-look__slide-prices {
         font-size: 14px;
     }
