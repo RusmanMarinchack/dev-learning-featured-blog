@@ -3,7 +3,7 @@
 <script src="{{ "newsletter-popup.js" | asset_url }}" defer="defer"></script>
 
 {% assign image_desktop = settings.image_desktop %}
-{% assign image_mobile = settings.image_mobile | image_desktop %}
+{% assign image_mobile = settings.image_mobile | default: image_desktop %}
 
 {%- if settings.enable -%}
     <div class="newsletter-popup shadow js-close">
@@ -14,7 +14,7 @@
 
             {%- if image_desktop -%}
                 <div class="newsletter-popup__box-image">
-                    <picture>
+                    <picture class="newsletter-popup__picture-container">
                         <source media="(max-width: 991.98px)" srcset="{{ image_mobile | image_url: width: 329 }} 1x, {{ image_mobile | image_url: width: 658 }} 2x">
                         <source media="(max-width: 1279.98px)" srcset="{{ image_desktop | image_url: width: 420 }} 1x, {{ image_desktop | image_url: width: 840 }} 2x">
                         <img src="{{ image_desktop | image_url: width: 504 }}" srcset="{{ image_desktop | image_url: width: 504 }} 1x, {{ image_desktop | image_url: width: 1008 }} 2x" alt="{{ image_desktop.alt }}" class="newsletter-popup__image">
@@ -40,8 +40,8 @@
                         {%- else -%}
 
                             <div class="newsletter-popup__form-email">
-                                <label class="newsletter-popup__form-label" for="email">{{- settings.input_label -}}</label>
-                                <input class="newsletter-popup__form-input" type="email" name="contact[email]" placeholder="{{- settings.input_placeholder -}}" />
+                                <label class="newsletter-popup__form-label" for="input-email">{{- settings.input_label -}}</label>
+                                <input class="newsletter-popup__form-input" id="input-email" type="email" name="contact[email]" placeholder="{{- settings.input_placeholder -}}" />
                                 <ul class="newsletter-popup__form-list-error">
 
                                     {%- for error in form.errors -%}
@@ -72,17 +72,17 @@
                         <div class="newsletter-popup__box-social">
                             <ul class="newsletter-popup__social-list">
                                 <li class="newsletter-popup__social-item">
-                                    <a href="#" class="newsletter-popup__social-link">
+                                    <a href="#" class="newsletter-popup__social-link" target="_blank">
                                         <img class="newsletter-popup__social-image" src="{{- 'facebook.svg' | asset_url -}}" alt="Icon">
                                     </a>
                                 </li>
                                 <li class="newsletter-popup__social-item">
-                                    <a href="#" class="newsletter-popup__social-link">
+                                    <a href="#" class="newsletter-popup__social-link" target="_blank">
                                         <img class="newsletter-popup__social-image" src="{{- 'instagram.svg' | asset_url -}}" alt="Icon">
                                     </a>
                                 </li>
                                 <li class="newsletter-popup__social-item">
-                                    <a href="#" class="newsletter-popup__social-link">
+                                    <a href="#" class="newsletter-popup__social-link" target="_blank">
                                         <img class="newsletter-popup__social-image" src="{{- 'youtube.svg' | asset_url -}}" alt="Icon">
                                     </a>
                                 </li>

@@ -64,7 +64,7 @@
     border-radius: 16px;
     overflow: hidden;
 }
-.newsletter-popup .newsletter-popup__box-image picture {
+.newsletter-popup .newsletter-popup__picture-container {
     display: block;
     padding-bottom: 100%;
 }
@@ -164,6 +164,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 20px;
     list-style: none;
     padding: 0;
@@ -213,7 +214,7 @@
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
     }
-    .newsletter-popup .newsletter-popup__box-image picture {
+    .newsletter-popup .newsletter-popup__picture-container {
         padding-bottom: 72%;
     }
     .newsletter-popup .newsletter-popup__close {
