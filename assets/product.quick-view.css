@@ -134,6 +134,9 @@ body.look {
     width: 50%;
     padding: 24px 32px;
 }
+.quick-view .quick-view__info-title-box.mob {
+    display: none;
+}
 .quick-view .quick-view__info-title {
     color: #000;
     font-size: 28px;
@@ -328,6 +331,12 @@ body.look {
     .quick-view .quick-view__info-title {
         font-size: 22px;
         margin-bottom: 8px;
+    }
+    .quick-view .quick-view__info-title-box {
+        display: none;
+    }
+    .quick-view .quick-view__info-title-box.mob {
+        display: block;
     }
     .quick-view .quick-view__info-price-box {
         margin-bottom: 16px;

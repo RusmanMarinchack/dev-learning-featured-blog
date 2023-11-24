@@ -12,6 +12,17 @@
             </button>
         </div>
         <div class="quick-view__inner">
+            <div class="quick-view__info-title-box mob">
+                <h2 class="quick-view__info-title">{{- product.title -}}</h2>
+                <div class="quick-view__info-price-box">
+                    <div class="quick-view__info-price {% if old_price %}new{% endif %}">{{- product.price | money -}}</div>
+
+                    {%- if old_price -%}
+                        <div class="quick-view__info-price old">{{- old_price | money }}</div>
+                    {%- endif -%}
+
+                </div>
+            </div>
 
             {% if product.images != empty %}
                 <div class="quick-view__slider-box">
@@ -66,6 +77,7 @@
 
                     </div>
                 </div>
+
                 <div class="quick-view__info-variant-box">
 
                     {%- for option in product.options_with_values -%}

@@ -229,23 +229,4 @@ async function handlerClickBtn() {
     // When clicking on the content so that the popup does not close.
     const contentPopup = document.querySelector('.quick-view__content');
     contentPopup.addEventListener('click', (e) => e.stopPropagation());
-
-    // When adapting, we move the blocks so that it is as per the design.
-    function handlerFlipBlocksOver(media) {
-        const innerContent = document.querySelector('.quick-view__inner');
-
-        if (innerContent) {
-            const boxInfo = innerContent.querySelector('.quick-view__info-box');
-            const boxTitle = innerContent.querySelector('.quick-view__info-title-box');
-
-            if (media.matches) {
-                innerContent.insertBefore(boxTitle, innerContent.firstChild);
-            } else {
-                boxInfo.insertBefore(boxTitle, boxInfo.firstChild);
-            }
-        }
-
-    }
-    handlerFlipBlocksOver(mql);
-    mql.addEventListener("change", handlerFlipBlocksOver);
 }
