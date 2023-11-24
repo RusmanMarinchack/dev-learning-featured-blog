@@ -60,7 +60,7 @@ body.look {
 }
 .quick-view .quick-view__top {
     text-align: right;
-    margin-bottom: 16px;
+    margin-bottom: 6px;
 }
 .quick-view .quick-view__top-close {
     display: inline-block;
@@ -76,7 +76,7 @@ body.look {
     justify-content: center;
 }
 .quick-view .quick-view__slider-box {
-    width: 50%;
+    width: 48%;
 }
 .quick-view .quick-view__swiper {
     margin-bottom: 16px;
@@ -117,6 +117,12 @@ body.look {
     height: 100%;
     object-fit: cover;
 }
+.quick-view .swiper-button-prev {
+    left: 18px;
+}
+.quick-view .swiper-button-next {
+    right: 18px;
+}
 .quick-view .swiper-button-next,
 .quick-view .swiper-button-prev {
     width: 40px;
@@ -130,8 +136,12 @@ body.look {
 .quick-view .swiper-button-prev:after {
     display: none;
 }
+.quick-view .quick-view__swiper-button-icon {
+    width: 12px;
+    height: 12px;
+}
 .quick-view .quick-view__info-box {
-    width: 50%;
+    width: 56%;
     padding: 24px 32px;
 }
 .quick-view .quick-view__info-title-box.mob {
@@ -209,7 +219,7 @@ body.look {
 .quick-view .quick-view__item-count-box {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     padding: 6px;
     border-radius: 68px;
     background-color: #F6F6F6;
@@ -220,8 +230,8 @@ body.look {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     border: 1px solid #E9E9E9;
     background: #FFF;
@@ -237,6 +247,7 @@ body.look {
 }
 .quick-view .quick-view__item-count {
     width: 32px;
+    font-size: 16px;
     background: transparent;
     border: none;
     text-align: center;
