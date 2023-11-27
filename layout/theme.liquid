@@ -252,12 +252,12 @@
     {%- endif -%}
 
     {%- if settings.predictive_search_enabled -%}
-      <link
-        rel="stylesheet"
-        href="{{ 'component-predictive-search.css' | asset_url }}"
-        media="print"
-        onload="this.media='all'"
-      >
+      {% comment %}<link{% endcomment %}
+        {% comment %}rel="stylesheet"{% endcomment %}
+        {% comment %}href="{{ 'component-predictive-search.css' | asset_url }}"{% endcomment %}
+        {% comment %}media="print"{% endcomment %}
+        {% comment %}onload="this.media='all'"{% endcomment %}
+      {% comment %}>{% endcomment %}
     {%- endif -%}
 
     <script>
@@ -333,7 +333,7 @@
     </script>
 
     {%- if settings.predictive_search_enabled -%}
-      <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+      {% comment %}<script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>{% endcomment %}
     {%- endif -%}
   </body>
 </html>

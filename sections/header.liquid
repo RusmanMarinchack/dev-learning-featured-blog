@@ -118,7 +118,7 @@
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
+{% comment %}<script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>{% endcomment %}
 {%- if settings.cart_type == "drawer" -%}
   <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
@@ -300,8 +300,8 @@
         {%- endif -%}
       </div>
 
-      <button class="predictive-search__btn">
-        <img class="predictive-search__btn-icon" src="{{ 'search.svg' | asset_url }}" alt="Icon Search">
+      <button class="predictive-search1__btn">
+        <img class="predictive-search1__btn-icon" src="{{ 'search.svg' | asset_url }}" alt="Icon Search">
       </button>
 
       {% render 'header-search', input_id: 'Search-In-Modal' %}

@@ -16,11 +16,13 @@ class SearchForm extends HTMLElement {
   }
 
   toggleResetButton() {
-    const resetIsHidden = this.resetButton.classList.contains('hidden');
-    if (this.input.value.length > 0 && resetIsHidden) {
-      this.resetButton.classList.remove('hidden');
-    } else if (this.input.value.length === 0 && !resetIsHidden) {
-      this.resetButton.classList.add('hidden');
+    if (this.resetButton) {
+      const resetIsHidden = this.resetButton.classList.contains('hidden');
+      if (this.input.value.length > 0 && resetIsHidden) {
+        this.resetButton.classList.remove('hidden');
+      } else if (this.input.value.length === 0 && !resetIsHidden) {
+        this.resetButton.classList.add('hidden');
+      }
     }
   }
 

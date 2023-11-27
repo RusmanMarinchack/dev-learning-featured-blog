@@ -2,14 +2,107 @@
 
 <script src="{{ 'predictive-search-1.js' | asset_url }}" defer="defer"></script>
 
-<div class="predictive-search1 shadow">
-    <div class="predictive-search1__content">
+<div class="predictive-search1 js-shadow js-close">
+    <div class="predictive-search1__content js-search-content">
         <div class="predictive-search1__header">
             <div class="predictive-search1__header-title">Search</div>
-            <button class="predictive-search1__btn-close">
+            <button class="predictive-search1__btn-close js-close">
                 <img src="{{ 'X.svg' | asset_url }}" alt="Predictive search close" class="predictive-search__btn-icon">
             </button>
         </div>
-        predictive-search
+        <div class="predictive-search1__box-form">
+
+            <predictive-search>
+                <form class="predictive-search1__form" action="{{ routes.search_url }}" method="get" role="search">
+                    <input
+                            id="predictive-search1-input"
+                            class="predictive-search1__form-input"
+                            type="search"
+                            name="q"
+                            value="{{ search.terms | escape }}"
+                            role="combobox"
+                            aria-expanded="false"
+                            aria-owns="predictive-search-results"
+                            aria-controls="predictive-search-results"
+                            aria-haspopup="listbox"
+                            aria-autocomplete="list"
+                            placeholder="Search"
+                    >
+                    <input name="options[prefix]" type="hidden" value="last">
+                    <div id="predictive-search" tabindex="-1"></div>
+                    <button class="predictive-search1__form-submit" type="submit">
+                        <img class="predictive-search1__form-submit-icon" src="{{ 'search.svg' | asset_url }}" alt="Icon Search">
+                    </button>
+                </form>
+
+                <div class="predictive-search1__box-results js-tabs-result">
+                    {%- if predictive_search.performed -%}
+                        <div class="predictive-search1__results-header js-tabs-header">
+                            <button class="predictive-search1__results-header-btn js-tabs-btn tab-active" data-index-tab="1">Products</button>
+                            <button class="predictive-search1__results-header-btn js-tabs-btn" data-index-tab="2">Articles</button>
+                            <button class="predictive-search1__results-header-btn js-tabs-btn" data-index-tab="3">Pages</button>
+                        </div>
+
+                        {%- if predictive_search.resources.products.size > 0 -%}
+                            <div class="predictive-search1__results-body js-tabs-body js-tabs-body--1">
+                                <ul class="predictive-search1__results-list" role="listbox" aria-labelledby="predictive-search1-products">
+
+                                    {%- for product in predictive_search.resources.products -%}
+                                        {% assign image = product.featured_image %}
+                                        {% assign price_old = product.compare_at_price %}
+
+                                        <li class="predictive-search1__results-item" role="option">
+                                            <div class="predictive-search1__results-box-image">
+                                                <a class="predictive-search1__results-link" href="{{ product.url }}">
+
+                                                    {% if image %}
+                                                        <img class="predictive-search1__results-image" src="{{ image | image_url: width: 120 }}" alt="{{ image.alt }}">
+                                                    {% else %}
+                                                        <img class="predictive-search1__results-image" src="{{ 'def.png' | asset_url: '120x' }}" alt="{{ image.alt }}">
+                                                    {% endif %}
+
+                                                </a>
+                                            </div>
+                                            <div class="predictive-search1__results-description">
+                                                <a class="predictive-search1__results-body-title" href="{{ product.url }}">{{ product.title }}</a>
+                                                <div class="predictive-search1__results-box-prices">
+                                                    <div class="predictive-search1__results-price {% if price_old %}new{% endif %}">{{ product.price | money }}</div>
+
+                                                    {%- if price_old -%}
+                                                        <div class="predictive-search1__results-price-old">{{- price_old | money -}}</div>
+                                                    {%- endif -%}
+
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {%- endfor -%}
+
+                                </ul>
+                            </div>
+                        {%- endif -%}
+
+                        {%- if predictive_search.resources.pages.size > 0 -%}
+                            <div class="predictive-search1__results-body js-tabs-body js-tabs-body--2">
+                                <ul class="predictive-search1__results-list" role="listbox" aria-labelledby="predictive-search1-products">
+
+                                    {%- for page in predictive_search.resources.pages -%}
+                                        <li class="predictive-search1__results-item" role="option">
+                                            <a class="predictive-search1__results-body-title" href="{{ page.url }}">{{ page.title }}</a>
+                                        </li>
+                                    {%- endfor -%}
+
+                                </ul>
+                            </div>
+                        {%- endif -%}
+
+                        <button>
+                                Search for “{{ predictive_search.terms }}”
+                        </button>
+                    {%- endif -%}
+
+                </div>
+            </predictive-search>
+
+        </div>
     </div>
 </div>
