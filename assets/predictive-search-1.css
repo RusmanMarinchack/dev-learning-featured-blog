@@ -260,7 +260,7 @@ body.look {
     padding-bottom: 100%;
 }
 .predictive-search1 .predictive-search1__results-link:hover .predictive-search1__results-image {
-    transform: scale(1.3);
+    transform: scale(1.05);
 }
 .predictive-search1 .predictive-search1__results-image {
     position: absolute;
