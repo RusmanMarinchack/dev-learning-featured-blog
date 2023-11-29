@@ -11,6 +11,7 @@ function handlerSearch() {
         function handlerSearchPopup() {
             headerBtnSearch.addEventListener('click', () => {
                 const shadow = document.querySelector('.js-shadow');
+                const widthScroll = window.innerWidth - document.documentElement.offsetWidth
 
                 if (shadow) {
                     const content = shadow.querySelector('.js-search-content');
@@ -19,12 +20,14 @@ function handlerSearch() {
                     shadow.classList.add('active-search');
                     content.classList.add('active-search');
                     document.body.classList.add('look');
+                    document.body.style.paddingRight = `${widthScroll}px`;
 
                     btnCloses.forEach(close => {
                         close.addEventListener('click', function () {
                             shadow.classList.remove('active-search');
                             content.classList.remove('active-search');
                             document.body.classList.remove('look');
+                            document.body.style.paddingRight = `0px`;
                         });
                     });
 
@@ -39,12 +42,9 @@ function handlerSearch() {
             const boxForm = document.querySelector('.predictive-search1__box-form');
 
             if (boxForm) {
-                const formSearch = document.querySelector('.predictive-search1__form');
                 const inputSearch = document.querySelector('#predictive-search1-input');
-                const wrapperResult = document.querySelector('.js-tabs-result')
 
                 inputSearch.addEventListener('input', async function () {
-                    // wrapperResult.innerHTML = '';
                     // We start the spinner.
                     preloader.classList.add('preloader-active');
                     await handlerFetchGetLayout(this.value);
@@ -55,13 +55,24 @@ function handlerSearch() {
 
         async function handlerFetchGetLayout(searchValue) {
             const content = document.querySelector('.js-search-content');
-            const result = document.querySelector('.js-tabs-result');
-
-            // We set a minimum height for the search content so that the height is not greater than the content.
-            content.style.minHeight = '0';
+            const wrapperResult = document.querySelector('.js-tabs-result');
+            const minHeightContent = 292;
 
             if (searchValue !== '') {
-                await fetch(`/search/suggest?q=${searchValue}&section_id=predictive-search-1`)
+                // We create a shift in which we transfer the index of the active tabu to the work flow.
+                let indexActiveBtn;
+
+                const tabBtns = wrapperResult.querySelectorAll('.js-tabs-btn');
+                tabBtns.forEach((btn, index) => {
+                    // We check whether the button tab is active and get its index.
+                    if (btn.classList.contains('tab-active')) {
+                        indexActiveBtn = index;
+                    }
+                });
+
+                wrapperResult.innerHTML = '';
+
+                await fetch(`/search/suggest?q=${searchValue}&resources[type]=query,product,collection,page,article&section_id=predictive-search-1`)
                     .then((response) => response.text())
                     .then((text) => {
                         // We get the page from the server, convert it page DOM element and get the desired element in the element.
@@ -70,14 +81,7 @@ function handlerSearch() {
                         const messageNoResult = resultsMarkup.querySelector('.predictive-search1__no-result');
 
                         // We change the content of the search result.
-                        result.innerHTML = resultsMarkup.innerHTML;
-
-                        const tabsBtns1 = document.querySelectorAll('.js-tabs-btn');
-                        tabsBtns1.forEach((btn, index) => {
-                            if (btn.classList.contains('tab-active')) {
-                                console.log(btn)
-                            }
-                        });
+                        wrapperResult.innerHTML = resultsMarkup.innerHTML;
 
                         // We hide the spinner.
                         preloader.classList.remove('preloader-active');
@@ -86,30 +90,26 @@ function handlerSearch() {
                         if (!messageNoResult) {
                             content.style.minHeight = '550px';
                         } else {
-                            content.style.minHeight = '300px';
+                            content.style.minHeight = `${minHeightContent}px`;
                         }
 
-                        // const activeBtn = handlerActiveBtn();
-                        // const index = activeBtn !== undefined ? activeBtn : 0;
-
-                        // console.log(index)
-
-                        // Call the function so that the tabs work when the search content is changed.
-                        handlerTabs();
+                        // Call the function so that the tabs work when the search content changes, and pass the index of the active tab to the function.
+                        handlerTabs(indexActiveBtn);
                     })
                     .catch((error) => {
                         console.error(error)
                     });
             } else {
                 // We clear the search result block so that when the search is empty, it returns an empty result block.
-                result.innerHTML = '';
+                wrapperResult.innerHTML = '';
                 // We hide the spinner.
                 preloader.classList.remove('preloader-active');
+                content.style.minHeight = `${minHeightContent}px`;
             }
         }
 
         // Let's make tabs.
-        function handlerTabs() {
+        function handlerTabs(indexBtn = 0) {
             const tabsBox = document.querySelector('.js-tabs-result');
 
             if (tabsBox) {
@@ -120,7 +120,6 @@ function handlerSearch() {
                         btn.addEventListener("click", function () {
                             removeClassActive();
                             this.classList.add('tab-active');
-                            indexBtn = index;
                             handlerTabBtns();
                         });
 
@@ -134,6 +133,10 @@ function handlerSearch() {
                                 }
                             }
                         }
+
+                        // When changing the search field, we remain on the same tab where we were.
+                        const tabBtns = document.querySelectorAll('.js-tabs-btn');
+                        tabBtns[indexBtn].classList.add('tab-active');
 
                         handlerTabBtns();
                     });
@@ -151,9 +154,14 @@ function handlerSearch() {
                     }
                 }
             }
-
-
         }
         handlerTabs();
     }
+
+
+    fetch(`/search/suggest.json?q=c&resources[type]=query,product,collection,page,article`)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data.resources.results)
+        })
 }

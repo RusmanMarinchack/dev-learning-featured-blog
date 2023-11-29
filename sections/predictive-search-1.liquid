@@ -7,7 +7,7 @@
         <div class="predictive-search1__header">
             <div class="predictive-search1__header-title">Search</div>
             <button class="predictive-search1__btn-close js-close">
-                <img src="{{ 'X.svg' | asset_url }}" alt="Predictive search close" class="predictive-search__btn-icon">
+                <img src="{{ 'X.svg' | asset_url }}" alt="Predictive search close" class="predictive-search1__btn-icon">
             </button>
         </div>
         <div class="predictive-search1__box-form">
@@ -51,77 +51,113 @@
                                 <p class="predictive-search1__no-result">No results found</p>
                             {% else %}
                                 <div class="predictive-search1__results-header js-tabs-header">
-                                    <button class="predictive-search1__results-header-btn js-tabs-btn tab-active{% if products_object.size <= 0 or products_object == blank %} no-result{% endif %}" data-index-tab="1">Products</button>
+                                    <button class="predictive-search1__results-header-btn js-tabs-btn{% if products_object.size <= 0 or products_object == blank %} no-result{% endif %}" data-index-tab="1">Products</button>
                                     <button class="predictive-search1__results-header-btn js-tabs-btn{% if articles_object.size <= 0 or articles_object == blank %} no-result{% endif %}" data-index-tab="2">Articles</button>
                                     <button class="predictive-search1__results-header-btn js-tabs-btn{% if pages_object.size <= 0 or pages_object == blank %} no-result{% endif %}" data-index-tab="3">Pages</button>
                                 </div>
-                            {% endif %}
 
-                            {%- if products_object.size > 0 -%}
-                                <div class="predictive-search1__results-body js-tabs-body js-tabs-body--1">
-                                    <ul class="predictive-search1__results-list" role="listbox" aria-labelledby="predictive-search1-products">
+                                {%- if products_object.size > 0 -%}
+                                    <div class="predictive-search1__results-body results-body-products js-tabs-body js-tabs-body--1">
+                                        <ul class="predictive-search1__results-list" role="listbox" aria-labelledby="predictive-search1-products">
 
-                                        {%- for product in products_object -%}
-                                            {% assign image = product.featured_image %}
-                                            {% assign price_old = product.compare_at_price %}
+                                            {%- for product in products_object -%}
+                                                {% assign image = product.featured_image %}
+                                                {% assign price_old = product.compare_at_price %}
 
-                                            <li class="predictive-search1__results-item" role="option">
-                                                <div class="predictive-search1__results-box-image">
-                                                    <a class="predictive-search1__results-link" href="{{ product.url }}">
+                                                <li class="predictive-search1__results-item" role="option">
+                                                    <div class="predictive-search1__results-box-image">
+                                                        <a class="predictive-search1__results-link" href="{{- product.url -}}">
 
-                                                        {% if image %}
-                                                            <img class="predictive-search1__results-image" src="{{ image | image_url: width: 120 }}" alt="{{ image.alt }}">
-                                                        {% else %}
-                                                            <img class="predictive-search1__results-image" src="{{ 'def.png' | asset_img_url: '120x' }}" alt="{{ image.alt }}">
-                                                        {% endif %}
+                                                            {%- if image -%}
+                                                                <img class="predictive-search1__results-image" src="{{- image | image_url: width: 120 -}}" alt="{{- image.alt -}}">
+                                                            {%- else -%}
+                                                                <img class="predictive-search1__results-image" src="{{- 'def.png' | asset_img_url: '120x' -}}" alt="{{- image.alt -}}">
+                                                            {%- endif -%}
 
-                                                    </a>
-                                                </div>
-                                                <div class="predictive-search1__results-description">
-                                                    <a class="predictive-search1__results-body-title" href="{{ product.url }}">{{ product.title }}</a>
-                                                    <div class="predictive-search1__results-box-prices">
-                                                        <div class="predictive-search1__results-price {% if price_old %}new{% endif %}">{{ product.price | money }}</div>
-
-                                                        {%- if price_old -%}
-                                                            <div class="predictive-search1__results-price-old">{{- price_old | money -}}</div>
-                                                        {%- endif -%}
-
+                                                        </a>
                                                     </div>
-                                                </div>
-                                            </li>
-                                        {%- endfor -%}
+                                                    <div class="predictive-search1__results-description">
+                                                        <a class="predictive-search1__description-title" href="{{- product.url -}}">{{- product.title -}}</a>
+                                                        <div class="predictive-search1__results-box-prices">
+                                                            <div class="predictive-search1__results-price {% if price_old %}new{% endif %}">{{- product.price | money -}}</div>
 
-                                    </ul>
-                                </div>
-                            {%- elsif products_object.size <= 0 or products_object == blank -%}
-                                <div class="predictive-search1__results-body js-tabs-body js-tabs-body--1">
-                                    <p class="predictive-search1__no-result">No results found</p>
-                                </div>
-                            {%- endif -%}
+                                                            {%- if price_old -%}
+                                                                <div class="predictive-search1__results-price-old">{{- price_old | money -}}</div>
+                                                            {%- endif -%}
 
-                            {%- if articles_object.size <= 0 or articles_object == blank -%}
-                                <div class="predictive-search1__results-body js-tabs-body js-tabs-body--2">
-                                    <p class="predictive-search1__no-result">No results found</p>
-                                </div>
-                            {%- endif -%}
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            {%- endfor -%}
 
-                            {%- if pages_object.size > 0 -%}
-                                <div class="predictive-search1__results-body js-tabs-body js-tabs-body--3">
-                                    <ul class="predictive-search1__results-list" role="listbox" aria-labelledby="predictive-search1-products">
+                                        </ul>
+                                    </div>
+                                {%- elsif products_object.size <= 0 or products_object == blank -%}
+                                    <div class="predictive-search1__results-body results-body-products js-tabs-body js-tabs-body--1">
+                                        <p class="predictive-search1__no-result-item">No results found</p>
+                                    </div>
+                                {%- endif -%}
 
-                                        {%- for page in pages_object -%}
-                                            <li class="predictive-search1__results-item" role="option">
-                                                <a class="predictive-search1__results-body-title" href="{{ page.url }}">{{ page.title }}</a>
-                                            </li>
-                                        {%- endfor -%}
+                                {%- if articles_object.size > 0 -%}
+                                    <div class="predictive-search1__results-body results-body-articles js-tabs-body js-tabs-body--2">
+                                        <ul class="predictive-search1__results-list" role="listbox" aria-labelledby="predictive-search1-products">
 
-                                    </ul>
-                                </div>
-                            {%- elsif pages_object.size <= 0 or pages_object == blank -%}
-                                <div class="predictive-search1__results-body js-tabs-body js-tabs-body--3">
-                                    <p class="predictive-search1__no-result">No results found</p>
-                                </div>
-                            {%- endif -%}
+                                            {%- for article in articles_object -%}
+                                                {% assign image = article.image %}
+
+                                                <li class="predictive-search1__results-item" role="option">
+                                                    <div class="predictive-search1__results-box-image">
+                                                        <a class="predictive-search1__results-link" href="{{- product.url -}}">
+
+                                                            {%- if image -%}
+                                                                <img class="predictive-search1__results-image" src="{{- image | image_url: width: 120 -}}" alt="{{- image.alt -}}">
+                                                            {%- else -%}
+                                                                <img class="predictive-search1__results-image" src="{{- 'def.png' | asset_img_url: '120x' -}}" alt="{{- image.alt -}}">
+                                                            {%- endif -%}
+
+                                                        </a>
+                                                    </div>
+                                                    <div class="predictive-search1__results-description">
+                                                        <div class="predictive-search1__description-info">
+                                                            <div class="predictive-search1__info-item">{{- article.published_at | slice: 0, 10 -}}</div>
+                                                            <div class="predictive-search1__info-item">{{- article.author -}}</div>
+                                                            <div class="predictive-search1__info-item">2 comments</div>
+                                                        </div>
+                                                        <a class="predictive-search1__description-title" href="{{- article.url -}}">{{- article.title -}}</a>
+                                                    </div>
+                                                </li>
+                                            {%- endfor -%}
+
+                                        </ul>
+                                    </div>
+                                {%- elsif articles_object.size <= 0 or articles_object == blank -%}
+                                    <div class="predictive-search1__results-body results-body-articles js-tabs-body js-tabs-body--2">
+                                        <p class="predictive-search1__no-result-item">No results found</p>
+                                    </div>
+                                {%- endif -%}
+
+                                {%- if pages_object.size > 0 -%}
+                                    <div class="predictive-search1__results-body results-body-pages js-tabs-body js-tabs-body--3">
+                                        <ul class="predictive-search1__results-list" role="listbox" aria-labelledby="predictive-search1-products">
+
+                                            {%- for page in pages_object -%}
+                                                <li class="predictive-search1__results-item" role="option">
+                                                    <a class="predictive-search1__description-title" href="{{- page.url -}}">
+                                                        {{- page.title -}}
+                                                        <img class="predictive-search1__description-title-icon" src="{{- 'arrow-right.svg' | asset_url -}}" alt="Arrow Icon">
+                                                    </a>
+                                                </li>
+                                            {%- endfor -%}
+
+                                        </ul>
+                                    </div>
+                                {%- elsif pages_object.size <= 0 or pages_object == blank -%}
+                                    <div class="predictive-search1__results-body results-body-pages js-tabs-body js-tabs-body--3">
+                                        <p class="predictive-search1__no-result-item">No results found</p>
+                                    </div>
+                                {%- endif -%}
+
+                            {% endif %}
 
                             <div class="predictive-search1__results-footer">
                                 <a class="predictive-search1__results-footer-link" href="{{ routes.search_url }}?q={{ predictive_search.terms }}">See all results</a>
