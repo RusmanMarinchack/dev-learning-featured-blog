@@ -137,6 +137,12 @@ function handlerQuickView() {
                         });
                     }
                 });
+
+                console.log(productsObject)
+
+                // productsObject.options_with_values.forEach(option => {
+                //     console.log(option)
+                // })
             }
             handlerRadioBtn();
 
