@@ -157,11 +157,4 @@ function handlerSearch() {
         }
         handlerTabs();
     }
-
-
-    fetch(`/search/suggest.json?q=c&resources[type]=query,product,collection,page,article`)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data.resources.results)
-        })
 }
