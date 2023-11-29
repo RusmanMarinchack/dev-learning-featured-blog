@@ -17,11 +17,13 @@ function handlerSearch() {
                     const content = shadow.querySelector('.js-search-content');
                     const btnCloses = document.querySelectorAll('.js-close');
 
+                    // Add classes and open the popup.
                     shadow.classList.add('active-search');
                     content.classList.add('active-search');
                     document.body.classList.add('look');
                     document.body.style.paddingRight = `${widthScroll}px`;
 
+                    // When clicking on elements with these classes, we close the popup.
                     btnCloses.forEach(close => {
                         close.addEventListener('click', function () {
                             shadow.classList.remove('active-search');
@@ -31,6 +33,8 @@ function handlerSearch() {
                         });
                     });
 
+                    // When you click on the search field, a pop-up window appears
+                    // so as not to close.
                     content.addEventListener('click', (e) => e.stopPropagation());
                 }
             });
@@ -47,12 +51,14 @@ function handlerSearch() {
                 inputSearch.addEventListener('input', async function () {
                     // We start the spinner.
                     preloader.classList.add('preloader-active');
+                    // When filling out the search, we run the function and transfer the search value.
                     await handlerFetchGetLayout(this.value);
                 });
             }
         }
         handlerFormSearch();
 
+        // We get a page with content
         async function handlerFetchGetLayout(searchValue) {
             const content = document.querySelector('.js-search-content');
             const wrapperResult = document.querySelector('.js-tabs-result');
@@ -116,13 +122,14 @@ function handlerSearch() {
                 const headerBtns = tabsBox.querySelectorAll('.js-tabs-btn');
                 if (headerBtns.length >= 1) {
 
-                    headerBtns.forEach((btn, index) => {
+                    headerBtns.forEach(btn => {
                         btn.addEventListener("click", function () {
                             removeClassActive();
                             this.classList.add('tab-active');
                             handlerTabBtns();
                         });
 
+                        // If the tab is active, we get its dataset and show the desired tab.
                         function handlerTabBtns() {
                             if (btn.classList.contains('tab-active')) {
                                 const tabIndex = btn.dataset.indexTab;
@@ -141,6 +148,7 @@ function handlerSearch() {
                         handlerTabBtns();
                     });
 
+                    // We delete the classes so that there is only one active tab.
                     function removeClassActive() {
                         const tabBody = document.querySelectorAll(`.predictive-search1__results-body`);
 
