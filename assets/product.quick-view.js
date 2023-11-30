@@ -94,7 +94,7 @@ function handlerQuickView() {
         if (productJson) {
             const productsObject = JSON.parse(productJson.innerHTML);
             const variantsObject = productsObject.variants;
-            const price = document.querySelector('.quick-view__info-price');
+            const prices = document.querySelectorAll('.quick-view__info-price');
             const innerVariant = document.querySelectorAll('.quick-view__info-variant-inner');
             const variantsItem = document.querySelectorAll('.quick-view__info-variant-item');
             // We create a variable and pass the index to the options block.
@@ -200,7 +200,9 @@ function handlerQuickView() {
                             }
 
                             if (variant.public_title === option) {
-                                price.innerHTML = `₴${formatCurrency(variant.price)}`;
+                                prices.forEach(price => {
+                                    price.innerHTML = `₴${formatCurrency(variant.price)}`;
+                                })
                                 activeBtnAddCart(variant.available);
 
                                 // If there is an image, the slider slides to the image.
