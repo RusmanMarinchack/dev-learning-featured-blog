@@ -360,6 +360,9 @@ body.look {
     .predictive-search1 .predictive-search1__results-item {
         flex-direction: column;
     }
+    .predictive-search1__results-body.results-body-products .predictive-search1__results-item {
+        align-items: center;
+    }
     .predictive-search1 .predictive-search1__results-box-image {
         margin-right: 0;
         margin-bottom: 16px;
