@@ -15,7 +15,7 @@
             <div class="quick-view__info-title-box mob">
                 <h2 class="quick-view__info-title">{{- product.title -}}</h2>
                 <div class="quick-view__info-price-box">
-                    <div class="quick-view__info-price {% if old_price %}new{% endif %}">{{- product.price | money -}}</div>
+                    <div class="quick-view__info-price{% if old_price %} new{% endif %}">{{- product.price | money -}}</div>
 
                     {%- if old_price -%}
                         <div class="quick-view__info-price old">{{- old_price | money }}</div>
@@ -91,11 +91,13 @@
                                     {% assign option_disabled = true %}
 
                                     {% for variant in product.variants %}
-                                        {% for option in variant.options %}
-                                                {% if option == value and variant.available %}
-                                                    {% assign option_disabled = false %}
-                                                {% endif %}
-                                            {% endfor %}
+                                        {% for option1_name in variant.options %}
+                                            {% if option.position == 1 and option1_name == value and variant.available %}
+                                                {% assign option_disabled = false %}
+                                            {% elsif option.position == 2 and product.variants[forloop.index0].option2 == value and variant.available %}
+                                                {% assign option_disabled = false %}
+                                            {% endif %}
+                                        {% endfor %}
                                     {% endfor %}
 
                                     <div class="quick-view__info-variant-item">

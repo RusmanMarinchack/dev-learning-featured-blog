@@ -93,21 +93,94 @@ function handlerQuickView() {
 
         if (productJson) {
             const productsObject = JSON.parse(productJson.innerHTML);
-            const variantsItem = document.querySelectorAll('.quick-view__info-variant-item');
-            const price = document.querySelector('.quick-view__info-price');
             const variantsObject = productsObject.variants;
+            const price = document.querySelector('.quick-view__info-price');
+            const innerVariant = document.querySelectorAll('.quick-view__info-variant-inner');
+            const variantsItem = document.querySelectorAll('.quick-view__info-variant-item');
+            // We create a variable and pass the index to the options block.
+            let indexInner;
 
-            variantsItem.forEach(item => {
-                const btnRadio = item.querySelector('.quick-view__info-variant-input');
+            innerVariant.forEach((inner, index) => {
 
-                 btnRadio.addEventListener('change', handlerRadioBtn);
+                const variantsItem = inner.querySelectorAll('.quick-view__info-variant-item');
+
+                variantsItem.forEach(item => {
+                    const btnRadio = item.querySelector('.quick-view__info-variant-input');
+
+                    btnRadio.addEventListener('change', () => {
+                        // We transfer the index of the block to the change.
+                        indexInner = index;
+                        handlerRadioBtn(btnRadio.value)
+
+                        // We call a function that deletes the class in options 'disabled'.
+                        removeClass()
+                        // Let's go through the options.
+                        variantsObject.forEach(variant => {
+
+                            if (variant.option1 === btnRadio.value) {
+                                const innerVariant = document.querySelectorAll('.quick-view__info-variant-inner');
+
+                                if (innerVariant.length >= 1) {
+                                    innerVariant.forEach(inner => {
+                                        const variantsItem = inner.querySelectorAll('.quick-view__info-variant-item');
+
+                                        variantsItem.forEach(radioItem => {
+
+                                            const btnRadio = radioItem.querySelector('.quick-view__info-variant-input');
+                                            const label = radioItem.querySelector('.quick-view__info-variant-label');
+
+                                            if (btnRadio.value === variant.option2 && variant.available) {
+                                                label.classList.remove('disabled')
+                                            }
+                                        });
+                                    });
+                                }
+                            } else if (variant.option2 === btnRadio.value) {
+                                const innerVariant = document.querySelectorAll('.quick-view__info-variant-inner');
+
+                                if (innerVariant.length >= 1) {
+                                    innerVariant.forEach(inner => {
+                                        const variantsItem = inner.querySelectorAll('.quick-view__info-variant-item');
+
+                                        variantsItem.forEach(radioItem => {
+
+                                            const btnRadio = radioItem.querySelector('.quick-view__info-variant-input');
+                                            const label = radioItem.querySelector('.quick-view__info-variant-label');
+
+                                            if (btnRadio.value === variant.option1 && variant.available) {
+                                                label.classList.remove('disabled')
+                                            }
+                                        });
+                                    });
+                                }
+
+                            }
+                        });
+
+                        function removeClass() {
+                            innerVariant.forEach((inner, index) => {
+
+                                if (indexInner !== index ) {
+                                    const variantsItem = inner.querySelectorAll('.quick-view__info-variant-item');
+                                    variantsItem.forEach(radioItem => {
+                                        const label = radioItem.querySelector('.quick-view__info-variant-label');
+                                        label.classList.add('disabled');
+                                    });
+                                }
+                            });
+                        }
+                    });
+                });
             });
 
+
+
             // A function to process product options and change content depending on the selected options.
-            function handlerRadioBtn() {
-                const radioValue = this.value;
+            function handlerRadioBtn(inputValue) {
+                const radioValue = inputValue;
                 let listOption = [];
                 let option;
+                let radioCheckedColor;
 
                 variantsItem.forEach(radio => {
                     const btnRadio = radio.querySelector('.quick-view__info-variant-input');
@@ -116,6 +189,8 @@ function handlerQuickView() {
                         listOption.push(btnRadio.value);
 
                         option = listOption.join(' / ');
+
+                        radioCheckedColor = listOption[0];
 
                         variantsObject.forEach(variant => {
                             if (radioValue === variant.option1) {
@@ -137,14 +212,8 @@ function handlerQuickView() {
                         });
                     }
                 });
-
-                console.log(productsObject)
-
-                // productsObject.options_with_values.forEach(option => {
-                //     console.log(option)
-                // })
             }
-            handlerRadioBtn();
+            // handlerRadioBtn();
 
             // The function to check whether the product is active and dependencies from this, we make an active button.
             function activeBtnAddCart(available) {
