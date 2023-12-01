@@ -160,7 +160,7 @@ function handlerQuickView() {
                         function removeClass() {
                             innerVariant.forEach((inner, index) => {
 
-                                if (indexInner !== index ) {
+                                if (indexInner !== index) {
                                     const variantsItem = inner.querySelectorAll('.quick-view__info-variant-item');
                                     variantsItem.forEach(radioItem => {
                                         const label = radioItem.querySelector('.quick-view__info-variant-label');
