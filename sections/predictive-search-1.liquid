@@ -71,7 +71,7 @@
                                                             {%- if image -%}
                                                                 <img class="predictive-search1__results-image" src="{{- image | image_url: width: 120 -}}" alt="{{- image.alt -}}">
                                                             {%- else -%}
-                                                                <img class="predictive-search1__results-image" src="{{- 'def.png' | asset_img_url: '120x' -}}" alt="{{- image.alt -}}">
+                                                                <img class="predictive-search1__results-image" src="{{- 'def.png' | asset_img_url: '120x' -}}" alt="Default">
                                                             {%- endif -%}
 
                                                         </a>
