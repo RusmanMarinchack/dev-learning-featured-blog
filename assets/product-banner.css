@@ -69,8 +69,7 @@ a {
     font-weight: 400;
 }
 .product-banner .product-banner__product-slider-box {
-    max-width: 574px;
-    width: 50%;
+    padding: 0 72px;
     position: relative;
     margin: 0 0 0 auto;
 }
@@ -202,8 +201,8 @@ a {
     }
     .product-banner .product-banner__text-box,
     .product-banner .product-banner__product-slider-box {
-        max-width: 100%;
         width: 100%;
+        padding: 0;
     }
     .product-banner .product-banner__text-title {
         font-size: 28px;
